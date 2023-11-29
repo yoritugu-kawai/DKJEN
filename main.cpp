@@ -11,7 +11,7 @@
 #include"DKJEN/Type/Sphere.h"
 #include"DKJEN/Type/Obj3D.h"
 #include"DKJEN/Utilipy/rektyk.h"
-
+#include"DKJEN/Utilipy/Input.h"
 
 #include"DKJEN/Management/PSOCopileManagement.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
@@ -32,7 +32,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	WinApp::Initialize(Title);
 	DxCommon::Initialize();
 	ImguiManager::Initialize();
-
+	Input::Initialize();
 	
 	PSOCopileManagement::Set();
 	
@@ -50,7 +50,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 		DxCommon::BeginFrame();
 		ImguiManager::BeginFrame();
-		//Input::BeginFlame();
+		Input::BeginFlame();
 
 		//　ゲーム処理
 		//////
