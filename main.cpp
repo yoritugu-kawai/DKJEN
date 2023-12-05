@@ -51,25 +51,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		DxCommon::BeginFrame();
 		ImguiManager::BeginFrame();
 		Input::BeginFlame();
-
+		//////
 		//　ゲーム処理
 		//////
 
 
-		Matrix4x4 rotateMatrix = MakeRotateAxisAngle(axis, angle);
-		ImGui::Begin("rotateMatrix");
-		for (int i = 0; i < 4; i++) {
-			for (int t = 0; t < 4; t++) {
-				ImGui::Text("%.3f", rotateMatrix.m[i][t]);
-			}
-		}
-		
-		ImGui::End();
 		 
-		// 
+
 		//////
 		//　ゲーム処理
-
+		//////
 
 		ImguiManager::EndFrame();
 		DxCommon::EndFrame();
