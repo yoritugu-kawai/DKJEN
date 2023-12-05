@@ -7,7 +7,7 @@ class  Sprite
 {
 public:
 	 
-	 void Initialize(TexProeerty  tex, Vector4 x, Vector4 y, Vector4 xy);
+	 void Initialize(TexProeerty  tex);
 	 void Vertex();
 	 void Darw(Matrix4x4 m);
 	 void Release();

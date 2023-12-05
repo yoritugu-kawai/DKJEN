@@ -1,16 +1,13 @@
 #include "Polygon.h"
 
-void PolygonType::Initialize(Vector4 lefe, Vector4 top, Vector4 right)
+void PolygonType::Initialize()
 {
 	Vertex = CreateBufferResource(sizeof(VertexData) * 3);
 	bufferView_ = VertexCreateBufferView(sizeof(VertexData) * 3, Vertex, 3);
 	materialResource = CreateBufferResource(sizeof(Vector4));
 	wvpResource = CreateBufferResource(sizeof(Matrix4x4));
 
-	lefe_ = lefe,
-	top_ = top;
-	right_ = right;
-
+	
 
 }
 

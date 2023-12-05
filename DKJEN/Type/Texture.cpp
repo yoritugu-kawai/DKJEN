@@ -1,7 +1,7 @@
 #include "Texture.h"
 
 
-void Texture::Initialize(Vector4 lefe, Vector4 top, Vector4 right, TexProeerty  tex)
+void Texture::Initialize(TexProeerty  tex)
 {
 	//テキスト
 
@@ -13,10 +13,7 @@ void Texture::Initialize(Vector4 lefe, Vector4 top, Vector4 right, TexProeerty  
 	wvpResource = CreateBufferResource(sizeof(Matrix4x4));
 	bufferView_ = VertexCreateBufferView(sizeof(VertexData) * 3, Vertex, 3);
 
-	lefe_ = lefe;
-	top_ = top;
-	right_ = right;
-
+	
 
 }
 

@@ -1,6 +1,6 @@
 #include"Sphere.h"
 
-void Sphere::Initialize(Vector4 pos, float size,TexProeerty  tex)
+void Sphere::Initialize(TexProeerty  tex)
 {
 	const uint32_t v = VertexNum_ * VertexNum_ * 6;
 	Vertex = CreateBufferResource(sizeof(VertexData) * v);
@@ -9,8 +9,7 @@ void Sphere::Initialize(Vector4 pos, float size,TexProeerty  tex)
 
 	materialResource = CreateBufferResource(sizeof(Material));
 	lightResource = CreateBufferResource(sizeof(DirectionalLight));
-	centerPos_ = pos;
-	radious_ = size;
+
 
 
 	tex_ = tex; 

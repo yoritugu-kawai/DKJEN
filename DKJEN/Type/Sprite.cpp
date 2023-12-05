@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-void Sprite::Initialize(TexProeerty  tex, Vector4 x, Vector4 y, Vector4 xy)
+void Sprite::Initialize(TexProeerty  tex)
 {
 
 
@@ -11,9 +11,7 @@ void Sprite::Initialize(TexProeerty  tex, Vector4 x, Vector4 y, Vector4 xy)
 	transformationMatrixResourceSprote = CreateBufferResource(sizeof(Matrix4x4));
 	materialResource = CreateBufferResource(sizeof(UVMaterial));
 	indexResourceSprite = CreateBufferResource(sizeof(uint32_t) * 6);
-	transX_ = x;
-	transY_ = y;
-	transXY_ = xy;
+
 }
 
 void Sprite::Vertex()

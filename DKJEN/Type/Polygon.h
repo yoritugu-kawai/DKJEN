@@ -7,7 +7,7 @@
 class PolygonType
 {
 public:
-	void Initialize(Vector4 lefe, Vector4 top, Vector4 right);
+	void Initialize();
 	void Draw(Matrix4x4 m, Vector4 Color);
 	void Release();
 	//

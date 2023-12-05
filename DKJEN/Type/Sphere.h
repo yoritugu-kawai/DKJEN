@@ -10,7 +10,7 @@ class Sphere
 {
 public:
 
-	void Initialize(Vector4 pos, float size, TexProeerty  tex);
+	void Initialize( TexProeerty  tex);
 
 	void Draw(Matrix4x4 m);
 
