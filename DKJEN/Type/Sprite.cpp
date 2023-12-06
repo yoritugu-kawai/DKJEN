@@ -29,8 +29,7 @@ void Sprite::Vertex()
 	vertexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&VertexDataSprite));
 	uint32_t* indexDataSpriite = nullptr;
 	indexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&indexDataSpriite));
-	indexDataSpriite[0] = 0;  indexDataSpriite[1] = 1; indexDataSpriite[2] = 2;
-	indexDataSpriite[3] = 2; indexDataSpriite[4] = 1; indexDataSpriite[5] = 4;
+	
 
 	//1枚目
 	//左下
@@ -42,25 +41,21 @@ void Sprite::Vertex()
 	//右下
 	VertexDataSprite[2].position = { transXY_ };
 	VertexDataSprite[2].texcoord = { 1.0f,1.0f };
-	//二枚目
-	//左上
-	VertexDataSprite[3].position = { 0.0f,0.0f,0.0f,1.0f };
-	VertexDataSprite[3].texcoord = { 0.0f,0.0f };
+	
 	//右上
-	VertexDataSprite[4].position = { transX_ };
-	VertexDataSprite[4].texcoord = { 1.0f,0.0f };
-	//右下
-	VertexDataSprite[5].position = { transXY_ };
-	VertexDataSprite[5].texcoord = { 1.0f,1.0f };
-
-
+	VertexDataSprite[3].position = { transX_ };
+	VertexDataSprite[3].texcoord = { 1.0f,0.0f };
+	
+	
+	indexDataSpriite[0] = 0;  indexDataSpriite[1] = 1; indexDataSpriite[2] = 2;
+	indexDataSpriite[3] = 1; indexDataSpriite[4] = 3; indexDataSpriite[5] = 2;
 }
-void Sprite::Darw(Matrix4x4 m)
+void Sprite::Darw(Matrix4x4 m, Vector4 Color)
 {
 	UVMaterial* materialDeta = nullptr;
 	materialResource->Map(0, nullptr,
 		reinterpret_cast<void**>(&materialDeta));
-	materialDeta->color = { 1.0f,1.0f,1.0,1.0f };
+	materialDeta->color = Color;
 	Vertex();
 
 	ImGui::Begin("sprite");

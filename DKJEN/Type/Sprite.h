@@ -9,7 +9,7 @@ public:
 	 
 	 void Initialize(TexProeerty  tex);
 	 void Vertex();
-	 void Darw(Matrix4x4 m);
+	 void Darw(Matrix4x4 m, Vector4 Color);
 	 void Release();
 
 	 ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
@@ -30,9 +30,9 @@ private:
 
 
 	TexProeerty  tex_;
-	Vector4 transX_ = { 0.0f,0.0f,0.0f };
-	Vector4 transY_ = { 0.0f,0.0f,0.0f };
-	Vector4 transXY_ = { 0.0f,0.0f,0.0f };
+	Vector4 transX_ = { 560.f,0.0f,0.0f,1.0f };
+	Vector4 transY_ = { 0.0f,360.0f,0.0f,1.0f };
+	Vector4 transXY_ = { 560.0f,360.0f,0.0f,1.0f };
 	Transform uvTranformSprite{
 	 {1.0f,1.0f,1.0f},
 	 {0.0f,0.0f,0.0f},

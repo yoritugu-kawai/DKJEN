@@ -40,9 +40,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	TexProeerty tex2 = imageLoading->LoadTexture("resource/uvChecker.png");
 	Texture* tex = new Texture;
 	tex->Initialize(tex2);
+
+	Sprite* SpriteTex = new Sprite;
+	SpriteTex->Initialize(tex2);
+
+	///ImGui
 	ImGguiTransfrom imGuiTextur;
-
-
 	for (int i = 0; i < 2; i++) {
 		imGuiTextur.matrix = MakeIdentity4x4();
 		imGuiTextur.scale = { 1,1,1 };
@@ -51,6 +54,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		imGuiTextur.color = { 1.0f,1.0f,1.0f,1.0f };
 
 	}
+
+	ImGguiTransfrom imGuiSprite;
+	imGuiSprite.matrix = MakeIdentity4x4();
+	imGuiSprite.scale = { 1.0f,1.0f,1.0f };
+	imGuiSprite.rotate = { 0.0f,0.0f,0.0f };
+	imGuiSprite.translate = { 0.0f,0.0f,0.0f };
+	imGuiSprite.color = { 1.0f, 1.0f, 1.0, 1.0f };
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -73,6 +83,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		imGuiTextur.matrix = MakeAffineMatrix(imGuiTextur.scale, imGuiTextur.rotate, imGuiTextur.translate);
 		tex->Draw(imGuiTextur.matrix, imGuiTextur.color);
+
+
+
+
+		ImGui::Begin("Sprite");
+		ImGui::ColorEdit3("color", (float*)&imGuiSprite.color);
+		ImGui::SliderFloat3("scale", &imGuiSprite.scale.x, -0.0f, 5.0f);
+		ImGui::SliderFloat3("rotate", &imGuiSprite.rotate.x, -5.0f, 5.0f);
+		ImGui::SliderFloat3("translate", &imGuiSprite.translate.x, -500.0f, 500.0f);
+		ImGui::End();
+		imGuiSprite.matrix = MakeAffineMatrix(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate);
+
+		SpriteTex->Darw(imGuiSprite.matrix, imGuiSprite.color);
 		//////
 		//　ゲーム処理
 		//////
@@ -88,7 +111,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	*/
 	
 	tex->Release();
-	
+	SpriteTex->Release();
 	
 	PSOCopileManagement::Release();
 
