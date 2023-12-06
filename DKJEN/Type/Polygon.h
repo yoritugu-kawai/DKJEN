@@ -16,10 +16,9 @@ public:
 
 private:
 
-	Vector4 lefe_ = { 0.0f,0.0f,0.0f };
-	Vector4 top_ = { 0.0f,0.0f,0.0f };
-	Vector4 right_ = { 0.0f,0.0f,0.0f };
-	
+	Vector4 lefe_ = { -0.5f, -0.5f, 0.0f, 1.0f };
+	Vector4 top_ = { 0.0f,0.5f,0.0f,1.0f };
+	Vector4 right_ = { 0.5f,-0.5f,0.0f,1.0f };
 	//Vector4 Color_ = { 0.0f,0.0f,1.0f,1.0f };
 	Transform transfom{ {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 
