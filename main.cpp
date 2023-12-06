@@ -1,9 +1,9 @@
-#include"DKJEN/Base/DxCommon.h"
+
 #include"DKJEN/Base/WinApp.h"
 #include"DKJEN/Base/ImageLoading.h"
 
 #include"DKJEN/Math/Math.h"
-#include"DKJEN/Imgui/imguiManager.h"
+
 
 #include"DKJEN/Type/Polygon.h"
 #include"DKJEN/Type/Sprite.h"
@@ -11,8 +11,8 @@
 #include"DKJEN/Type/Sphere.h"
 #include"DKJEN/Type/Obj3D.h"
 #include"DKJEN/Utilipy/rektyk.h"
-#include"DKJEN/Utilipy/Input.h"
 
+#include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
@@ -59,9 +59,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		DxCommon::BeginFrame();
-		ImguiManager::BeginFrame();
-		Input::BeginFlame();
+		FrameManagement::BeginFrame();
 		//////
 		//　ゲーム処理
 		//////
@@ -79,9 +77,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 
-		ImguiManager::EndFrame();
-		DxCommon::EndFrame();
-
+		
+		FrameManagement::EndFrame();
 	}
 
 	/*

@@ -141,6 +141,9 @@
     <ClCompile Include="DKJEN\externals\imgui\imgui_widgets.cpp">
       <Filter>ImguiEx</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Management\FrameManagement.cpp">
+      <Filter>DKJEN\Management</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Base\DxCommon.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\externals\imgui\imstb_truetype.h">
       <Filter>ImguiEx</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Management\FrameManagement.h">
+      <Filter>DKJEN\Management</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
