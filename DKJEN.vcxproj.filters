@@ -144,6 +144,9 @@
     <ClCompile Include="DKJEN\Management\FrameManagement.cpp">
       <Filter>DKJEN\Management</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Base\ObjPOS.cpp">
+      <Filter>DKJEN\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Base\DxCommon.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Management\FrameManagement.h">
       <Filter>DKJEN\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\ObjPOS.h">
+      <Filter>DKJEN\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
