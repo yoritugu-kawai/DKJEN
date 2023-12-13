@@ -87,7 +87,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 
-		ImGui::Begin("Texture");
+		/*ImGui::Begin("Texture");
 		ImGui::ColorEdit3("color", (float*)&imGuiTextur.color);
 		ImGui::SliderFloat3("scale", &imGuiTextur.scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGuiTextur.rotate.x, -5.0f, 5.0f);
@@ -95,7 +95,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 
 		imGuiTextur.matrix = MakeAffineMatrix(imGuiTextur.scale, imGuiTextur.rotate, imGuiTextur.translate);
-		tex->Draw(imGuiTextur.matrix, imGuiTextur.color);
+		tex->Draw(imGuiTextur.matrix, imGuiTextur.color);*/
 
 
 
@@ -120,6 +120,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
 		ImGui::SliderFloat3("translate", &imGui3D[0].translate.x, -5.0f, 5.0f);
 		ImGui::End();
+
 		imGui3D[0].matrix = MakeAffineMatrix(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate);
 
 		Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
@@ -148,6 +149,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 	tex->Release();
 	SpriteTex->Release();
+	delete SpriteTex;
 	obj3D->Release();
 	delete obj3D;
 	PSOCopileManagement::Release();
