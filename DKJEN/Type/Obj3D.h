@@ -21,7 +21,7 @@ struct ModelData
 class Obj3D {
 public:
 	void Initialize(TexProeerty  tex);
-	void Draw(Matrix4x4 m);
+	void Draw(Matrix4x4 m, Vector4 Color);
 	void Release();
 	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 

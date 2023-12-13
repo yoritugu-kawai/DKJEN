@@ -101,7 +101,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 		ImGui::Begin("Sprite");
-		ImGui::ColorEdit3("color", (float*)&imGuiSprite.color);
+		ImGui::ColorEdit4("color", (float*)&imGuiSprite.color);
 		ImGui::SliderFloat3("scale", &imGuiSprite.scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGuiSprite.rotate.x, -5.0f, 5.0f);
 		ImGui::SliderFloat3("translate", &imGuiSprite.translate.x, -500.0f, 500.0f);
@@ -115,7 +115,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 		ImGui::Begin("3D");
-		ImGui::ColorEdit3("color", (float*)&imGui3D[0].color);
+		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
 		ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
 		ImGui::SliderFloat3("translate", &imGui3D[0].translate.x, -5.0f, 5.0f);
@@ -129,7 +129,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		imGui3D[0].matrix = Multiply(imGui3D[0].matrix, Multiply( CameraMatrix, ProjectionMatrix));
 
 
-		obj3D->Draw(imGui3D[0].matrix);
+		obj3D->Draw(imGui3D[0].matrix, imGui3D[0].color);
 
 
 		//////

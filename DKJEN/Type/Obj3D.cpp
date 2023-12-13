@@ -20,7 +20,7 @@ void Obj3D::Initialize(TexProeerty  tex)
 	
 }
 
-void Obj3D::Draw(Matrix4x4 m)
+void Obj3D::Draw(Matrix4x4 m, Vector4 Color)
 {
 
 	//
@@ -42,8 +42,8 @@ void Obj3D::Draw(Matrix4x4 m)
 
 	matrixData->WVP = m;
 	matrixData->World = MakeIdentity4x4();
-	*materialData = { 1,1,1,1 };
-	lightData->direction = { 0.0f,-1.0f,0.0f };
+	*materialData = Color;
+	lightData->direction = { 0.0f,-1.0f,1.0f };
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->intensity = 1.0f;
 
