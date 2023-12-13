@@ -47,6 +47,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	SpriteTex->Initialize(tex3);
 	Obj3D* obj3D = new Obj3D;
 	obj3D->Initialize(tex2);
+
+
+	Sphere* sphere_ = new Sphere;
+	sphere_->Initialize(tex2);
 	///ImGui
 	ImGguiTransfrom imGuiTextur;
 	for (int i = 0; i < 2; i++) {
@@ -72,6 +76,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		imGui3D[i].rotate = { 0.0f, 0.0f, 0.0f };
 		imGui3D[i].translate = { 0.0f, 0.0f, 5.0f };
 		imGui3D[i].color = { 1.0f,1.0f,1.0f,1.0f };
+
+	}
+
+	ImGguiTransfrom imGuiSphere[1];
+	for (int i = 0; i < 1; i++) {
+		imGuiSphere[i].matrix = MakeIdentity4x4();
+		imGuiSphere[i].scale = { 1.0f, 1.0f, 1.0f };
+		imGuiSphere[i].rotate = { 0.0f, 4.7f, 0.0f };
+		imGuiSphere[i].translate = { 0.0f, 0.0f, 0.0f };
+		imGuiSphere[i].color = { 1.0f,1.0f,1.0f,1.0f };
 
 	}
 	//　メインループ
@@ -100,7 +114,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-		ImGui::Begin("Sprite");
+		/*ImGui::Begin("Sprite");
 		ImGui::ColorEdit4("color", (float*)&imGuiSprite.color);
 		ImGui::SliderFloat3("scale", &imGuiSprite.scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGuiSprite.rotate.x, -5.0f, 5.0f);
@@ -108,7 +122,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 		imGuiSprite.matrix = MakeAffineMatrix(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate);
 
-		SpriteTex->Darw(imGuiSprite.matrix, imGuiSprite.color);
+		SpriteTex->Darw(imGuiSprite.matrix, imGuiSprite.color);*/
 		
 
 
@@ -131,8 +145,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 		obj3D->Draw(imGui3D[0].matrix, imGui3D[0].color);
+		//
+
+		ImGui::Begin("sphere");
+		ImGui::ColorEdit3("color", (float*)&imGuiSphere[0].color);
+		ImGui::SliderFloat3("scale", &imGuiSphere[0].scale.x, -0.0f, 5.0f);
+		ImGui::SliderFloat3("rotate", &imGuiSphere[0].rotate.x, -5.0f, 5.0f);
+		ImGui::SliderFloat3("translate", &imGuiSphere[0].translate.x, -5.0f, 5.0f);
+		ImGui::End();
 
 
+		imGuiSphere[0].rotate.y += 0.02f;
+
+		imGuiSphere[0].matrix = MakeAffineMatrix(imGuiSphere[0].scale, imGuiSphere[0].rotate, imGuiSphere[0].translate);
+		sphere_->Draw(imGuiSphere[0].matrix);
 		//////
 		//　ゲーム処理
 		//////
@@ -152,6 +178,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete SpriteTex;
 	obj3D->Release();
 	delete obj3D;
+	sphere_->Release();
 	PSOCopileManagement::Release();
 
 	ImguiManager::Release();

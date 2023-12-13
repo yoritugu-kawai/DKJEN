@@ -49,6 +49,15 @@
     <Filter Include="DKJEN\Base\Win">
       <UniqueIdentifier>{cc4b616d-3206-4cd2-942a-9ca0a3e90cd9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\Base\Log">
+      <UniqueIdentifier>{f660c6de-7089-4bc7-9605-f19e08233b08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Type\2D">
+      <UniqueIdentifier>{4e1367a1-ed4f-4627-a165-5bcfe250df36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Type\3D">
+      <UniqueIdentifier>{ef5c8bc5-9c2a-4343-b48a-7498e51e6ef6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -59,18 +68,6 @@
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Base\Function.cpp">
-      <Filter>DKJEN\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Base\ImageLoading.cpp">
-      <Filter>DKJEN\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Base\LightPSO.cpp">
-      <Filter>DKJEN\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Base\Log.cpp">
-      <Filter>DKJEN\Base</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Utilipy\Input.cpp">
       <Filter>DKJEN\Utilipy</Filter>
@@ -97,21 +94,6 @@
       <Filter>DKJEN\Shader</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Type\Camera.cpp">
-      <Filter>DKJEN\Type</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Type\Obj3D.cpp">
-      <Filter>DKJEN\Type</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Type\Polygon.cpp">
-      <Filter>DKJEN\Type</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Type\Sphere.cpp">
-      <Filter>DKJEN\Type</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Type\Sprite.cpp">
-      <Filter>DKJEN\Type</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Type\Texture.cpp">
       <Filter>DKJEN\Type</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\externals\imgui\imgui.cpp">
@@ -153,20 +135,35 @@
     <ClCompile Include="DKJEN\Base\WinApp.cpp">
       <Filter>DKJEN\Base\Win</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Base\LightPSO.cpp">
+      <Filter>DKJEN\Base\POS</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\Function.cpp">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\ImageLoading.cpp">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\Log.cpp">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Polygon.cpp">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Sprite.cpp">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Texture.cpp">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Obj3D.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Sphere.cpp">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DKJEN\Base\Function.h">
-      <Filter>DKJEN\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Base\ImageLoading.h">
-      <Filter>DKJEN\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Base\LightPSO.h">
-      <Filter>DKJEN\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Base\Log.h">
-      <Filter>DKJEN\Base</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
       <Filter>DKJEN\Utilipy</Filter>
     </ClInclude>
@@ -198,21 +195,6 @@
       <Filter>DKJEN\Shader</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Type\Camera.h">
-      <Filter>DKJEN\Type</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Type\Obj3D.h">
-      <Filter>DKJEN\Type</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Type\Polygon.h">
-      <Filter>DKJEN\Type</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Type\Sphere.h">
-      <Filter>DKJEN\Type</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Type\Sprite.h">
-      <Filter>DKJEN\Type</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Type\Texture.h">
       <Filter>DKJEN\Type</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\externals\imgui\imconfig.h">
@@ -257,14 +239,35 @@
     <ClInclude Include="DKJEN\Base\WinApp.h">
       <Filter>DKJEN\Base\Win</Filter>
     </ClInclude>
+    <ClInclude Include="DKJEN\Base\LightPSO.h">
+      <Filter>DKJEN\Base\POS</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\Function.h">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\ImageLoading.h">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\Log.h">
+      <Filter>DKJEN\Base\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Polygon.h">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Sprite.h">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Texture.h">
+      <Filter>DKJEN\Type\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Obj3D.h">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Sphere.h">
+      <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\LightObject.VS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\LightObject.PS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonOdject3d.PS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
@@ -281,6 +284,12 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonObiject3d.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="LightObject.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="LightObject.VS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>

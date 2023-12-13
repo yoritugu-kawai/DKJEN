@@ -43,7 +43,7 @@ void Obj3D::Draw(Matrix4x4 m, Vector4 Color)
 	matrixData->WVP = m;
 	matrixData->World = MakeIdentity4x4();
 	*materialData = Color;
-	lightData->direction = { 0.0f,-1.0f,1.0f };
+	lightData->direction = { 0.0f,-1.0f,0.0f };
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->intensity = 1.0f;
 

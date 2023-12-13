@@ -39,7 +39,7 @@ private:
 
 	Vector4 color_ = { 1,1,1,1 };
 	Vector4 centerPos_ = { 0,0,0,0 };
-	float radious_ = 1.0f;
+	float radious_ = 0.3f;
 	Matrix4x4 viewMatrix = MakeIdentity4x4();
 	
 	const int VertexNum_ = 16;
