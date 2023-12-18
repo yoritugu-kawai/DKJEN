@@ -119,9 +119,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		
 		SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
 		
-
-
-
+//#ifdef _DEBUG
+//		ImGui::Begin("a");
+//
+//		ImGui::End();
+//
+//#endif
+		ImGui
 
 		ImGui::Begin("3D");
 		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
