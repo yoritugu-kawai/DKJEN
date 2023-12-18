@@ -124,9 +124,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 //
 //		ImGui::End();
 //
-//#endif
-		ImGui
-
+//#endiftry
+	
+		
 		ImGui::Begin("3D");
 		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
 		ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
