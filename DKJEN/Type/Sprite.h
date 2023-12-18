@@ -9,7 +9,7 @@ public:
 	 
 	 void Initialize(TexProeerty  tex);
 	 void Vertex();
-	 void Darw(Matrix4x4 m, Vector4 Color);
+	 void Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
 	 void Release();
 
 	 ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
@@ -38,6 +38,7 @@ private:
 	 {0.0f,0.0f,0.0f},
 	 {0.0f,0.0f,0.0f}
 	};
+	Matrix4x4 matrix;
 };
 
 

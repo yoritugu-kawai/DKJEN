@@ -15,14 +15,17 @@ void Obj3D::Initialize(TexProeerty  tex)
 	vertxBufferView.BufferLocation = vetexResource->GetGPUVirtualAddress();
 	vertxBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData.vertices.size());
 	vertxBufferView.StrideInBytes = sizeof(VertexData);
+    matrix = MakeIdentity4x4();
 
-
-	
+	pos = { 0.0f,0.0f,5.0f };
 }
 
-void Obj3D::Draw(Matrix4x4 m, Vector4 Color)
+void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
-
+	
+	translate.z = translate.z + pos.z;
+	matrix = MakeAffineMatrix(scale,rotate, translate);
+	
 	//
 	VertexData* vertexData = nullptr;
 	Vector4* materialData = nullptr;
@@ -34,18 +37,21 @@ void Obj3D::Draw(Matrix4x4 m, Vector4 Color)
 	materialResource->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 	wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&matrixData));
 	lightResource->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
-	std::memcpy(vertexData, modelData.
-		vertices.data(), sizeof(VertexData)*
-		modelData.vertices.size());
+	std::memcpy(vertexData, modelData.vertices.data(), sizeof(VertexData)*modelData.vertices.size());
 	//
 	// 
+	Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
 
-	matrixData->WVP = m;
+	Matrix4x4 CameraMatrix = MakeIdentity4x4();
+
+	matrix = Multiply(matrix, Multiply(CameraMatrix, ProjectionMatrix));
+	matrixData->WVP = matrix;
 	matrixData->World = MakeIdentity4x4();
 	*materialData = Color;
 	lightData->direction = { 0.0f,-1.0f,0.0f };
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->intensity = 1.0f;
+	
 
 	//
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();

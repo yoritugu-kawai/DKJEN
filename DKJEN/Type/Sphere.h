@@ -12,7 +12,7 @@ public:
 
 	void Initialize( TexProeerty  tex);
 
-	void Draw(Matrix4x4 m);
+	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate);
 
 	void Release();
 
@@ -44,6 +44,7 @@ private:
 	
 	const int VertexNum_ = 16;
 	bool useMonsterBall = true;
+	Matrix4x4 matrix;
 
 };
 

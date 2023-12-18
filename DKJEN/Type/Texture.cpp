@@ -14,12 +14,14 @@ void Texture::Initialize(TexProeerty  tex)
 	bufferView_ = VertexCreateBufferView(sizeof(VertexData) * 3, Vertex, 3);
 
 	
-
+	matrix = MakeIdentity4x4();
 }
 
 
-void Texture::Draw( Matrix4x4 m, Vector4 Color)
+void Texture::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
+
+	matrix = MakeAffineMatrix(scale, rotate,translate);
 	//色
 	Vector4* materialDeta = nullptr;
 	materialResource->Map(0, nullptr,
@@ -40,7 +42,7 @@ void Texture::Draw( Matrix4x4 m, Vector4 Color)
 	Matrix4x4 cameraMatrix = MakeAffineMatrix(cameratransform.scale, cameratransform.rotate, cameratransform.translate);
 	Matrix4x4 viewMatrix = Inverse(cameraMatrix);
 	Matrix4x4 projectionMatrix = MakePerspectiveFovMatrix(0.45f, float(WinApp::GetInstance()->Width()) / float(WinApp::GetInstance()->Height()), 0.1f, 100.0f);
-	Matrix4x4 worldViewProjectionMatrix = Multiply(m, Multiply(viewMatrix, projectionMatrix));
+	Matrix4x4 worldViewProjectionMatrix = Multiply(matrix, Multiply(viewMatrix, projectionMatrix));
 	*wvpData = worldViewProjectionMatrix;
 
 

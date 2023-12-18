@@ -11,7 +11,7 @@ void Sprite::Initialize(TexProeerty  tex)
 	transformationMatrixResourceSprote = CreateBufferResource(sizeof(Matrix4x4));
 	materialResource = CreateBufferResource(sizeof(UVMaterial));
 	indexResourceSprite = CreateBufferResource(sizeof(uint32_t) * 6);
-
+	matrix = MakeIdentity4x4();
 }
 
 void Sprite::Vertex()
@@ -50,8 +50,10 @@ void Sprite::Vertex()
 	indexDataSpriite[0] = 0;  indexDataSpriite[1] = 1; indexDataSpriite[2] = 2;
 	indexDataSpriite[3] = 1; indexDataSpriite[4] = 3; indexDataSpriite[5] = 2;
 }
-void Sprite::Darw(Matrix4x4 m, Vector4 Color)
+void Sprite::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
+	matrix = MakeAffineMatrix(scale, rotate, translate);
+
 	UVMaterial* materialDeta = nullptr;
 	materialResource->Map(0, nullptr,
 		reinterpret_cast<void**>(&materialDeta));
@@ -76,7 +78,7 @@ void Sprite::Darw(Matrix4x4 m, Vector4 Color)
 	Matrix4x4 SpriteMatrix = MakeAffineMatrix(transformSprite.scale, transformSprite.rotate, transformSprite.translate);
 	Matrix4x4 viewMatrix = MakeIdentity4x4();
 	Matrix4x4 projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::GetInstance()->Width()), float(WinApp::GetInstance()->Height()), 0.0f, 100.0f);
-	Matrix4x4 worldViewProjectionMatrix = Multiply(m, Multiply(viewMatrix, projectionMatrix));
+	Matrix4x4 worldViewProjectionMatrix = Multiply(matrix, Multiply(viewMatrix, projectionMatrix));
 	*transformationMatrixDataSprite = worldViewProjectionMatrix;
 
 

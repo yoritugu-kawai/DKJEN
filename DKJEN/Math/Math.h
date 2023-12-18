@@ -73,7 +73,6 @@ struct  Transform
 
 struct ImGguiTransfrom
 {
-	Matrix4x4 matrix;
 	Vector3 scale;
 	Vector3 rotate;
 	Vector3 translate;

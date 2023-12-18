@@ -6,7 +6,7 @@ class Texture
 {
 public:
 	void Initialize(TexProeerty  tex);
-	void Draw( Matrix4x4 m, Vector4 Color);
+	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
 	void Release();
 	//
 	static ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
@@ -34,6 +34,6 @@ private:
 	//
 	Transform cameratransform = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,-5.0f} };
 	///
-
+	Matrix4x4 matrix;
 	TexProeerty  tex_;
 };

@@ -21,7 +21,14 @@ struct ModelData
 class Obj3D {
 public:
 	void Initialize(TexProeerty  tex);
-	void Draw(Matrix4x4 m, Vector4 Color);
+	/// <summary>
+	/// m= MakeAffineMatrix(scale,rotate,translate);
+	/// の式を計算してmを引数に代入
+	/// </summary>
+	/// <param name="m"></param>
+	/// 
+	/// <param name="Color"></param>
+	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
 	void Release();
 	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 
@@ -36,7 +43,9 @@ private:
 
 	D3D12_VERTEX_BUFFER_VIEW vertxBufferView{};
 	ModelData modelData;
-
+	Matrix4x4 matrix;
 	TexProeerty  tex_;
 	ImageLoading* imageLoading = new ImageLoading;
+
+	Vector3 pos;
 };

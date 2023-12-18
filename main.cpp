@@ -54,7 +54,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	///ImGui
 	ImGguiTransfrom imGuiTextur;
 	for (int i = 0; i < 2; i++) {
-		imGuiTextur.matrix = MakeIdentity4x4();
 		imGuiTextur.scale = { 1,1,1 };
 		imGuiTextur.rotate = { 0,0,0 };
 		imGuiTextur.translate = { 0,0,0 };
@@ -63,7 +62,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	}
 
 	ImGguiTransfrom imGuiSprite;
-	imGuiSprite.matrix = MakeIdentity4x4();
 	imGuiSprite.scale = { 1.0f,1.0f,1.0f };
 	imGuiSprite.rotate = { 0.0f,0.0f,0.0f };
 	imGuiSprite.translate = { 0.0f,0.0f,0.0f };
@@ -71,17 +69,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	ImGguiTransfrom imGui3D[1];
 	for (int i = 0; i < 1; i++) {
-		imGui3D[i].matrix = MakeIdentity4x4();
 		imGui3D[i].scale = { 0.5f, 0.5f, 0.5f };
 		imGui3D[i].rotate = { 0.0f, 0.0f, 0.0f };
-		imGui3D[i].translate = { 0.0f, 0.0f, 5.0f };
+		imGui3D[i].translate = { 0.0f, 0.0f, 0.0f };
 		imGui3D[i].color = { 1.0f,1.0f,1.0f,1.0f };
 
 	}
 
 	ImGguiTransfrom imGuiSphere[1];
 	for (int i = 0; i < 1; i++) {
-		imGuiSphere[i].matrix = MakeIdentity4x4();
 		imGuiSphere[i].scale = { 1.0f, 1.0f, 1.0f };
 		imGuiSphere[i].rotate = { 0.0f, 4.7f, 0.0f };
 		imGuiSphere[i].translate = { 0.0f, 0.0f, 0.0f };
@@ -101,28 +97,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 
-		/*ImGui::Begin("Texture");
+		ImGui::Begin("Texture");
 		ImGui::ColorEdit3("color", (float*)&imGuiTextur.color);
 		ImGui::SliderFloat3("scale", &imGuiTextur.scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGuiTextur.rotate.x, -5.0f, 5.0f);
 		ImGui::SliderFloat3("translate", &imGuiTextur.translate.x, -5.0f, 5.0f);
 		ImGui::End();
 
-		imGuiTextur.matrix = MakeAffineMatrix(imGuiTextur.scale, imGuiTextur.rotate, imGuiTextur.translate);
-		tex->Draw(imGuiTextur.matrix, imGuiTextur.color);*/
+
+		tex->Draw(imGuiTextur.scale, imGuiTextur.rotate, imGuiTextur.translate, imGuiTextur.color);
 
 
 
 
-		/*ImGui::Begin("Sprite");
+		ImGui::Begin("Sprite");
 		ImGui::ColorEdit4("color", (float*)&imGuiSprite.color);
 		ImGui::SliderFloat3("scale", &imGuiSprite.scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGuiSprite.rotate.x, -5.0f, 5.0f);
 		ImGui::SliderFloat3("translate", &imGuiSprite.translate.x, -500.0f, 500.0f);
 		ImGui::End();
-		imGuiSprite.matrix = MakeAffineMatrix(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate);
-
-		SpriteTex->Darw(imGuiSprite.matrix, imGuiSprite.color);*/
+		
+		SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
 		
 
 
@@ -135,16 +130,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::SliderFloat3("translate", &imGui3D[0].translate.x, -5.0f, 5.0f);
 		ImGui::End();
 
-		imGui3D[0].matrix = MakeAffineMatrix(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate);
-
-		Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
-
-		Matrix4x4 CameraMatrix = MakeIdentity4x4();
-
-		imGui3D[0].matrix = Multiply(imGui3D[0].matrix, Multiply( CameraMatrix, ProjectionMatrix));
-
-
-		obj3D->Draw(imGui3D[0].matrix, imGui3D[0].color);
+		
+		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);
 		//
 
 		ImGui::Begin("sphere");
@@ -156,9 +143,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 		imGuiSphere[0].rotate.y += 0.02f;
-
-		imGuiSphere[0].matrix = MakeAffineMatrix(imGuiSphere[0].scale, imGuiSphere[0].rotate, imGuiSphere[0].translate);
-		sphere_->Draw(imGuiSphere[0].matrix);
+		sphere_->Draw(imGuiSphere[0].scale, imGuiSphere[0].rotate, imGuiSphere[0].translate);
 		//////
 		//　ゲーム処理
 		//////
