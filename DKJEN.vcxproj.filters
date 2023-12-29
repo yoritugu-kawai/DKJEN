@@ -64,6 +64,9 @@
     <None Include="..\..\..\2年前期課題\CG\DirectＸ\Object3d.hlsli">
       <Filter>hlsl</Filter>
     </None>
+    <None Include="Paticle.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -290,6 +293,12 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="LightObject.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Paticle.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Paticle.VS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>

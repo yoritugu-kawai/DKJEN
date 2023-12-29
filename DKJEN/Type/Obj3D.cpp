@@ -5,7 +5,7 @@ void Obj3D::Initialize(TexProeerty  tex)
 	tex_ = tex;
 	modelData = LoadObjFile("resource","axis.obj");
 
-
+	inst_ = 1;
 	vetexResource = CreateBufferResource(sizeof(VertexData) * modelData.vertices.size());
 	materialResource = CreateBufferResource(sizeof(Vector4));
 	wvpResource = CreateBufferResource(sizeof(TransformationMatrix));
@@ -69,7 +69,12 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	commandList->SetGraphicsRootConstantBufferView(1, wvpResource->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource->GetGPUVirtualAddress());
 	
-	commandList->DrawInstanced(UINT(modelData.vertices.size()), 1, 0, 0);
+	commandList->DrawInstanced(UINT(modelData.vertices.size()), inst_, 0, 0);
+}
+
+void Obj3D::Instancing(int inst)
+{
+	inst_ = inst;
 }
 
 

@@ -49,8 +49,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	obj3D->Initialize(tex2);
 
 
-	Sphere* sphere_ = new Sphere;
-	sphere_->Initialize(tex2);
+
 	///ImGui
 	ImGguiTransfrom imGuiTextur;
 	for (int i = 0; i < 2; i++) {
@@ -65,7 +64,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	imGuiSprite.scale = { 1.0f,1.0f,1.0f };
 	imGuiSprite.rotate = { 0.0f,0.0f,0.0f };
 	imGuiSprite.translate = { 0.0f,0.0f,0.0f };
-	imGuiSprite.color = { 1.0f, 1.0f, 1.0, 1.0f };
+	imGuiSprite.color = { 1.0f, 1.0f, 1.0, 0.0f };
 
 	ImGguiTransfrom imGui3D[1];
 	for (int i = 0; i < 1; i++) {
@@ -76,14 +75,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	}
 
-	ImGguiTransfrom imGuiSphere[1];
-	for (int i = 0; i < 1; i++) {
-		imGuiSphere[i].scale = { 1.0f, 1.0f, 1.0f };
-		imGuiSphere[i].rotate = { 0.0f, 4.7f, 0.0f };
-		imGuiSphere[i].translate = { 0.0f, 0.0f, 0.0f };
-		imGuiSphere[i].color = { 1.0f,1.0f,1.0f,1.0f };
-
-	}
+	
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -105,7 +97,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 
 
-		tex->Draw(imGuiTextur.scale, imGuiTextur.rotate, imGuiTextur.translate, imGuiTextur.color);
+		//tex->Draw(imGuiTextur.scale, imGuiTextur.rotate, imGuiTextur.translate, imGuiTextur.color);
 
 
 
@@ -126,7 +118,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 //
 //#endiftry
 	
-
 		
 		ImGui::Begin("3D");
 		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
@@ -137,19 +128,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		
 		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);
+		obj3D->Instancing(10);
 		//
 
-		ImGui::Begin("sphere");
-		ImGui::ColorEdit3("color", (float*)&imGuiSphere[0].color);
-		ImGui::SliderFloat3("scale", &imGuiSphere[0].scale.x, -0.0f, 5.0f);
-		ImGui::SliderFloat3("rotate", &imGuiSphere[0].rotate.x, -5.0f, 5.0f);
-		ImGui::SliderFloat3("translate", &imGuiSphere[0].translate.x, -5.0f, 5.0f);
-		ImGui::End();
-
-
-		imGuiSphere[0].rotate.y += 0.02f;
-		sphere_->Draw(imGuiSphere[0].scale, imGuiSphere[0].rotate, imGuiSphere[0].translate);
-		//////
+		
 		//　ゲーム処理
 		//////
 
@@ -168,7 +150,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	delete SpriteTex;
 	obj3D->Release();
 	delete obj3D;
-	sphere_->Release();
+	
 	PSOCopileManagement::Release();
 
 	ImguiManager::Release();

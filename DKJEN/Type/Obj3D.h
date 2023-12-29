@@ -33,7 +33,10 @@ public:
 	/// <param name="Vector3 translate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector4 color = { 1.0f,1.0f,1.0f,1.0f }"></param>
 	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
+	void Instancing(int inst);
 	void Release();
+	
+	
 	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 
 	ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
@@ -50,6 +53,6 @@ private:
 	Matrix4x4 matrix;
 	TexProeerty  tex_;
 	ImageLoading* imageLoading = new ImageLoading;
-
+	int inst_ = 0;
 	Vector3 pos;
 };
