@@ -58,6 +58,9 @@
     <Filter Include="DKJEN\Type\3D">
       <UniqueIdentifier>{ef5c8bc5-9c2a-4343-b48a-7498e51e6ef6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ALGame">
+      <UniqueIdentifier>{4c9c33d1-60e3-41dd-a10b-b013c80657a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -162,6 +165,9 @@
     <ClCompile Include="DKJEN\Type\Sphere.cpp">
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
+    <ClCompile Include="ALGame\Player.cpp">
+      <Filter>ALGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Type\Sphere.h">
       <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="ALGame\Player.h">
+      <Filter>ALGame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

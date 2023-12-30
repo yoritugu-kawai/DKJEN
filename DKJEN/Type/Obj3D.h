@@ -1,7 +1,7 @@
 #pragma once
 #include"../Math/Math.h"
 #include"../Base/DxCommon.h"
-#include"../Base/SpritePSO.h"
+
 #include"../Base/TexturePSO.h"
 #include"../Base/LightPSO.h"
 #include"../Base/ImageLoading.h"
@@ -24,7 +24,7 @@ public:
 	/// 
 	/// </summary>
 	/// <param name="tex"></param>
-	void Initialize(TexProeerty  tex);
+	void Initialize(TexProeerty  tex, const std::string& filename);
 	/// <summary>
 	/// 参考数値↓
 	/// </summary>

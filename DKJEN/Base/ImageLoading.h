@@ -45,7 +45,7 @@ class ImageLoading
 public:
 	void Initiluze();
 	TexProeerty LoadTexture(const std::string& filePath);
-	//void Draw();
+
 	void End();
 	DirectX::ScratchImage LoadTextureData(const std::string& filePath);
 	ID3D12Resource* CreateTexResource(ID3D12Device* device, const DirectX::TexMetadata& metadata);

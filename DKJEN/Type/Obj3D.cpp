@@ -1,9 +1,9 @@
 #include "Obj3D.h"
 
-void Obj3D::Initialize(TexProeerty  tex)
+void Obj3D::Initialize(TexProeerty  tex, const std::string& filename)
 {
 	tex_ = tex;
-	modelData = LoadObjFile("resource","axis.obj");
+	modelData = LoadObjFile("resource",filename);
 
 
 	vetexResource = CreateBufferResource(sizeof(VertexData) * modelData.vertices.size());
