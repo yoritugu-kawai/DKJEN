@@ -47,6 +47,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	SpriteTex->Initialize(tex3);
 	Obj3D* obj3D = new Obj3D;
 	obj3D->Initialize(tex2);
+	obj3D->Instancing(10);
 
 
 
@@ -89,20 +90,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 
-		ImGui::Begin("Texture");
+		/*ImGui::Begin("Texture");
 		ImGui::ColorEdit3("color", (float*)&imGuiTextur.color);
 		ImGui::SliderFloat3("scale", &imGuiTextur.scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGuiTextur.rotate.x, -5.0f, 5.0f);
 		ImGui::SliderFloat3("translate", &imGuiTextur.translate.x, -5.0f, 5.0f);
 		ImGui::End();
-
+*/
 
 		//tex->Draw(imGuiTextur.scale, imGuiTextur.rotate, imGuiTextur.translate, imGuiTextur.color);
 
 
 
 
-		ImGui::Begin("Sprite");
+	/*	ImGui::Begin("Sprite");
 		ImGui::ColorEdit4("color", (float*)&imGuiSprite.color);
 		ImGui::SliderFloat3("scale", &imGuiSprite.scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGuiSprite.rotate.x, -5.0f, 5.0f);
@@ -110,7 +111,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 		
 		SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
-		
+		*/
 //#ifdef _DEBUG
 //		ImGui::Begin("a");
 //
@@ -128,7 +129,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		
 		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);
-		obj3D->Instancing(10);
 		//
 
 		

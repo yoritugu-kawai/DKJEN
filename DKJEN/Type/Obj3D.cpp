@@ -7,7 +7,7 @@ void Obj3D::Initialize(TexProeerty  tex)
 
 	inst_ = 1;
 	vetexResource = CreateBufferResource(sizeof(VertexData) * modelData.vertices.size());
-	materialResource = CreateBufferResource(sizeof(Vector4));
+	materialResource = CreateBufferResource(sizeof(UVMaterial));
 	wvpResource = CreateBufferResource(sizeof(TransformationMatrix));
 	lightResource = CreateBufferResource(sizeof(DirectionalLight));
 	InstancingResource = CreateBufferResource(sizeof(TransformationMatrix) * kNumIstance);
@@ -45,7 +45,7 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	
 	//
 	VertexData* vertexData = nullptr;
-	Vector4* materialData = nullptr;
+	UVMaterial* materialData = nullptr;
 	TransformationMatrix* matrixData = nullptr;
 	DirectionalLight* lightData = nullptr;
 	TransformationMatrix* inststacingDet = nullptr;
@@ -66,7 +66,8 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	matrix = Multiply(matrix, Multiply(CameraMatrix, ProjectionMatrix));
 	matrixData->WVP = matrix;
 	matrixData->World = MakeIdentity4x4();
-	*materialData = Color;
+	materialData->color = Color;
+	materialData->uvTransform = { 1,1,1,1 };
 	lightData->direction = { 0.0f,-1.0f,0.0f };
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->intensity = 1.0f;
@@ -106,7 +107,7 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 
 	commandList->SetGraphicsRootDescriptorTable(1, instancingSrvHandleGPU);
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootConstantBufferView(1, InstancingResource->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource->GetGPUVirtualAddress());
 	
 	commandList->DrawInstanced(UINT(modelData.vertices.size()), inst_, 0, 0);
