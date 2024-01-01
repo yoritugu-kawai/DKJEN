@@ -2,6 +2,7 @@
 #include"../Base/WinApp.h"
 #include"../Base/DxCommon.h"
 #include"../Base/Function.h"
+
 #include"../externals/DirectXTex/d3dx12.h"
 #include"../externals/DirectXTex/DirectXTex.h"
 struct VertexData {
@@ -11,8 +12,8 @@ struct VertexData {
 };
 struct TexProeerty {
 	D3D12_GPU_DESCRIPTOR_HANDLE SrvHandleGPU;
-
 	ID3D12Resource* Resource;
+	D3D12_GPU_DESCRIPTOR_HANDLE SrvHandleGPU2;
 
 
 };
@@ -55,7 +56,7 @@ public:
 	
 private:
 	DxCommon dxcommon_;
-
+	
 	uint32_t descriptorSizeSRV;
 	uint32_t descriptorSizeRTV;
 	uint32_t descriptorSizeDSV;

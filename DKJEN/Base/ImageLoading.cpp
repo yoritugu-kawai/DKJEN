@@ -11,6 +11,7 @@ void ImageLoading::Initiluze()
 	descriptorSizeRTV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	descriptorSizeDSV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 	LoadCount = 0;
+	
 }
 
 DirectX::ScratchImage ImageLoading::LoadTextureData(const std::string& filePath)
@@ -122,7 +123,8 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
 	//
-
+	
+	//
 	D3D12_GPU_DESCRIPTOR_HANDLE texSrvHandleGPU =
 		GetGPUDescriptorHandle(
 			srvDescriptorHeap, descriptorSizeSRV, LoadCount);
@@ -133,8 +135,9 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 	texSrvHandleCPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	texSrvHandleGPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	device->CreateShaderResourceView(textureResource, &srvDesc, texSrvHandleCPU);
+	///
 
-
+	
 	//テキストのシェダ－2
 	//D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc2{};
 	//srvDesc2.Format = metadata2.format;

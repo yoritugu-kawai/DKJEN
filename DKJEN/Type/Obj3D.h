@@ -36,23 +36,28 @@ public:
 	void Instancing(int inst);
 	void Release();
 	
-	
+	void SRV();
 	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 
 	ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
+
+	
 private:
 	ID3D12Resource* vetexResource;
 	ID3D12Resource* materialResource;
 	ID3D12Resource* wvpResource;
 	ID3D12Resource* lightResource;
 
+	ComPtr<ID3D12Resource>InstancingResource;
 	D3D12_VERTEX_BUFFER_VIEW vertxBufferView{};
 	ModelData modelData;
 	Matrix4x4 matrix;
 	TexProeerty  tex_;
 	ImageLoading* imageLoading = new ImageLoading;
 	int inst_ = 0;
+	const uint32_t kNumIstance = 10;
+
 	Vector3 pos;
 };
