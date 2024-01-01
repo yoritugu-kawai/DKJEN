@@ -146,6 +146,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ALGame\Player.cpp" />
+    <ClCompile Include="ALGame\State.cpp" />
     <ClCompile Include="DKJEN\Base\DxCommon.cpp" />
     <ClCompile Include="DKJEN\Base\Function.cpp" />
     <ClCompile Include="DKJEN\Base\ImageLoading.cpp" />
@@ -181,6 +182,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ALGame\Player.h" />
+    <ClInclude Include="ALGame\State.h" />
     <ClInclude Include="DKJEN\Base\DxCommon.h" />
     <ClInclude Include="DKJEN\Base\Function.h" />
     <ClInclude Include="DKJEN\Base\ImageLoading.h" />

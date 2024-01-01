@@ -168,6 +168,9 @@
     <ClCompile Include="ALGame\Player.cpp">
       <Filter>ALGame</Filter>
     </ClCompile>
+    <ClCompile Include="ALGame\State.cpp">
+      <Filter>ALGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -273,6 +276,9 @@
       <Filter>DKJEN\Type\3D</Filter>
     </ClInclude>
     <ClInclude Include="ALGame\Player.h">
+      <Filter>ALGame</Filter>
+    </ClInclude>
+    <ClInclude Include="ALGame\State.h">
       <Filter>ALGame</Filter>
     </ClInclude>
   </ItemGroup>

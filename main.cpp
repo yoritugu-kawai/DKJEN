@@ -54,7 +54,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
     imGui3D.rotate = { 0.0f, 0.0f, 0.0f };
 	imGui3D.translate = { 0.0f, -1.0f, 3.0f };
 	imGui3D.color = { 0.0f,0.0f,1.0f,1.0f };
-	
+	int nem=1;
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -67,15 +67,40 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
+
 		
-		//更新
-		player_->Updet();
+	
+		switch (nem)
+		{
+		case 1:
+			if (Input::GetInstance()->PushKeyPressed(DIK_1)) {
+				nem = 2;
+			}
+			break;
+		case 2:
+			//更新
+			player_->Updet();
+
+			//////描画
+			//
+
+			player_->Draw();
+			if (Input::GetInstance()->PushKeyPressed(DIK_1)) {
+				nem = 3;
+			}
+			break;
+		case 3:
+			if (Input::GetInstance()->PushKeyPressed(DIK_1)) {
+				nem = 1;
+			}
+			break;
+		case 4:
+			if (Input::GetInstance()->PushKeyPressed(DIK_1)) {
+				nem = 1;
+			}
+			break;
+		}
 		
-		//////描画
-		//
-	
-		player_->Draw();
-	
 		
 	
 		//////
