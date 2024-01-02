@@ -31,7 +31,7 @@ void PSOCopileManagement::Set()
 	PolygonPSO::CreatePSO();
 	SpritePSO::CreatePSO();
 	LightPSO::CreatePSO();
-	PaticlePSO::CreatePSO();
+	//PaticlePSO::CreatePSO();
 
 }
 
@@ -47,6 +47,6 @@ void PSOCopileManagement::Release()
 	PolygonPSO::Release();
 	SpritePSO::Release();
 	LightPSO::Release();
-	PaticlePSO::Release();
+	//PaticlePSO::Release();
 
 }
