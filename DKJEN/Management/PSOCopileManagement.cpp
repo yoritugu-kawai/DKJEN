@@ -19,16 +19,20 @@ void PSOCopileManagement::Set()
 	PolygonCompileShader::DXC();
 	SpriteCompileShader::DXC();
 	LightCompileShader::DXC();
+	PaticleCompileShader::DXC();
 
 	TextureCompileShader::ShaderCompile();
 	PolygonCompileShader::ShaderCompile();
 	SpriteCompileShader::ShaderCompile();
 	LightCompileShader::ShaderCompile();
-
+	PaticleCompileShader::ShaderCompile();
+	
 	TexturePSO::CreatePSO();
 	PolygonPSO::CreatePSO();
 	SpritePSO::CreatePSO();
 	LightPSO::CreatePSO();
+	PaticlePSO::CreatePSO();
+
 }
 
 void PSOCopileManagement::Release()
@@ -37,9 +41,12 @@ void PSOCopileManagement::Release()
 	PolygonCompileShader::Release();
 	SpriteCompileShader::Release();
 	LightCompileShader::Release();
+	PaticleCompileShader::Release();
+
 	TexturePSO::Release();
 	PolygonPSO::Release();
 	SpritePSO::Release();
 	LightPSO::Release();
+	PaticlePSO::Release();
 
 }

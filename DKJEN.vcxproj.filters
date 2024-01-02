@@ -67,6 +67,9 @@
     <None Include="..\..\..\2年前期課題\CG\DirectＸ\Object3d.hlsli">
       <Filter>hlsl</Filter>
     </None>
+    <None Include="Paticle.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -167,6 +170,12 @@
     </ClCompile>
     <ClCompile Include="DKJEN\Type\Particle.cpp">
       <Filter>DKJEN\Type\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\PaticlePSO.cpp">
+      <Filter>DKJEN\Base\POS</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\PaticleCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,6 +284,12 @@
     <ClInclude Include="DKJEN\Type\Particle.h">
       <Filter>DKJEN\Type\particle</Filter>
     </ClInclude>
+    <ClInclude Include="DKJEN\Base\PaticlePSO.h">
+      <Filter>DKJEN\Base\POS</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\PaticleCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonOdject3d.PS.hlsl">
@@ -299,6 +314,12 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="LightObject.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Paticle.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Paticle.VS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>

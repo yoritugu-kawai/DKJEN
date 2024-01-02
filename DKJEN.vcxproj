@@ -143,6 +143,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <None Include="..\..\..\2年前期課題\CG\DirectＸ\Object3d.hlsli" />
     <None Include=".editorconfig" />
+    <None Include="Paticle.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DKJEN\Base\DxCommon.cpp" />
@@ -150,6 +151,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Base\ImageLoading.cpp" />
     <ClCompile Include="DKJEN\Base\LightPSO.cpp" />
     <ClCompile Include="DKJEN\Base\Log.cpp" />
+    <ClCompile Include="DKJEN\Base\PaticlePSO.cpp" />
     <ClCompile Include="DKJEN\Base\PolygonPSO.cpp" />
     <ClCompile Include="DKJEN\Base\SpritePSO.cpp" />
     <ClCompile Include="DKJEN\Base\TexturePSO.cpp" />
@@ -166,6 +168,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Management\PSOCopileManagement.cpp" />
     <ClCompile Include="DKJEN\Math\Math.cpp" />
     <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp" />
+    <ClCompile Include="DKJEN\Shader\PaticleCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp" />
@@ -185,6 +188,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Base\ImageLoading.h" />
     <ClInclude Include="DKJEN\Base\LightPSO.h" />
     <ClInclude Include="DKJEN\Base\Log.h" />
+    <ClInclude Include="DKJEN\Base\PaticlePSO.h" />
     <ClInclude Include="DKJEN\Base\PolygonPSO.h" />
     <ClInclude Include="DKJEN\Base\SpritePSO.h" />
     <ClInclude Include="DKJEN\Base\TexturePSO.h" />
@@ -202,6 +206,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h" />
     <ClInclude Include="DKJEN\Math\Math.h" />
     <ClInclude Include="DKJEN\Shader\LightCompileShader.h" />
+    <ClInclude Include="DKJEN\Shader\PaticleCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\TextureCompileShader.h" />
@@ -246,6 +251,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="LightObject.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Paticle.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Paticle.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
