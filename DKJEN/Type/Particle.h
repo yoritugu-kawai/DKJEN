@@ -5,6 +5,7 @@ class Particle
 {
 public:
 	void Initialize();
+	void SRV();
 	void Draw();
 private:
 	ModelData modelData;
