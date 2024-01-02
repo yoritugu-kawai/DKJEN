@@ -96,7 +96,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
-
+		
 		ImGui::Begin("Texture");
 		ImGui::ColorEdit3("color", (float*)&imGuiTextur.color);
 		ImGui::SliderFloat3("scale", &imGuiTextur.scale.x, -0.0f, 5.0f);

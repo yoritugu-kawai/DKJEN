@@ -58,6 +58,9 @@
     <Filter Include="DKJEN\Type\3D">
       <UniqueIdentifier>{ef5c8bc5-9c2a-4343-b48a-7498e51e6ef6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\Type\particle">
+      <UniqueIdentifier>{f452e02b-e103-49c0-b01a-4ecd7ff4ac5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -162,6 +165,9 @@
     <ClCompile Include="DKJEN\Type\Sphere.cpp">
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Type\Particle.cpp">
+      <Filter>DKJEN\Type\particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Type\Sphere.h">
       <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Particle.h">
+      <Filter>DKJEN\Type\particle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
