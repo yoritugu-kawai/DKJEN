@@ -1,135 +1,323 @@
 #include "Particle.h"
+static uint32_t modelIndex;
+std::list<ModelData> Particle3D::modelInformationList_{};
+static uint32_t descriptorSizeSRV_ = 0u;
 
-void Particle::Initialize()
-{
-	InstancingResource = CreateBufferResource(sizeof(TransformationMatrix) * kNumIstance);
-	vetexResource = CreateBufferResource(sizeof(VertexData) * modelData.vertices.size());
-	materialResource = CreateBufferResource(sizeof(Vector4));
-	wvpResource = CreateBufferResource(sizeof(TransformationMatrix));
-	
-	vertxBufferView.BufferLocation = vetexResource->GetGPUVirtualAddress();
-	vertxBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData.vertices.size());
-	vertxBufferView.StrideInBytes = sizeof(VertexData);
+Particle3D::Particle3D() {
+
 }
 
-void Particle::SRV()
-{
-	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-	ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
-	uint32_t descriptorSizeSRV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	D3D12_SHADER_RESOURCE_VIEW_DESC instansingSrvDesc{};
-	instansingSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
-	instansingSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	instansingSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
-	instansingSrvDesc.Buffer.FirstElement = 0;
-	instansingSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
-	instansingSrvDesc.Buffer.NumElements = 10;
-	instansingSrvDesc.Buffer.StructureByteStride = sizeof(TransformationMatrix);
-	D3D12_CPU_DESCRIPTOR_HANDLE instancingSrvHandleCPU = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
-	 instancingSrvHandleGPU = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
-	device->CreateShaderResourceView(InstancingResource.Get(), &instansingSrvDesc, instancingSrvHandleCPU);
+
+
+//モデルデータの読み込み
+ModelData Particle3D::LoadObjectFile(const std::string& directoryPath, const std::string& fileName) {
+	//1.中で必要となる変数の宣言
+	ModelData modelData;
+	//位置
+	std::vector<Vector4> positions;
+	//法線
+	std::vector<Vector3> normals;
+	//テクスチャ座標
+	std::vector<Vector2> texcoords;
+	//ファイルから読んだ1行を格納するもの
+	std::string line;
+
+
+	//2.ファイルを開く
+	std::ifstream file(directoryPath + "/" + fileName);
+	assert(file.is_open());
+
+	//3.実際にファイルを読み、ModelDataを構築していく
+
+	//getline...streamから1行読んでstringに格納する
+	//istringstream...文字列を分解しながら読むためのクラス、空白を区切りとして読む
+	//objファイルの先頭にはその行の意味を示す識別子(identifier/id)が置かれているので、最初にこの識別子を読み込む
+
+	//v...頂点位置
+	//vt...頂点テクスチャ座標
+	//vn...頂点法線
+	//f...面
+
+	while (std::getline(file, line)) {
+		std::string identifier;
+		std::istringstream s(line);
+		//先頭の識別子を読む
+		s >> identifier;
+
+		//identifierに応じた処理
+		if (identifier == "v") {
+			Vector4 position;
+			//ex).  v 「1.0000」 「1.0000」 「-0.0000」
+			s >> position.x >> position.y >> position.z;
+			position.z *= -1.0f;
+			position.w = 1.0f;
+			positions.push_back(position);
+		}
+		else if (identifier == "vt") {
+			Vector2 texcoord;
+			s >> texcoord.x >> texcoord.y;
+			texcoord.y = 1.0f - texcoord.y;
+			texcoords.push_back(texcoord);
+		}
+		else if (identifier == "vn") {
+			Vector3 normal;
+			s >> normal.x >> normal.y >> normal.z;
+			normal.z *= -1.0f;
+			normals.push_back(normal);
+		}
+		else if (identifier == "f") {
+			//面は三角形限定。その他は未対応
+			VertexData triangle[3];
+			for (int32_t faceVertex = 0; faceVertex < 3; ++faceVertex) {
+				std::string vertexDefinition;
+				s >> vertexDefinition;
+				//頂点の要素へのINdexは「位置/uv/法線」で格納されているので、分解してindexを取得する
+				std::istringstream v(vertexDefinition);
+				uint32_t elementIndices[3];
+
+
+				for (int32_t element = 0; element < 3; ++element) {
+					std::string index;
+					// 「/」区切りでインデックスを読んでいく
+					std::getline(v, index, '/');
+					elementIndices[element] = std::stoi(index);
+
+
+				}
+				//要素へのIndexから実際の要素の値を取得して、頂点を構築する
+				Vector4 position = positions[elementIndices[0] - 1];
+				Vector2 texcoord = texcoords[elementIndices[1] - 1];
+				Vector3 normal = normals[elementIndices[2] - 1];
+				//VertexData vertex = { position,texcoord,normal };
+				//modelData.vertices.push_back(vertex);
+
+				triangle[faceVertex] = { position,texcoord,normal };
+
+
+
+			}
+			//頂点を逆順で登録することで、回り順を逆にする
+			modelData.vertices.push_back(triangle[2]);
+			modelData.vertices.push_back(triangle[1]);
+			modelData.vertices.push_back(triangle[0]);
+
+		}
+		else if (identifier == "mtllib") {
+			//materialTemplateLibraryファイルの名前を取得する
+			std::string materialFileName;
+			s >> materialFileName;
+			//基本的にobjファイルと同一階層にmtlは存在させるので、ディレクトリ名とファイル名を渡す
+			modelData.material = LoadMaterialTemplateFile(directoryPath, materialFileName);
+		}
+
+
+	}
+
+
+
+
+
+	//4.ModelDataを返す
+	return modelData;
 }
 
-void Particle::Draw()
-{
-	Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
-	TransformationMatrix* inststacingDet = nullptr;
+//mtlファイルを読む関数
+MaterialData Particle3D::LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& fileName) {
 
-	Vector4* materialData = nullptr;
-	TransformationMatrix* matrixData = nullptr;
+#pragma region 1.中で必要となる変数の宣言
+	//構築するMaterialData
+	MaterialData materialData;
+	//ファイルから読んだ1行を格納するもの
+	std::string line;
+
+#pragma endregion
 
 
-	InstancingResource->Map(0, nullptr, reinterpret_cast<void**>(&inststacingDet));
-	materialResource->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
-	wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&matrixData));
+
+#pragma region 2.ファイルを開く
+	std::ifstream file(directoryPath + "/" + fileName);
+	//開かなかったら止める
+	assert(file.is_open());
+
+#pragma endregion
+
+
+
+
+#pragma region  実際にファイルを読みMaterialDataを構築していく
+	while (std::getline(file, line)) {
+		std::string identifier;
+		std::istringstream s(line);
+		s >> identifier;
+
+		//identifierに応じた処理
+		//map_Kdにはtextureのファイル名が記載されているよ
+		if (identifier == "map_Kd") {
+			std::string textureFileName;
+			s >> textureFileName;
+			//連結してファイルパスにする
+			materialData.textureFilePath = directoryPath + "/" + textureFileName;
+
+		}
+
+
+
+	}
+
+#pragma endregion
+
+	//4.MaterialDataを返す
+
+	return materialData;
+
+
+
+}
+
+
+
+Particle3D* Particle3D::Create(const std::string& directoryPath, const std::string& fileName) {
+	//新たなModel型のインスタンスのメモリを確保
+	Particle3D* particle3D = new Particle3D();
+
+
+	//初期化の所でやってね、Update,Drawでやるのが好ましいけど凄く重くなった。
+	//ブレンドモードの設定
 	
 
 
-	Matrix4x4 CameraMatrix = MakeIdentity4x4();
+	//すでにある場合はリストから取り出す
+	for (ModelData modelData : modelInformationList_) {
+		if (modelData.name == fileName) {
 
-	matrix = Multiply(matrix, Multiply(CameraMatrix, ProjectionMatrix));
-	matrixData->WVP = matrix;
-	matrixData->World = MakeIdentity4x4();
-	*materialData = { 1.0f,1.0f,1.0f,1.0f };
-	
-	for (uint32_t i = 0; i < kNumIstance; ++i)
-	{
-		inststacingDet[i].WVP = MakeIdentity4x4();
-		inststacingDet[i].World = MakeIdentity4x4();
+
+
+			////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
+			particle3D->material_ = std::make_unique<CreateMaterial>();
+			particle3D->material_->Initialize();
+
+
+
+			//テクスチャの読み込み
+			particle3D->textureHandle_ = TextureManager::GetInstance()->LoadTexture(modelData.material.textureFilePath);
+
+
+			//頂点リソースを作る
+			particle3D->mesh_ = std::make_unique<Mesh>();
+			particle3D->mesh_->Initialize(modelData.vertices);
+
+			//Instancing
+			//Transformationいらなかったっす
+			particle3D->instancing_ = std::make_unique<Instancing>();
+			particle3D->instancing_->Initialize();
+
+
+			//Lighting
+			particle3D->directionalLight_ = std::make_unique<CreateDirectionalLight>();
+			particle3D->directionalLight_->Initialize();
+
+
+
+
+			//初期は白色
+			//モデル個別に色を変更できるようにこれは外に出しておく
+			particle3D->color_ = { 1.0f,1.0f,1.0f,1.0f };
+
+			return particle3D;
+
+
+		}
 	}
-	Transform transfom[10];
-	for (uint32_t i = 0; i < kNumIstance; ++i)
-	{
-		transfom[i].scale = { 1.0f,1.0f,1.0f };
-		transfom[i].rotate = { 0.0f,0.0f,0.0f };
-		transfom[i].translate = { i * 0.1f,i * 0.1f,i * 0.1f };
-	}
 
-	for (uint32_t i = 0; i < kNumIstance; ++i)
-	{
-		Matrix4x4 woldMatrix = MakeAffineMatrix(transfom[i].scale, transfom[i].rotate, transfom[i].translate);
-		Matrix4x4 woldViewProMatrix = Multiply(woldMatrix, ProjectionMatrix);
-		inststacingDet[i].WVP = woldViewProMatrix;
-		inststacingDet[i].World = woldMatrix;
-	}
+	//モデルの読み込み
+	ModelData modelDataNew = particle3D->LoadObjectFile(directoryPath, fileName);
+	modelDataNew.name = fileName;
+	modelInformationList_.push_back(modelDataNew);
 
 
-	modelData.vertices.push_back({ vertexData.position = {1.0f,1.0f,0.0f,1.0f}, vertexData.texcoord = {0.0f,0.0f},vertexData.normal = {0.0f,0.0f,1.0f} });
-	modelData.vertices.push_back({ vertexData.position = {1.0f,1.0f,0.0f,1.0f}, vertexData.texcoord = {0.0f,0.0f},vertexData.normal = {0.0f,0.0f,1.0f} });
-	modelData.vertices.push_back({ vertexData.position = {1.0f,1.0f,0.0f,1.0f}, vertexData.texcoord = {0.0f,0.0f},vertexData.normal = {0.0f,0.0f,1.0f} });
-	modelData.vertices.push_back({ vertexData.position = {1.0f,1.0f,0.0f,1.0f}, vertexData.texcoord = {0.0f,0.0f},vertexData.normal = {0.0f,0.0f,1.0f} });
-	modelData.vertices.push_back({ vertexData.position = {1.0f,1.0f,0.0f,1.0f}, vertexData.texcoord = {0.0f,0.0f},vertexData.normal = {0.0f,0.0f,1.0f} });
-	modelData.vertices.push_back({ vertexData.position = {1.0f,1.0f,0.0f,1.0f}, vertexData.texcoord = {0.0f,0.0f},vertexData.normal = {0.0f,0.0f,1.0f} });
-	modelData.material.textureFilePath = "./resoures/uvChecker.png";
 
-	PSOProperty pso_ = Paticle::GetInstance()->GetPSO().polygon;
+	////マテリアル用のリソースを作る。今回はcolor1つ分のサイズを用意する
+	particle3D->material_ = std::make_unique<CreateMaterial>();
+	particle3D->material_->Initialize();
+
+
+	//テクスチャの読み込み
+	particle3D->textureHandle_ = TextureManager::GetInstance()->LoadTexture(modelDataNew.material.textureFilePath);
+
+
+	//頂点リソースを作る
+	particle3D->mesh_ = std::make_unique<Mesh>();
+	particle3D->mesh_->Initialize(modelDataNew.vertices);
+
+
+
+	//Instancing
+	//Transformationいらなかったっす
+	particle3D->instancing_ = std::make_unique<Instancing>();
+	particle3D->instancing_->Initialize();
+
+	//Lighting
+	particle3D->directionalLight_ = std::make_unique<CreateDirectionalLight>();
+	particle3D->directionalLight_->Initialize();
+
+
+
+
+
+	//初期は白色
+	//モデル個別に色を変更できるようにこれは外に出しておく
+	particle3D->color_ = { 1.0f,1.0f,1.0f,1.0f };
+
+	return particle3D;
+
+}
+
+
+
+//描画
+void Particle3D::Draw(Transform transform) {
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
-	
-	commandList->SetGraphicsRootSignature(pso_.rootSignature);
-	commandList->SetPipelineState(pso_.GraphicsPipelineState);//
+	//マテリアルにデータを書き込む
+	//書き込むためのアドレスを取得
+	//reinterpret_cast...char* から int* へ、One_class* から Unrelated_class* へなどの変換に使用
+
+	material_->SetInformation(color_);
+
+	//書き込むためのデータを書き込む
+	//頂点データをリソースにコピ
 
 
-	commandList->IASetVertexBuffers(0, 1, &vertxBufferView);
+	instancing_->SetGraphicsCommand();
 
-	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	commandList->SetGraphicsRootDescriptorTable(2, instancingSrvHandleGPU);
-	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootConstantBufferView(1, wvpResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootConstantBufferView(3, InstancingResource->GetGPUVirtualAddress());
+	//コマンドを積む
+	commandList->SetPipelineState(Paticle::GetInstance()->GetParticle3DGraphicsPipelineState().Get());
+	commandList->SetGraphicsRootSignature(Paticle::GetInstance()->GetParticle3DRootSignature().Get());
 
-	commandList->DrawInstanced(UINT(modelData.vertices.size()), 10, 0, 0);
+
+	mesh_->GraphicsCommand();
+
+	//CBVを設定する
+	material_->GraphicsCommand();
+
+	//Transformationいらなかったっす
+	instancing_->GraphicsCommand();
+
+
+	//SRVのDescriptorTableの先頭を設定。2はrootParameter[2]である
+
+	if (textureHandle_ != 0) {
+		TextureManager::GraphicsCommand(textureHandle_);
+
+	}
+
+
+	//Light
+	directionalLight_->GraphicsCommand();
+
+	//DrawCall
+	mesh_->DrawCall(instanceCount_);
+
 
 }
 
-ID3D12Resource* Particle::CreateBufferResource(size_t sizeInbyte)
-{
-	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-	ID3D12Resource* RssultResource;
-	//頂点リソース用のヒープの設定
-	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
-
-	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD; //UploadHeapを使う
-
-	//頂点リソースの設定
-	D3D12_RESOURCE_DESC ResourceDesc{};
-
-	//バッファリソース。テクスチャの場合はまた別の設定をする
-	ResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	ResourceDesc.Width = sizeInbyte; //リソースのサイズ。今回はvector4を3頂点分
-
-	//バッファの場合はこれらは1にする決まり
-	ResourceDesc.Height = 1;
-	ResourceDesc.DepthOrArraySize = 1;
-	ResourceDesc.MipLevels = 1;
-	ResourceDesc.SampleDesc.Count = 1;
-
-	//バッファの場合はこれにする決まり
-	ResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-	HRESULT hr;
-	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
-		&ResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&RssultResource));
-	assert(SUCCEEDED(hr));
-
-	return RssultResource;
-}

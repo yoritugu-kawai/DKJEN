@@ -1,8 +1,12 @@
 #pragma once
-#include "Common/DirectX/DirectXSetup.h"
-
-#include "Math/Vector/Transform.h"
-#include <Math/Matrix/Matrix/TransformationMatrix.h>
+#include"../Math/Math.h"
+#include"../Base/DxCommon.h"
+#include"../Base/SpritePSO.h"
+#include"../Base/TexturePSO.h"
+#include"../Base/LightPSO.h"
+#include"../Base/ImageLoading.h"
+#include<fstream>
+#include<sstream>
 
 class Instancing{
 public:
@@ -20,6 +24,7 @@ public:
 
 	//デストラクタ
 	~Instancing();
+	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 
 public:
 	int GetInstanceCount() {

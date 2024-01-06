@@ -1,8 +1,14 @@
 #pragma once
 
 #include <vector>
-#include <Math/Vector/VertexData.h>
-#include "Common/DirectX/DirectXSetup.h"
+#include"../Math/Math.h"
+#include"../Base/DxCommon.h"
+#include"../Base/SpritePSO.h"
+#include"../Base/TexturePSO.h"
+#include"../Base/LightPSO.h"
+#include"../Base/ImageLoading.h"
+#include<fstream>
+#include<sstream>
 
 class Mesh{
 public:
@@ -13,6 +19,7 @@ public:
 
 	void DrawCall(int32_t instanceCount);
 
+	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 
 private:
 	//頂点リソースを作る
