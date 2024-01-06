@@ -4,7 +4,7 @@
 
 #include"DKJEN/Math/Math.h"
 
-
+#include"DKJEN/Type/Particle.h"
 #include"DKJEN/Type/Polygon.h"
 #include"DKJEN/Type/Sprite.h"
 #include"DKJEN/Type/Texture.h"
@@ -35,8 +35,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Input::Initialize();
 	PSOCopileManagement::Set();
 	
-	
-	
+	Particle* par =new Particle;
+	par->Initialize();
 	///ImGui
 	
 	//　メインループ
@@ -52,7 +52,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 		
-		
+		par->Draw();
 		//////
 		//　ゲーム処理
 		//////
@@ -72,7 +72,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	ImguiManager::Release();
 	DxCommon::Release();
-
+	
 
 	return 0;
 }

@@ -61,6 +61,9 @@
     <Filter Include="DKJEN\Type\particle">
       <UniqueIdentifier>{f452e02b-e103-49c0-b01a-4ecd7ff4ac5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\ko">
+      <UniqueIdentifier>{6104460c-3d6f-42d3-888a-0db5a9a67b17}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -177,6 +180,15 @@
     <ClCompile Include="DKJEN\Shader\PaticleCompileShader.cpp">
       <Filter>DKJEN\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\ko\CreateMaterial.cpp">
+      <Filter>DKJEN\ko</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\ko\Mesh.cpp">
+      <Filter>DKJEN\ko</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\ko\Instancing.cpp">
+      <Filter>DKJEN\ko</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -289,6 +301,15 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Shader\PaticleCompileShader.h">
       <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\ko\CreateMaterial.h">
+      <Filter>DKJEN\ko</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\ko\Mesh.h">
+      <Filter>DKJEN\ko</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\ko\Instancing.h">
+      <Filter>DKJEN\ko</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

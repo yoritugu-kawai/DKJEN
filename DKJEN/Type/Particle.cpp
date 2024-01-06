@@ -3,6 +3,13 @@
 void Particle::Initialize()
 {
 	InstancingResource = CreateBufferResource(sizeof(TransformationMatrix) * kNumIstance);
+	vetexResource = CreateBufferResource(sizeof(VertexData) * modelData.vertices.size());
+	materialResource = CreateBufferResource(sizeof(Vector4));
+	wvpResource = CreateBufferResource(sizeof(TransformationMatrix));
+	
+	vertxBufferView.BufferLocation = vetexResource->GetGPUVirtualAddress();
+	vertxBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData.vertices.size());
+	vertxBufferView.StrideInBytes = sizeof(VertexData);
 }
 
 void Particle::SRV()
@@ -19,7 +26,7 @@ void Particle::SRV()
 	instansingSrvDesc.Buffer.NumElements = 10;
 	instansingSrvDesc.Buffer.StructureByteStride = sizeof(TransformationMatrix);
 	D3D12_CPU_DESCRIPTOR_HANDLE instancingSrvHandleCPU = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
-	D3D12_GPU_DESCRIPTOR_HANDLE instancingSrvHandleGPU = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
+	 instancingSrvHandleGPU = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
 	device->CreateShaderResourceView(InstancingResource.Get(), &instansingSrvDesc, instancingSrvHandleCPU);
 }
 
@@ -27,7 +34,24 @@ void Particle::Draw()
 {
 	Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
 	TransformationMatrix* inststacingDet = nullptr;
+
+	Vector4* materialData = nullptr;
+	TransformationMatrix* matrixData = nullptr;
+
+
 	InstancingResource->Map(0, nullptr, reinterpret_cast<void**>(&inststacingDet));
+	materialResource->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
+	wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&matrixData));
+	
+
+
+	Matrix4x4 CameraMatrix = MakeIdentity4x4();
+
+	matrix = Multiply(matrix, Multiply(CameraMatrix, ProjectionMatrix));
+	matrixData->WVP = matrix;
+	matrixData->World = MakeIdentity4x4();
+	*materialData = { 1.0f,1.0f,1.0f,1.0f };
+	
 	for (uint32_t i = 0; i < kNumIstance; ++i)
 	{
 		inststacingDet[i].WVP = MakeIdentity4x4();
@@ -58,8 +82,9 @@ void Particle::Draw()
 	modelData.vertices.push_back({ vertexData.position = {1.0f,1.0f,0.0f,1.0f}, vertexData.texcoord = {0.0f,0.0f},vertexData.normal = {0.0f,0.0f,1.0f} });
 	modelData.material.textureFilePath = "./resoures/uvChecker.png";
 
+	PSOProperty pso_ = Paticle::GetInstance()->GetPSO().polygon;
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
-	PSOProperty pso_ = PaticlePSO::GetInstance()->GetPSO().Texture;
+	
 	commandList->SetGraphicsRootSignature(pso_.rootSignature);
 	commandList->SetPipelineState(pso_.GraphicsPipelineState);//
 
@@ -68,12 +93,12 @@ void Particle::Draw()
 
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	commandList->SetGraphicsRootDescriptorTable(1, instancingSrvHandleGPU);
+	commandList->SetGraphicsRootDescriptorTable(2, instancingSrvHandleGPU);
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
-	commandList->SetGraphicsRootConstantBufferView(3, lightResource->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(1, wvpResource->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(3, InstancingResource->GetGPUVirtualAddress());
 
-	commandList->DrawInstanced(UINT(modelData.vertices.size()), inst_, 0, 0);
+	commandList->DrawInstanced(UINT(modelData.vertices.size()), 10, 0, 0);
 
 }
 

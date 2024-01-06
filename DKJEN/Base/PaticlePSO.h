@@ -1,20 +1,20 @@
 #pragma once
 #include"DxCommon.h"
-#include"../Shader/LightCompileShader.h"
+#include"../Shader/PaticleCompileShader.h"
 
-class PaticlePSO
+class Paticle
 {
 public:
-	static PaticlePSO* GetInstance();
+	static Paticle* GetInstance();
 
 	//PSO
 
 	static void CreatePSO();
 	static void Release();
-	static PSO GetPSO() { return PaticlePSO::GetInstance()->pso_; }
+	static PSO GetPSO() { return Paticle::GetInstance()->pso_; }
 private:
 	//
-	static void ShapePSO();
+	static void PPso();
 	HRESULT hr;//
 
 	PSO pso_;
