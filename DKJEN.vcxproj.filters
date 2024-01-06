@@ -189,6 +189,12 @@
     <ClCompile Include="DKJEN\ko\Instancing.cpp">
       <Filter>DKJEN\ko</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\ko\CreateDirectionalLight.cpp">
+      <Filter>DKJEN\ko</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\ko\TextureManager.cpp">
+      <Filter>DKJEN\ko</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -309,6 +315,12 @@
       <Filter>DKJEN\ko</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\ko\Instancing.h">
+      <Filter>DKJEN\ko</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\ko\CreateDirectionalLight.h">
+      <Filter>DKJEN\ko</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\ko\TextureManager.h">
       <Filter>DKJEN\ko</Filter>
     </ClInclude>
   </ItemGroup>

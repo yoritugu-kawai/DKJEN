@@ -35,10 +35,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Input::Initialize();
 	PSOCopileManagement::Set();
 	
-	Particle* par =new Particle;
-	par->Initialize();
+	Particle3D* model_ = nullptr;
+	Vector4 modelColor_ = { 1.0f,1.0f,1.0f,1.0f };
+	Transform modelTransform_ = { {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 	///ImGui
-	
+	model_ = Particle3D::Create("resource", "plane.obj");
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -51,8 +52,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
-		
-		par->Draw();
+		model_->SetColor(modelColor_);
+		model_->Draw(modelTransform_);
 		//////
 		//　ゲーム処理
 		//////

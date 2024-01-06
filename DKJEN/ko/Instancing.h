@@ -31,6 +31,10 @@ public:
 		return instanceCount_;
 	}
 
+	Matrix4x4 GetViewMatrix();
+
+	Matrix4x4 GetProjectionMatrix_();
+
 private:
 	
 	D3D12_CPU_DESCRIPTOR_HANDLE instancingSrvHandleCPU_ = {};
@@ -41,5 +45,12 @@ private:
 	static const int32_t instanceCount_ = 10;
 	Transform transforms[instanceCount_];
 	TransformationMatrix* instancingData_ = nullptr;
+
+	Matrix4x4 cameraMatrix_ = {};
+	Matrix4x4 viewMatrix_ = {};
+
+	//遠視投影行列
+	Transform cameraTransform_ = {};
+	Matrix4x4 projectionMatrix_ = {};
 };
 

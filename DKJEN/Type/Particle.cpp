@@ -27,16 +27,7 @@ ModelData Particle3D::LoadObjectFile(const std::string& directoryPath, const std
 	std::ifstream file(directoryPath + "/" + fileName);
 	assert(file.is_open());
 
-	//3.実際にファイルを読み、ModelDataを構築していく
-
-	//getline...streamから1行読んでstringに格納する
-	//istringstream...文字列を分解しながら読むためのクラス、空白を区切りとして読む
-	//objファイルの先頭にはその行の意味を示す識別子(identifier/id)が置かれているので、最初にこの識別子を読み込む
-
-	//v...頂点位置
-	//vt...頂点テクスチャ座標
-	//vn...頂点法線
-	//f...面
+	
 
 	while (std::getline(file, line)) {
 		std::string identifier;
@@ -84,19 +75,18 @@ ModelData Particle3D::LoadObjectFile(const std::string& directoryPath, const std
 
 
 				}
-				//要素へのIndexから実際の要素の値を取得して、頂点を構築する
+				
 				Vector4 position = positions[elementIndices[0] - 1];
 				Vector2 texcoord = texcoords[elementIndices[1] - 1];
 				Vector3 normal = normals[elementIndices[2] - 1];
-				//VertexData vertex = { position,texcoord,normal };
-				//modelData.vertices.push_back(vertex);
+			
 
 				triangle[faceVertex] = { position,texcoord,normal };
 
 
 
 			}
-			//頂点を逆順で登録することで、回り順を逆にする
+			
 			modelData.vertices.push_back(triangle[2]);
 			modelData.vertices.push_back(triangle[1]);
 			modelData.vertices.push_back(triangle[0]);
@@ -106,7 +96,7 @@ ModelData Particle3D::LoadObjectFile(const std::string& directoryPath, const std
 			//materialTemplateLibraryファイルの名前を取得する
 			std::string materialFileName;
 			s >> materialFileName;
-			//基本的にobjファイルと同一階層にmtlは存在させるので、ディレクトリ名とファイル名を渡す
+			
 			modelData.material = LoadMaterialTemplateFile(directoryPath, materialFileName);
 		}
 
@@ -124,7 +114,7 @@ ModelData Particle3D::LoadObjectFile(const std::string& directoryPath, const std
 //mtlファイルを読む関数
 MaterialData Particle3D::LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& fileName) {
 
-#pragma region 1.中で必要となる変数の宣言
+#pragma region 
 	//構築するMaterialData
 	MaterialData materialData;
 	//ファイルから読んだ1行を格納するもの
@@ -134,7 +124,7 @@ MaterialData Particle3D::LoadMaterialTemplateFile(const std::string& directoryPa
 
 
 
-#pragma region 2.ファイルを開く
+#pragma region
 	std::ifstream file(directoryPath + "/" + fileName);
 	//開かなかったら止める
 	assert(file.is_open());
@@ -144,14 +134,13 @@ MaterialData Particle3D::LoadMaterialTemplateFile(const std::string& directoryPa
 
 
 
-#pragma region  実際にファイルを読みMaterialDataを構築していく
+#pragma region  
 	while (std::getline(file, line)) {
 		std::string identifier;
 		std::istringstream s(line);
 		s >> identifier;
 
-		//identifierに応じた処理
-		//map_Kdにはtextureのファイル名が記載されているよ
+		
 		if (identifier == "map_Kd") {
 			std::string textureFileName;
 			s >> textureFileName;
@@ -179,12 +168,6 @@ MaterialData Particle3D::LoadMaterialTemplateFile(const std::string& directoryPa
 Particle3D* Particle3D::Create(const std::string& directoryPath, const std::string& fileName) {
 	//新たなModel型のインスタンスのメモリを確保
 	Particle3D* particle3D = new Particle3D();
-
-
-	//初期化の所でやってね、Update,Drawでやるのが好ましいけど凄く重くなった。
-	//ブレンドモードの設定
-	
-
 
 	//すでにある場合はリストから取り出す
 	for (ModelData modelData : modelInformationList_) {
@@ -277,10 +260,7 @@ Particle3D* Particle3D::Create(const std::string& directoryPath, const std::stri
 //描画
 void Particle3D::Draw(Transform transform) {
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
-	//マテリアルにデータを書き込む
-	//書き込むためのアドレスを取得
-	//reinterpret_cast...char* から int* へ、One_class* から Unrelated_class* へなどの変換に使用
-
+	
 	material_->SetInformation(color_);
 
 	//書き込むためのデータを書き込む
@@ -289,10 +269,10 @@ void Particle3D::Draw(Transform transform) {
 
 	instancing_->SetGraphicsCommand();
 
-
+	PSOProperty pso_ = Paticle::GetInstance()->GetPSO().Texture;
 	//コマンドを積む
-	commandList->SetPipelineState(Paticle::GetInstance()->GetParticle3DGraphicsPipelineState().Get());
-	commandList->SetGraphicsRootSignature(Paticle::GetInstance()->GetParticle3DRootSignature().Get());
+	commandList->SetPipelineState(pso_.GraphicsPipelineState);
+	commandList->SetGraphicsRootSignature(pso_.rootSignature);
 
 
 	mesh_->GraphicsCommand();

@@ -6,6 +6,22 @@ static uint32_t descriptorSizeSRV_ = 0u;
 Instancing::Instancing(){
 
 }
+
+
+Matrix4x4 Instancing::GetViewMatrix() {
+	//カメラ行列
+	cameraMatrix_ = MakeAffineMatrix(cameraTransform_.scale, cameraTransform_.rotate, cameraTransform_.translate);
+	viewMatrix_ = Inverse(cameraMatrix_);
+	return viewMatrix_;
+}
+
+Matrix4x4 Instancing::GetProjectionMatrix_() {
+	//遠視投影行列
+	projectionMatrix_ = MakePerspectiveFovMatrix(0.45f, float(WinApp::GetInstance()->Width()) / float(WinApp::GetInstance()->Height()), 0.1f, 100.0f);
+
+	return projectionMatrix_;
+}
+
 ID3D12Resource* Instancing::CreateBufferResource(size_t sizeInbyte)
 {
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
@@ -55,13 +71,20 @@ void Instancing::Initialize(){
 	instancingSrvDesc.Buffer.NumElements = instanceCount_;
 	instancingSrvDesc.Buffer.StructureByteStride = sizeof(TransformationMatrix);
 
-	instancingSrvHandleCPU_ = DirectXSetup::GetInstance()->GetCPUDescriptorHandle(
-		DirectXSetup::GetInstance()->GetSrvDescriptorHeap(), descriptorSizeSRV_, 3);
-	instancingSrvHandleGPU_ = DirectXSetup::GetGPUDescriptorHandle(
-		DirectXSetup::GetInstance()->GetSrvDescriptorHeap(), descriptorSizeSRV_, 3);
 
-	DirectXSetup::GetInstance()->GetDevice()->CreateShaderResourceView(
-		instancingResource_.Get(), &instancingSrvDesc, instancingSrvHandleCPU_);
+
+
+	//
+
+	ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
+	uint32_t descriptorSizeSRV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	D3D12_SHADER_RESOURCE_VIEW_DESC instansingSrvDesc{};
+
+	instansingSrvDesc.Buffer.StructureByteStride = sizeof(TransformationMatrix);
+	D3D12_CPU_DESCRIPTOR_HANDLE instancingSrvHandleCPU = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
+	D3D12_GPU_DESCRIPTOR_HANDLE instancingSrvHandleGPU = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
+	device->CreateShaderResourceView(instancingResource_.Get(), &instansingSrvDesc, instancingSrvHandleCPU);
+	
 
 	
 	//SRTの設定
@@ -84,7 +107,7 @@ void Instancing::SetGraphicsCommand(){
 		Matrix4x4 worldMatrix = MakeAffineMatrix(transforms[index].scale, transforms[index].rotate, transforms[index].translate);
 		
 		//WVP行列を作成
-		Matrix4x4 worldViewProjectionMatrix = Multiply(worldMatrix, Multiply(Camera::GetInstance()->GetViewMatrix(), Camera::GetInstance()->GetProjectionMatrix_()));
+		Matrix4x4 worldViewProjectionMatrix = Multiply(worldMatrix, Multiply(GetViewMatrix(), GetProjectionMatrix_()));
 
 		instancingData_[index].WVP = worldViewProjectionMatrix;
 		instancingData_[index].World = worldMatrix;
@@ -93,7 +116,8 @@ void Instancing::SetGraphicsCommand(){
 }
 
 void Instancing::GraphicsCommand(){
-	DirectXSetup::GetInstance()->GetCommandList()->SetGraphicsRootDescriptorTable(1, instancingSrvHandleGPU_);
+	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
+	commandList->SetGraphicsRootDescriptorTable(1, instancingSrvHandleGPU_);
 }
 
 Instancing::~Instancing(){
