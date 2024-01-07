@@ -132,9 +132,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		case 2:
 			//更新
 			
-			ImGui::Begin("e");
-			ImGui::Text("tim%d",t);
-			ImGui::End();
+		
 			//////描画
 			//
 			player_->Updet(t);
