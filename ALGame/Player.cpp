@@ -54,8 +54,9 @@ void Player::Initialize()
 
 }
 
-void Player::Updet()
+void Player::Updet(int t)
 {
+	int tim = 0;
 	if (Input::GetInstance()->PushKey(DIK_A)) {
 		imGui3D[0].translate.x -= 0.05f;
 	}
@@ -67,15 +68,25 @@ void Player::Updet()
 	imGui3D[2].translate.z += 0.1f;
 	if (Input::GetInstance()->PushKey(DIK_SPACE)) {
 		shot = 0;
-	}
-	if (shot == 1) {
+		
 
+	}
+
+	if (shot == 1) {
+		
 		imGui3D[2].translate = imGui3D[0].translate;
 	}
 	if (imGui3D[2].translate.z > 15) {
 		shot = 1;
 	}
 
+	if (imGui3D[2].translate.z > imGui3D[1].translate.z&&
+		imGui3D[2].translate.x >=imGui3D[1].translate.x) {
+		des = 1;
+		shot = 1;
+
+	}
+	
 
 	imGui3D[1].translate.x += enemySpeed;
 	imGui3D[3].translate = imGui3D[1].translate;
@@ -89,17 +100,23 @@ void Player::Updet()
 
 void Player::Draw()
 {
+	/*
 	ImGui::Begin("3D");
 	ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
 	ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
 	ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
 	ImGui::SliderFloat3("translate", &imGui3D[0].translate.x, -5.0f, 5.0f);
-	ImGui::End();
+	ImGui::End();*/
 
-	for (int i = 0; i < 4; i++)
-	{
-		obj3D[i]->Draw(imGui3D[i].scale, imGui3D[i].rotate, imGui3D[i].translate, imGui3D[i].color);
-	}
+	
+		obj3D[0]->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);
+		if (des == 0) {
+		obj3D[1]->Draw(imGui3D[1].scale, imGui3D[1].rotate, imGui3D[1].translate, imGui3D[1].color);
+
+		}
+		obj3D[2]->Draw(imGui3D[2].scale, imGui3D[2].rotate, imGui3D[2].translate, imGui3D[2].color);
+		obj3D[3]->Draw(imGui3D[3].scale, imGui3D[3].rotate, imGui3D[3].translate, imGui3D[3].color);
+	
 }
 
 void Player::Release()
@@ -112,4 +129,9 @@ void Player::Release()
 	PSOCopileManagement::Release();
 	SpriteTex->Release();
 	delete SpriteTex;
+}
+
+void Player::stedes(int dess)
+{
+	des = dess;
 }
