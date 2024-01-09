@@ -27,9 +27,10 @@ VertexShaderOutput main(VertexShaderInput input, uint32_t instanceId : SV_Instan
 
 	texposition = mul(texposition, gTransformationMatrix[instanceId].uvTransform);
 
-
+	output.position = mul(input.position, gTransformationMatrix[instanceId].WVP);
 	output.texcoord = texposition.rg;
-	output.color = gTransformationMatrix[instanceId].color;
+	output.color = normalize(mul(input.normal, (float32_t3x3)gTransformationMatrix[instanceId].World));
+
 
 	return output;
 }
