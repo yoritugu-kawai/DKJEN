@@ -39,9 +39,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	PSOCopileManagement::Set();
 	ImageLoading* imageLoading = new ImageLoading;
 	imageLoading->Initiluze();
+	TexProeerty tex_ = imageLoading->LoadTexture("resource//uvChecker.png");
+	Particle* particle = new Particle;
 
-
-
+	particle->Initialize(tex_);
 
 	//　メインループ
 	MSG msg{};
@@ -55,7 +56,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
-
+		particle->Darw();
 
 
 		//////
