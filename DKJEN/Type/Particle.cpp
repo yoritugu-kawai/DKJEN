@@ -65,7 +65,7 @@ void  Particle::Vertex()
 	/////
 
 	const uint32_t kNumInstance = 10;
-	ComPtr<ID3D12Resource>instancingResource= CreateBufferResource(sizeof(TransformationMatrix) * kNumInstance);
+	instancingResource= CreateBufferResource(sizeof(TransformationMatrix) * kNumInstance);
 	TransformationMatrix* instancingData = nullptr;
 	instancingResource->Map(0, nullptr, reinterpret_cast<void**>(&instancingData));
 
@@ -119,7 +119,7 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 	commandList->IASetIndexBuffer(&indexBufferViewSprite);
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootDescriptorTable(1, transformationMatrixResourceSprote->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootDescriptorTable(1, instancingSrvHandleGPU);
 	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
 	commandList->DrawIndexedInstanced(6, 10, 0, 0, 0);
 
@@ -137,6 +137,20 @@ void  Particle::Release()
 
 void Particle::SRV()
 {
+	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
+	ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
+	uint32_t descriptorSizeSRV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	D3D12_SHADER_RESOURCE_VIEW_DESC instansingSrvDesc{};
+	instansingSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	instansingSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	instansingSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
+	instansingSrvDesc.Buffer.FirstElement = 0;
+	instansingSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
+	instansingSrvDesc.Buffer.NumElements = 10;
+	instansingSrvDesc.Buffer.StructureByteStride = sizeof(TransformationMatrix);
+	D3D12_CPU_DESCRIPTOR_HANDLE instancingSrvHandleCPU = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
+	 instancingSrvHandleGPU = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
+	device->CreateShaderResourceView(instancingResource.Get(), &instansingSrvDesc, instancingSrvHandleCPU);
 }
 
 ID3D12Resource* Particle::CreateBufferResource(size_t sizeInbyte)

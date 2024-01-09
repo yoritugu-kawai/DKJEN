@@ -29,8 +29,8 @@ private:
 
 	Matrix4x4* transformationMatrixDataSprite = nullptr;
 	Transform transformSprite{ {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
-
-
+	D3D12_GPU_DESCRIPTOR_HANDLE instancingSrvHandleGPU;
+	ComPtr<ID3D12Resource>instancingResource;
 	TexProeerty  tex_;
 	Vector4 transX_ = { 560.f,0.0f,0.0f,1.0f };
 	Vector4 transY_ = { 0.0f,360.0f,0.0f,1.0f };
