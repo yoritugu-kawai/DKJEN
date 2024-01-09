@@ -10,6 +10,8 @@
 #include"DKJEN/Type/Texture.h"
 #include"DKJEN/Type/Sphere.h"
 #include"DKJEN/Type/Obj3D.h"
+#include"DKJEN/Type/Particle.h"
+
 #include"DKJEN/Utilipy/rektyk.h"
 
 #include "DKJEN/Management/FrameManagement.h"

@@ -82,6 +82,7 @@ void  Particle::Vertex()
 		transfom[i].rotate = { 0.0f,0.0f,0.0f };
 		transfom[i].translate = { i * 0.1f,i * 0.1f,i * 0.1f };
 	}
+	Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
 
 	for (uint32_t i = 0; i < kNumInstance; ++i)
 	{
