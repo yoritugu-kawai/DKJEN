@@ -64,6 +64,17 @@ void  Particle::Vertex()
 
 	/////
 
+	const uint32_t kNumInstance = 10;
+	ComPtr<ID3D12Resource>instancingResource= CreateBufferResource(sizeof(TransformationMatrix) * kNumInstance);
+	TransformationMatrix* instancingData = nullptr;
+	instancingResource->Map(0, nullptr, reinterpret_cast<void**>(&instancingData));
+
+	for (uint32_t index = 0; index < kNumInstance; ++index) {
+
+		instancingData[index].WVP = MakeIdentity4x4();
+		instancingData[index].World= MakeIdentity4x4();
+
+	}
 }
 void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
@@ -122,6 +133,10 @@ void  Particle::Release()
 	indexResourceSprite->Release();
 	transformationMatrixResourceSprote->Release();
 	materialResource->Release();
+}
+
+void Particle::SRV()
+{
 }
 
 ID3D12Resource* Particle::CreateBufferResource(size_t sizeInbyte)

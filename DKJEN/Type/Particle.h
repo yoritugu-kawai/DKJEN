@@ -13,7 +13,7 @@ public:
 	void Vertex();
 	void Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
 	void Release();
-
+	void SRV();
 	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 private:
 
