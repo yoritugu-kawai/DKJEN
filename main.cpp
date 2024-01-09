@@ -43,7 +43,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Particle* particle = new Particle;
 
 	particle->Initialize(tex_);
-
+	ImGguiTransfrom imGuiParticle;
+	imGuiParticle.scale = { 1.0f,1.0f,1.0f };
+	imGuiParticle.rotate = { 0.0f,0.0f,0.0f };
+	imGuiParticle.translate = { 0.0f,0.0f,0.0f };
+	imGuiParticle.color = { 1.0f, 1.0f, 1.0, 1.0f };
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -56,7 +60,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
-		particle->Darw();
+		particle->Darw(imGuiParticle.scale, imGuiParticle.rotate, imGuiParticle.translate, imGuiParticle.color);
 
 
 		//////

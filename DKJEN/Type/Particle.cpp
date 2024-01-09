@@ -22,52 +22,30 @@ void Particle::Initialize(TexProeerty  tex)
 	transformationMatrixResourceSprote = CreateBufferResource(sizeof(Matrix4x4));
 	materialResource = CreateBufferResource(sizeof(UVMaterial));
 	indexResourceSprite = CreateBufferResource(sizeof(uint32_t) * 6);
+
+	const uint32_t kNumInstance = 10;
+	instancingResource = CreateBufferResource(sizeof(TransformationMatrix) * kNumInstance);
 	matrix = MakeIdentity4x4();
+	vertexBufferViewSprite.BufferLocation = vertexResourceSprite->GetGPUVirtualAddress();
+	vertexBufferViewSprite.SizeInBytes = sizeof(VertexData) * 6;
+	vertexBufferViewSprite.StrideInBytes = sizeof(VertexData);
+	//
+	indexBufferViewSprite.BufferLocation = indexResourceSprite->GetGPUVirtualAddress();
+	indexBufferViewSprite.SizeInBytes = sizeof(uint32_t) * 6;
+	indexBufferViewSprite.Format = DXGI_FORMAT_R32_UINT;
 }
 
 void  Particle::Vertex()
 {
 
-	vertexBufferViewSprite.BufferLocation = vertexResourceSprite->GetGPUVirtualAddress();
-	vertexBufferViewSprite.SizeInBytes = sizeof(VertexData) * 6;
-	vertexBufferViewSprite.StrideInBytes = sizeof(VertexData);
-	//
-	indexBufferViewSprite.BufferLocation = instancingResource->GetGPUVirtualAddress();
-	indexBufferViewSprite.SizeInBytes = sizeof(uint32_t) * 6;
-	indexBufferViewSprite.Format = DXGI_FORMAT_R32_UINT;
+
 
 	//頂点データ
 	vertexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&VertexDataSprite));
-	uint32_t* indexDataSpriite = nullptr;
-	indexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&indexDataSpriite));
-
-
-	//1枚目
-	//左下
-	VertexDataSprite[0].position = { transY_ };
-	VertexDataSprite[0].texcoord = { 0.0f,1.0f };
-	//左上
-	VertexDataSprite[1].position = { 0.0f,0.0f,0.0f,1.0f };
-	VertexDataSprite[1].texcoord = { 0.0f,0.0f };
-	//右下
-	VertexDataSprite[2].position = { transXY_ };
-	VertexDataSprite[2].texcoord = { 1.0f,1.0f };
-
-	//右上
-	VertexDataSprite[3].position = { transX_ };
-	VertexDataSprite[3].texcoord = { 1.0f,0.0f };
-
-
-	indexDataSpriite[0] = 0;  indexDataSpriite[1] = 1; indexDataSpriite[2] = 2;
-	indexDataSpriite[3] = 1; indexDataSpriite[4] = 3; indexDataSpriite[5] = 2;
-
-
-	/////
 
 	const uint32_t kNumInstance = 10;
-	instancingResource= CreateBufferResource(sizeof(TransformationMatrix) * kNumInstance);
 	TransformationMatrix* instancingData = nullptr;
-	instancingResource->Map(0, nullptr, reinterpret_cast<void**>(&instancingData));
+	indexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&instancingData));
 
 	for (uint32_t index = 0; index < kNumInstance; ++index) {
 
@@ -102,6 +80,7 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 		reinterpret_cast<void**>(&materialDeta));
 	materialDeta->color = Color;
 	Vertex();
+	SRV();
 
 	ImGui::Begin("sprite");
 	ImGui::Text("uv");
@@ -138,7 +117,7 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootDescriptorTable(1, instancingSrvHandleGPU);
 	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
-	commandList->DrawIndexedInstanced(6, 10, 0, 0, 0);
+	commandList->DrawInstanced(6,10,0,0);
 
 }
 
@@ -167,6 +146,9 @@ void Particle::SRV()
 	instansingSrvDesc.Buffer.StructureByteStride = sizeof(TransformationMatrix);
 	D3D12_CPU_DESCRIPTOR_HANDLE instancingSrvHandleCPU = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
 	 instancingSrvHandleGPU = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
+	 instancingSrvHandleCPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	 instancingSrvHandleGPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	 
 	device->CreateShaderResourceView(instancingResource.Get(), &instansingSrvDesc, instancingSrvHandleCPU);
 }
 

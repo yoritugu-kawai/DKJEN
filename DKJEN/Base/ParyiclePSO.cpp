@@ -32,7 +32,7 @@ void ParticlePSO::ShapePSO()
 
 	PSOProperty ShapePSO;
 
-	ShaderMode shader = SpriteCompileShader::GetInstance()->GetShaders().shape;
+	ShaderMode shader = ParticleCompileShader::GetInstance()->GetShaders().shape;
 
 	//RootSignature作成
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -113,7 +113,7 @@ void ParticlePSO::ShapePSO()
 
 
 	//InputLayoutの設定
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2] = {};
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[3] = {};
 	inputElementDescs[0].SemanticName = "POSITION";
 	inputElementDescs[0].SemanticIndex = 0;
 	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
@@ -125,7 +125,7 @@ void ParticlePSO::ShapePSO()
 	inputElementDescs[1].Format = DXGI_FORMAT_R32G32_FLOAT;
 	inputElementDescs[1].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 	//
-	inputElementDescs[2].SemanticName = "COLOR";
+	inputElementDescs[2].SemanticName = "NORMAL";
 	inputElementDescs[2].SemanticIndex = 0;
 	inputElementDescs[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	inputElementDescs[2].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
@@ -159,10 +159,7 @@ void ParticlePSO::ShapePSO()
 	rasterizerDesc.FillMode = D3D12_FILL_MODE_SOLID;
 
 
-	/*D3D12_DEPTH_STENCIL_DESC despthStencilDesc{};
-	despthStencilDesc.DepthEnable = true;
-	despthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
-	despthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;*/
+	
 
 	//ステイト追加
 	D3D12_DEPTH_STENCIL_DESC depthStencilDesc{};
@@ -191,8 +188,7 @@ void ParticlePSO::ShapePSO()
 	graphicsPipelineStateDesc.DepthStencilState = depthStencilDesc;
 	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
-	/*graphicsPipelineStateDesc.DepthStencilState = despthStencilDesc;
-	graphicsPipelineStateDesc.DSVFormat = DXGI_FORMAT_D24_UNORM_S8_UINT;*/
+	
 
 	//書き込むRTVの情報
 	graphicsPipelineStateDesc.NumRenderTargets = 1;
