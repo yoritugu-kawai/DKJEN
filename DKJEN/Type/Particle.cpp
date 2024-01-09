@@ -32,7 +32,7 @@ void  Particle::Vertex()
 	vertexBufferViewSprite.SizeInBytes = sizeof(VertexData) * 6;
 	vertexBufferViewSprite.StrideInBytes = sizeof(VertexData);
 	//
-	indexBufferViewSprite.BufferLocation = indexResourceSprite->GetGPUVirtualAddress();
+	indexBufferViewSprite.BufferLocation = instancingResource->GetGPUVirtualAddress();
 	indexBufferViewSprite.SizeInBytes = sizeof(uint32_t) * 6;
 	indexBufferViewSprite.Format = DXGI_FORMAT_R32_UINT;
 
@@ -75,6 +75,22 @@ void  Particle::Vertex()
 		instancingData[index].World= MakeIdentity4x4();
 
 	}
+	Transform transfom[10];
+	for (uint32_t i = 0; i < kNumInstance; ++i)
+	{
+		transfom[i].scale = { 1.0f,1.0f,1.0f };
+		transfom[i].rotate = { 0.0f,0.0f,0.0f };
+		transfom[i].translate = { i * 0.1f,i * 0.1f,i * 0.1f };
+	}
+
+	for (uint32_t i = 0; i < kNumInstance; ++i)
+	{
+		Matrix4x4 woldMatrix = MakeAffineMatrix(transfom[i].scale, transfom[i].rotate, transfom[i].translate);
+		Matrix4x4 woldViewProMatrix = Multiply(woldMatrix, ProjectionMatrix);
+		instancingData[i].WVP = woldViewProMatrix;
+		instancingData[i].World = woldMatrix;
+	}
+
 }
 void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
