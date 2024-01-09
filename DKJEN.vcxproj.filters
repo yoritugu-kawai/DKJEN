@@ -162,6 +162,15 @@
     <ClCompile Include="DKJEN\Type\Sphere.cpp">
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Type\Particle.cpp">
+      <Filter>DKJEN\Type</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\ParyiclePSO.cpp">
+      <Filter>DKJEN\Base\POS</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -265,6 +274,15 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Type\Sphere.h">
       <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Particle.h">
+      <Filter>DKJEN\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\ParyiclePSO.h">
+      <Filter>DKJEN\Base\POS</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
