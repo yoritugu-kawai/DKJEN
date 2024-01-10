@@ -60,6 +60,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
+
+		ImGui::Begin("Sprite");
+		ImGui::ColorEdit4("color", (float*)&imGuiParticle.color);
+		ImGui::SliderFloat3("scale", &imGuiParticle.scale.x, -0.0f, 5.0f);
+		ImGui::SliderFloat3("rotate", &imGuiParticle.rotate.x, -5.0f, 5.0f);
+		ImGui::SliderFloat3("translate", &imGuiParticle.translate.x, -500.0f, 500.0f);
+		ImGui::End();
 		particle->Darw(imGuiParticle.scale, imGuiParticle.rotate, imGuiParticle.translate, imGuiParticle.color);
 
 

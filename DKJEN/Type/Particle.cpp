@@ -43,9 +43,37 @@ void  Particle::Vertex()
 	//頂点データ
 	vertexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&VertexDataSprite));
 
+	Vector4 pos = { 0,0,0,1 };
+	float size = 0.5f;
+	
+	VertexDataSprite[0].position = { pos.x - size,pos.y + size,pos.z ,pos.w };
+	VertexDataSprite[0].texcoord = { 0.0f,0.0f };//00
+	VertexDataSprite[0].normal = { 0.0f,1.0f,0.0f };
+	
+	VertexDataSprite[1].position = { pos.x + size,pos.y + size,pos.z ,pos.w };
+	VertexDataSprite[1].texcoord = { 1.0f,0.0f };//10
+	VertexDataSprite[1].normal = { 0.0f,1.0f,0.0f };
+	
+	VertexDataSprite[2].position = { pos.x - size,pos.y - size,pos.z,pos.w };
+	VertexDataSprite[2].texcoord = { 0.0f,1.0f };//01
+	VertexDataSprite[2].normal = { 0.0f,1.0f,0.0f };
+
+	VertexDataSprite[3].position = { pos.x + size,pos.y - size,pos.z,pos.w };
+	VertexDataSprite[3].texcoord = { 1.0f,1.0f };//11
+	VertexDataSprite[3].normal = { 0.0f,1.0f,0.0f };
+
+	
+
 	const uint32_t kNumInstance = 10;
 	TransformationMatrix* instancingData = nullptr;
-	indexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&instancingData));
+	uint32_t* indexData = nullptr;
+	indexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
+
+	indexData[0] = 0; indexData[1] = 1; indexData[2] = 2;
+	indexData[3] = 1; indexData[4] = 3; indexData[5] = 2;
+
+
+	instancingResource->Map(0, nullptr, reinterpret_cast<void**>(&instancingData));
 
 	for (uint32_t index = 0; index < kNumInstance; ++index) {
 
@@ -58,7 +86,7 @@ void  Particle::Vertex()
 	{
 		transfom[i].scale = { 1.0f,1.0f,1.0f };
 		transfom[i].rotate = { 0.0f,0.0f,0.0f };
-		transfom[i].translate = { i * 0.1f,i * 0.1f,i * 0.1f };
+		transfom[i].translate = { i * 0.1f,i * 0.1f,i * 0.1f +20.0f};
 	}
 	Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
 
@@ -67,9 +95,11 @@ void  Particle::Vertex()
 		Matrix4x4 woldMatrix = MakeAffineMatrix(transfom[i].scale, transfom[i].rotate, transfom[i].translate);
 		Matrix4x4 woldViewProMatrix = Multiply(woldMatrix, ProjectionMatrix);
 		instancingData[i].WVP = woldViewProMatrix;
-		instancingData[i].World = woldMatrix;
+		instancingData[i].World = woldViewProMatrix;
+		instancingData[i].color = { 1,1,1,1 };
+		instancingData[i].uvTransform_ = MakeIdentity4x4();
 	}
-
+	
 }
 void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
@@ -102,7 +132,7 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 	Matrix4x4 projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::GetInstance()->Width()), float(WinApp::GetInstance()->Height()), 0.0f, 100.0f);
 	Matrix4x4 worldViewProjectionMatrix = Multiply(matrix, Multiply(viewMatrix, projectionMatrix));
 	*transformationMatrixDataSprite = worldViewProjectionMatrix;
-
+	worldViewProjectionMatrix;
 
 	//
 	PSOProperty pso_ = ParticlePSO::GetInstance()->GetPSO().Texture;
@@ -115,9 +145,10 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 	commandList->IASetIndexBuffer(&indexBufferViewSprite);
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(3, transformationMatrixResourceSprote->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootDescriptorTable(1, instancingSrvHandleGPU);
 	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
-	commandList->DrawInstanced(6,10,0,0);
+	commandList->DrawIndexedInstanced(6,10,0,0,0);
 
 }
 
