@@ -17,18 +17,18 @@ void Sprite::Initialize(TexProeerty  tex)
 void Sprite::Vertex()
 {
 
-	vertexBufferViewSprite.BufferLocation = vertexResourceSprite->GetGPUVirtualAddress();
+	vertexBufferViewSprite.BufferLocation = vertexResourceSprite.Get()->GetGPUVirtualAddress();
 	vertexBufferViewSprite.SizeInBytes = sizeof(VertexData) * 6;
 	vertexBufferViewSprite.StrideInBytes = sizeof(VertexData);
 	//
-	indexBufferViewSprite.BufferLocation = indexResourceSprite->GetGPUVirtualAddress();
+	indexBufferViewSprite.BufferLocation = indexResourceSprite.Get()->GetGPUVirtualAddress();
 	indexBufferViewSprite.SizeInBytes = sizeof(uint32_t) * 6;
 	indexBufferViewSprite.Format = DXGI_FORMAT_R32_UINT;
 
 	//頂点データ
-	vertexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&VertexDataSprite));
+	vertexResourceSprite.Get()->Map(0, nullptr, reinterpret_cast<void**>(&VertexDataSprite));
 	uint32_t* indexDataSpriite = nullptr;
-	indexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&indexDataSpriite));
+	indexResourceSprite.Get()->Map(0, nullptr, reinterpret_cast<void**>(&indexDataSpriite));
 	
 
 	//1枚目
@@ -55,7 +55,7 @@ void Sprite::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Colo
 	matrix = MakeAffineMatrix(scale, rotate, translate);
 
 	UVMaterial* materialDeta = nullptr;
-	materialResource->Map(0, nullptr,
+	materialResource.Get()->Map(0, nullptr,
 		reinterpret_cast<void**>(&materialDeta));
 	materialDeta->color = Color;
 	Vertex();
@@ -71,7 +71,7 @@ void Sprite::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Colo
 	materialDeta->uvTransform = m2;
 
 
-	transformationMatrixResourceSprote->Map(0, nullptr, reinterpret_cast<void**>
+	transformationMatrixResourceSprote.Get()->Map(0, nullptr, reinterpret_cast<void**>
 		(&transformationMatrixDataSprite));
 	*transformationMatrixDataSprite = MakeIdentity4x4();
 
@@ -92,22 +92,13 @@ void Sprite::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Colo
 	commandList->IASetVertexBuffers(0, 1, &vertexBufferViewSprite);
 	commandList->IASetIndexBuffer(&indexBufferViewSprite);
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootConstantBufferView(1, transformationMatrixResourceSprote->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(0, materialResource.Get()->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(1, transformationMatrixResourceSprote.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
 	commandList->DrawIndexedInstanced(6, 1, 0, 0, 0);
 
 }
 
-void Sprite::Release()
-{
-	tex_.Resource->Release();
-
-	vertexResourceSprite->Release();
-	indexResourceSprite->Release();
-	transformationMatrixResourceSprote->Release();
-	materialResource->Release();
-}
 
 ID3D12Resource* Sprite::CreateBufferResource(size_t sizeInbyte)
 {

@@ -12,7 +12,7 @@ void Obj3D::Initialize(TexProeerty  tex)
 	lightResource = CreateBufferResource(sizeof(DirectionalLight));
 
 
-	vertxBufferView.BufferLocation = vetexResource->GetGPUVirtualAddress();
+	vertxBufferView.BufferLocation = vetexResource.Get()->GetGPUVirtualAddress();
 	vertxBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData.vertices.size());
 	vertxBufferView.StrideInBytes = sizeof(VertexData);
     matrix = MakeIdentity4x4();
@@ -33,10 +33,10 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	DirectionalLight* lightData = nullptr;
 
 
-	vetexResource->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-	materialResource->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
-	wvpResource->Map(0, nullptr, reinterpret_cast<void**>(&matrixData));
-	lightResource->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
+	vetexResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
+	materialResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
+	wvpResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&matrixData));
+	lightResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
 	std::memcpy(vertexData, modelData.vertices.data(), sizeof(VertexData)*modelData.vertices.size());
 	//
 	// 
@@ -65,9 +65,9 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
-	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootConstantBufferView(1, wvpResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootConstantBufferView(3, lightResource->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(0, materialResource.Get()->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(1, wvpResource.Get()->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(3, lightResource.Get()->GetGPUVirtualAddress());
 	
 	commandList->DrawInstanced(UINT(modelData.vertices.size()), 1, 0, 0);
 }
@@ -210,12 +210,3 @@ MaterialData Obj3D::LoadMaterialTemplateFile(const std::string& directoryPath, c
 	return materialData;
 }
 
-
-void Obj3D::Release()
-{
-	vetexResource->Release();
-	materialResource->Release();
-	wvpResource->Release();
-	tex_.Resource->Release();
-	lightResource->Release();
-}

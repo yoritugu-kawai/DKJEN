@@ -40,8 +40,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	TexProeerty tex2 = imageLoading->LoadTexture("resource/uvChecker.png");
 	TexProeerty tex3 = imageLoading->LoadTexture("resource/iras.png");
 	
-	Texture* tex = new Texture;
-	tex->Initialize(tex2);
+
 
 	Sprite* SpriteTex = new Sprite;
 	SpriteTex->Initialize(tex3);
@@ -49,17 +48,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	obj3D->Initialize(tex2);
 
 
-	Sphere* sphere_ = new Sphere;
-	sphere_->Initialize(tex2);
-	///ImGui
-	ImGguiTransfrom imGuiTextur;
-	for (int i = 0; i < 2; i++) {
-		imGuiTextur.scale = { 1,1,1 };
-		imGuiTextur.rotate = { 0,0,0 };
-		imGuiTextur.translate = { 0,0,0 };
-		imGuiTextur.color = { 1.0f,1.0f,1.0f,1.0f };
-
-	}
+	
 
 	ImGguiTransfrom imGuiSprite;
 	imGuiSprite.scale = { 1.0f,1.0f,1.0f };
@@ -76,14 +65,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	}
 
-	ImGguiTransfrom imGuiSphere[1];
-	for (int i = 0; i < 1; i++) {
-		imGuiSphere[i].scale = { 1.0f, 1.0f, 1.0f };
-		imGuiSphere[i].rotate = { 0.0f, 4.7f, 0.0f };
-		imGuiSphere[i].translate = { 0.0f, 0.0f, 0.0f };
-		imGuiSphere[i].color = { 1.0f,1.0f,1.0f,1.0f };
-
-	}
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -97,17 +78,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 
-		ImGui::Begin("Texture");
-		ImGui::ColorEdit3("color", (float*)&imGuiTextur.color);
-		ImGui::SliderFloat3("scale", &imGuiTextur.scale.x, -0.0f, 5.0f);
-		ImGui::SliderFloat3("rotate", &imGuiTextur.rotate.x, -5.0f, 5.0f);
-		ImGui::SliderFloat3("translate", &imGuiTextur.translate.x, -5.0f, 5.0f);
-		ImGui::End();
-
-
-		tex->Draw(imGuiTextur.scale, imGuiTextur.rotate, imGuiTextur.translate, imGuiTextur.color);
-
-
+		
 
 
 		ImGui::Begin("Sprite");
@@ -139,20 +110,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);
 		//
 
-		ImGui::Begin("sphere");
-		ImGui::ColorEdit3("color", (float*)&imGuiSphere[0].color);
-		ImGui::SliderFloat3("scale", &imGuiSphere[0].scale.x, -0.0f, 5.0f);
-		ImGui::SliderFloat3("rotate", &imGuiSphere[0].rotate.x, -5.0f, 5.0f);
-		ImGui::SliderFloat3("translate", &imGuiSphere[0].translate.x, -5.0f, 5.0f);
-		ImGui::End();
-
-
-		imGuiSphere[0].rotate.y += 0.02f;
-		sphere_->Draw(imGuiSphere[0].scale, imGuiSphere[0].rotate, imGuiSphere[0].translate);
-		//////
-		//　ゲーム処理
-		//////
-
+	
 		
 		FrameManagement::EndFrame();
 	}
@@ -163,12 +121,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	*************************
 	*/
 	
-	tex->Release();
-	SpriteTex->Release();
+	
 	delete SpriteTex;
-	obj3D->Release();
+	
 	delete obj3D;
-	sphere_->Release();
+	
 	PSOCopileManagement::Release();
 
 	ImguiManager::Release();

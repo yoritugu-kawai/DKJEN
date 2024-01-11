@@ -106,8 +106,8 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 	DirectX::ScratchImage mipImages = LoadTextureData(filePath);
 	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
 
-	ID3D12Resource* textureResource = CreateTexResource(device, metadata);
-	UploadTexData(textureResource, mipImages);
+	ComPtr <ID3D12Resource> textureResource = CreateTexResource(device, metadata);
+	UploadTexData(textureResource.Get(), mipImages);
 	//Textureを読んで転送する2
 	//DirectX::ScratchImage mipImages2 = LoadTexture("resource/monsterBall.png");
 	//const DirectX::TexMetadata& metadata2 = mipImages2.GetMetadata();
@@ -132,7 +132,7 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 
 	texSrvHandleCPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	texSrvHandleGPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	device->CreateShaderResourceView(textureResource, &srvDesc, texSrvHandleCPU);
+	device->CreateShaderResourceView(textureResource.Get(), &srvDesc, texSrvHandleCPU);
 
 
 	//テキストのシェダ－2
@@ -146,7 +146,7 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 	//
 
 	TexProeerty tex;
-	tex.Resource = textureResource;
+	//tex.Resource = textureResource;
 	tex.SrvHandleGPU = texSrvHandleGPU;
 
 	return tex;

@@ -33,17 +33,17 @@ public:
 	/// <param name="Vector3 translate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector4 color = { 1.0f,1.0f,1.0f,1.0f }"></param>
 	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
-	void Release();
+	//void Release();
 	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 
 	ModelData LoadObjFile(const std::string& directoryPath, const std::string& filename);
 
 	MaterialData LoadMaterialTemplateFile(const std::string& directoryPath, const std::string& filename);
 private:
-	ID3D12Resource* vetexResource;
-	ID3D12Resource* materialResource;
-	ID3D12Resource* wvpResource;
-	ID3D12Resource* lightResource;
+	ComPtr<ID3D12Resource> vetexResource;
+	ComPtr<ID3D12Resource> materialResource;
+	ComPtr<ID3D12Resource> wvpResource;
+	ComPtr<ID3D12Resource> lightResource;
 
 	D3D12_VERTEX_BUFFER_VIEW vertxBufferView{};
 	ModelData modelData;

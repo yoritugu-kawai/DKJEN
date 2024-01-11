@@ -82,7 +82,7 @@ void Texture::Release()
 	Vertex->Release();
 	materialResource->Release();
 	wvpResource->Release();
-	tex_.Resource->Release();
+	//tex_.Resource->Release();
 
 }
 
