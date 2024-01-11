@@ -2,7 +2,8 @@
 
 void seen::Initialize(TexProeerty  tex, TexProeerty  tex2)
 {
-
+	SpriteTex = new Sprite();
+	SpriteTex2 = new Sprite();
 
 	SpriteTex->Initialize(tex);
 	SpriteTex2->Initialize(tex2);

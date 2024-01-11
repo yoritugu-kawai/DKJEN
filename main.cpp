@@ -57,8 +57,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	SpriteTex4->Initialize(tex7);
 	Player* player_ = new Player;
 	player_->Initialize();
-	/*seen* Sen= new seen;
-	Sen->Initialize(tex4, tex5);*/
+	seen* Sen= new seen();
+	Sen->Initialize(tex4, tex5);
 	ImGguiTransfrom imGui3D;
 
 	imGui3D.scale = { 0.5f, 0.5f, 0.5f };
@@ -127,6 +127,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 			SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
 			SpriteTex2->Darw(imGuiSprite2.scale, imGuiSprite2.rotate, imGuiSprite2.translate, imGuiSprite2.color);
+			Sen->Draw();
 			player_->Draw();
 			break;
 		case 2:
