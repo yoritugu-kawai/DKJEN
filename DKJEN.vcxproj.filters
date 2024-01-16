@@ -58,6 +58,18 @@
     <Filter Include="DKJEN\Type\3D">
       <UniqueIdentifier>{ef5c8bc5-9c2a-4343-b48a-7498e51e6ef6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProject">
+      <UniqueIdentifier>{7e1d8f2b-02a0-4bac-ae43-541186326d37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\Player">
+      <UniqueIdentifier>{d3cb3329-7d61-46d2-9947-b639f2e30e34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\Enemy">
+      <UniqueIdentifier>{17139073-d901-450b-9aab-02ff33d3b021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\Scene">
+      <UniqueIdentifier>{50bfff11-8c19-4d32-a25c-1bc8d9a0424b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -165,6 +177,9 @@
     <ClCompile Include="DKJEN\Management\TypeManagement.cpp">
       <Filter>DKJEN\Management</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\Player\Player.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -271,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Management\TypeManagement.h">
       <Filter>DKJEN\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Player\Player.h">
+      <Filter>GameProject\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
