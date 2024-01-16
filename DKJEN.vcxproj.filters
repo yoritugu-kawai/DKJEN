@@ -162,6 +162,9 @@
     <ClCompile Include="DKJEN\Type\Sphere.cpp">
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Management\TypeManagement.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Type\Sphere.h">
       <Filter>DKJEN\Type\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Management\TypeManagement.h">
+      <Filter>DKJEN\Management</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
