@@ -1,10 +1,10 @@
 #include "Obj3D.h"
 
-void Obj3D::Initialize(TexProeerty  tex)
+void Obj3D::Initialize(const std::string& filename)
 {
-	tex_ = tex;
-	modelData = LoadObjFile("resource","axis.obj");
-
+	///tex_ = tex;
+	
+	modelData = LoadObjFile("resource", filename);
 
 	vetexResource = CreateBufferResource(sizeof(VertexData) * modelData.vertices.size());
 	materialResource = CreateBufferResource(sizeof(Vector4));
@@ -20,7 +20,7 @@ void Obj3D::Initialize(TexProeerty  tex)
 	pos = { 0.0f,0.0f,5.0f };
 }
 
-void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
+void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, TexProeerty  tex_)
 {
 	
 	translate.z = translate.z + pos.z;

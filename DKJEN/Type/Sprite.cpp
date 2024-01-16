@@ -1,11 +1,11 @@
 #include "Sprite.h"
 
-void Sprite::Initialize(TexProeerty  tex)
+void Sprite::Initialize()
 {
 
 
 
-	tex_ = tex;// spriteLoad_->Load("resource/e.png");
+	//tex_ = tex;// spriteLoad_->Load("resource/e.png");
 
 	vertexResourceSprite = CreateBufferResource(sizeof(VertexData) * 6);
 	transformationMatrixResourceSprote = CreateBufferResource(sizeof(Matrix4x4));
@@ -50,7 +50,7 @@ void Sprite::Vertex()
 	indexDataSpriite[0] = 0;  indexDataSpriite[1] = 1; indexDataSpriite[2] = 2;
 	indexDataSpriite[3] = 1; indexDataSpriite[4] = 3; indexDataSpriite[5] = 2;
 }
-void Sprite::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
+void Sprite::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, TexProeerty  tex_)
 {
 	matrix = MakeAffineMatrix(scale, rotate, translate);
 

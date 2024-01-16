@@ -44,9 +44,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 	Sprite* SpriteTex = new Sprite;
-	SpriteTex->Initialize(tex3);
+	SpriteTex->Initialize();
 	Obj3D* obj3D = new Obj3D;
-	obj3D->Initialize(tex2);
+	obj3D->Initialize("axis.obj");
 
 
 	
@@ -89,7 +89,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::SliderFloat3("translate", &imGuiSprite.translate.x, -500.0f, 500.0f);
 		ImGui::End();
 		
-		SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
+		SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color, tex3);
 		
 //#ifdef _DEBUG
 //		ImGui::Begin("a");
@@ -108,7 +108,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 
 		
-		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);
+		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color, tex2);
 		//
 
 	
@@ -123,10 +123,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	*/
 	
 	
-	delete SpriteTex;
+	/*delete SpriteTex;
 	
 	delete obj3D;
-	
+	*/
 	PSOCopileManagement::Release();
 
 	ImguiManager::Release();
