@@ -2,9 +2,9 @@
 
 void Obj3D::Initialize(TexProeerty  tex,const std::string& filename)
 {
-	tex_ = tex;
-	
 	modelData = LoadObjFile("resource", filename);
+	tex_ = tex;
+
 
 	vetexResource = CreateBufferResource(sizeof(VertexData) * modelData.vertices.size());
 	materialResource = CreateBufferResource(sizeof(Vector4));

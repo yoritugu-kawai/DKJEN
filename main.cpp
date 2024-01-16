@@ -10,6 +10,8 @@
 #include"DKJEN/Management/TypeManagement.h"
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
+
+#include"GameProject/Player/Player.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -27,16 +29,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	imageLoading->Initiluze();
 	TexProeerty tex2 = imageLoading->LoadTexture("resource/uvChecker.png");
 	TexProeerty tex3 = imageLoading->LoadTexture("resource/iras.png");
-	
+	TexProeerty tex4 = imageLoading->LoadTexture("resource/Player.png");
 
 
 	Sprite* SpriteTex = new Sprite;
 	SpriteTex->Initialize(tex3);
-	Obj3D* obj3D = new Obj3D;
-	obj3D->Initialize(tex2,"axis.obj");
-
-
 	
+
+	Player* player_ = new Player;
+	Player* player2_ = new Player;
 
 	ImGguiTransfrom imGuiSprite;
 	imGuiSprite.scale = { 1.0f,1.0f,1.0f };
@@ -53,6 +54,22 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	}
 
+	ImGguiTransfrom playerTransfrom;
+	playerTransfrom.scale= { 0.5f, 0.5f, 0.5f };
+	playerTransfrom.rotate = { 0.0f, 0.0f, 0.0f };
+	playerTransfrom.translate = { 0.0f, 0.0f, 5.0f };
+	playerTransfrom.color = { 1.0f,1.0f,1.0f,1.0f };
+
+	ImGguiTransfrom playerTransfrom2;
+	playerTransfrom2.scale = { 0.5f, 0.5f, 0.5f };
+	playerTransfrom2.rotate = { 0.0f, 0.0f, 0.0f };
+	playerTransfrom2.translate = { 0.0f, 0.0f, 5.0f };
+	playerTransfrom2.color = { 1.0f,0.0f,0.0f,1.0f };
+
+	player_->Initialize(tex4, "Player.obj", playerTransfrom);
+	player2_->Initialize(tex2, "Player.obj", playerTransfrom2);
+	/*Obj3D* obj3D = new Obj3D;
+	obj3D->Initialize(tex2, "axis.obj");*/
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -87,18 +104,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 
 		
-		ImGui::Begin("3D");
+		/*ImGui::Begin("3D");
 		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
 		ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
-		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
+		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);d
 		ImGui::SliderFloat3("translate", &imGui3D[0].translate.x, -5.0f, 5.0f);
-		ImGui::End();
+		ImGui::End();*/
 
 		
-		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);
+		/*obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);*/
 		//
-
-	
+		player_->Update();
+		player_->Draw();
+		player2_->Draw();
 		
 		FrameManagement::EndFrame();
 	}
