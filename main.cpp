@@ -27,7 +27,7 @@ struct Transfrom4
 
 };
 
-static D3DResourceLeaker leaker;
+//static D3DResourceLeaker leaker;
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	WinApp::Initialize(Title);
