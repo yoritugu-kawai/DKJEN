@@ -163,7 +163,7 @@
       <Filter>DKJEN\Type\3D</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Management\TypeManagement.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>DKJEN\Management</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

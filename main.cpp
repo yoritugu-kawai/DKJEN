@@ -5,13 +5,9 @@
 #include"DKJEN/Math/Math.h"
 
 
-#include"DKJEN/Type/Polygon.h"
-#include"DKJEN/Type/Sprite.h"
-#include"DKJEN/Type/Texture.h"
-#include"DKJEN/Type/Sphere.h"
-#include"DKJEN/Type/Obj3D.h"
 #include"DKJEN/Utilipy/rektyk.h"
 
+#include"DKJEN/Management/TypeManagement.h"
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
@@ -35,7 +31,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 	Sprite* SpriteTex = new Sprite;
-	SpriteTex->Initialize();
+	SpriteTex->Initialize(tex3);
 	Obj3D* obj3D = new Obj3D;
 	obj3D->Initialize(tex2,"axis.obj");
 
@@ -80,7 +76,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::SliderFloat3("translate", &imGuiSprite.translate.x, -500.0f, 500.0f);
 		ImGui::End();
 		
-		SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color, tex3);
+		SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
 		
 //#ifdef _DEBUG
 //		ImGui::Begin("a");

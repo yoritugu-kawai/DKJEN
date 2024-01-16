@@ -7,9 +7,9 @@ class  Sprite
 {
 public:
 	 
-	 void Initialize();
+	 void Initialize(TexProeerty  tex);
 	 void Vertex();
-	 void Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, TexProeerty  tex);
+	 void Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
 	// void Release();
 
 	 ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
