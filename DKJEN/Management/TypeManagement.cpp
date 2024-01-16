@@ -5,8 +5,17 @@ TypeManagement* TypeManagement::GetInstance()
 
 	return &instance;
 }
-void TypeManagement::Initialize()
+void TypeManagement::Initialize3DObj()
 {
+	obj3D = new Obj3D;
+
+}
+
+void TypeManagement::InitializeSprite()
+{
+	sprite = new Sprite;
+
+
 }
 
 void TypeManagement::Draw3DObj()

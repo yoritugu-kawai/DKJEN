@@ -24,7 +24,7 @@ public:
 	/// 
 	/// </summary>
 	/// <param name="tex"></param>
-	void Initialize(const std::string& filename);
+	void Initialize(TexProeerty  tex,const std::string& filename);
 	/// <summary>
 	/// 参考数値↓
 	/// </summary>
@@ -32,7 +32,7 @@ public:
 	/// <param name="Vector3 rotate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector3 translate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector4 color = { 1.0f,1.0f,1.0f,1.0f }"></param>
-	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, TexProeerty  tex);
+	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
 	//void Release();
 	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 

@@ -18,15 +18,6 @@ const wchar_t Title[] = { L"ド根性エンジン" };
 
 
 
-struct Transfrom4
-{
-	Vector4 lefe;
-	Vector4  top;
-	Vector4 right;
-	Vector4 color;
-
-};
-
 //static D3DResourceLeaker leaker;
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
@@ -46,7 +37,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Sprite* SpriteTex = new Sprite;
 	SpriteTex->Initialize();
 	Obj3D* obj3D = new Obj3D;
-	obj3D->Initialize("axis.obj");
+	obj3D->Initialize(tex2,"axis.obj");
 
 
 	
@@ -108,7 +99,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 
 		
-		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color, tex2);
+		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);
 		//
 
 	
