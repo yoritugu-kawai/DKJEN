@@ -15,7 +15,6 @@
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
-
 //static D3DResourceLeaker leaker;
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
