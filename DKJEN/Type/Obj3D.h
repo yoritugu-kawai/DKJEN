@@ -25,7 +25,7 @@ public:
 	/// 
 	/// </summary>
 	/// <param name="tex"></param>
-	void Initialize(TexProeerty  tex,const std::string& filename);
+	void Initialize(TexProeerty  tex, const std::string& directoryPath,const std::string& filename);
 	/// <summary>
 	/// 参考数値↓
 	/// </summary>

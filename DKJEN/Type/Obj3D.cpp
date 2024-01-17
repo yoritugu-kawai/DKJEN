@@ -1,10 +1,10 @@
 #include "Obj3D.h"
 
-void Obj3D::Initialize(TexProeerty  tex,const std::string& filename)
+void Obj3D::Initialize(TexProeerty  tex, const std::string& directoryPath,const std::string& filename)
 {
 	tex_ = tex;
 	
-	modelData = LoadObjFile("resource", filename);
+	modelData = LoadObjFile(directoryPath, filename);
 
 	vetexResource = CreateBufferResource(sizeof(VertexData) * modelData.vertices.size());
 	materialResource = CreateBufferResource(sizeof(Vector4));
@@ -64,11 +64,11 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(1, wvpResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource.Get()->GetGPUVirtualAddress());
 	
+	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
 	commandList->DrawInstanced(UINT(modelData.vertices.size()), 1, 0, 0);
 }
 

@@ -12,6 +12,8 @@
 #include"DKJEN/Management/TypeManagement.h"
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
+
+#include"GameProject/Player/Player.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -26,16 +28,29 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	PSOCopileManagement::Set();
 	ImageLoading* imageLoading = new ImageLoading;
 	imageLoading->Initiluze();
-	TexProeerty tex2 = imageLoading->LoadTexture("resource/uvChecker.png");
-	TexProeerty tex3 = imageLoading->LoadTexture("resource/iras.png");
+	TexProeerty texIro = imageLoading->LoadTexture("resource/iras.png");
+	TexProeerty texUV = imageLoading->LoadTexture("resource/uvChecker.png");
+	TexProeerty texPlayer = imageLoading->LoadTexture("GameResource/Player.png");
 	CameraProjection pro;
 	pro.Initialize();
 
 	Sprite* SpriteTex = new Sprite;
-	SpriteTex->Initialize(tex3);
-	Obj3D* obj3D = new Obj3D;
-	obj3D->Initialize(tex2,"axis.obj");
+	SpriteTex->Initialize(texIro);
 
+	Sprite* SpriteTex2 = new Sprite;
+	SpriteTex2->Initialize(texUV);
+
+	Obj3D* obj3D = new Obj3D;
+	obj3D->Initialize(texUV,"resource/p","axis.obj");
+	//ゲームキャラクター
+	ImGguiTransfrom playerTransfrom;
+	playerTransfrom.scale = { 0.5f, 0.5f, 0.5f };
+	playerTransfrom.rotate = { 0.0f, 0.0f, 0.0f };
+	playerTransfrom.translate = { 0.0f, 0.0f, 0.0f };
+	playerTransfrom.color = { 1.0f,1.0f,1.0f,1.0f };
+
+	Player* player_ = new Player;
+	player_->Intiailize(texPlayer, "GameResource", "Player.obj",playerTransfrom);
 
 	
 
@@ -44,6 +59,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	imGuiSprite.rotate = { 0.0f,0.0f,0.0f };
 	imGuiSprite.translate = { 0.0f,0.0f,0.0f };
 	imGuiSprite.color = { 1.0f, 1.0f, 1.0, 1.0f };
+	//
+	ImGguiTransfrom imGuiSprite2;
+	imGuiSprite2.scale = { 1.0f,1.0f,1.0f };
+	imGuiSprite2.rotate = { 0.0f,0.0f,0.0f };
+	imGuiSprite2.translate = { 50.0f,50.0f,50.0f };
+	imGuiSprite2.color = { 1.0f, 1.0f, 1.0, 1.0f };
 
 	ImGguiTransfrom imGui3D[1];
 	for (int i = 0; i < 1; i++) {
@@ -78,6 +99,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 		
 		SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
+
+		ImGui::Begin("Sprite2");
+		ImGui::ColorEdit4("color", (float*)&imGuiSprite2.color);
+		ImGui::SliderFloat3("scale", &imGuiSprite2.scale.x, -0.0f, 5.0f);
+		ImGui::SliderFloat3("rotate", &imGuiSprite2.rotate.x, -5.0f, 5.0f);
+		ImGui::SliderFloat3("translate", &imGuiSprite2.translate.x, -500.0f, 500.0f);
+		ImGui::End();
+		SpriteTex2->Darw(imGuiSprite2.scale, imGuiSprite2.rotate, imGuiSprite2.translate, imGuiSprite2.color);
 		
 //#ifdef _DEBUG
 //		ImGui::Begin("a");
@@ -87,8 +116,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 //#endiftry
 	
 
-		
-		ImGui::Begin("3D");
+		//
+		ImGui::Begin("pro");
 	
 		ImGui::SliderFloat3("scale", &pro.translate.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &pro.rotate.x, -10.0f, 10.0f);
@@ -96,7 +125,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 
 
-		ImGui::Begin("3");
+		ImGui::Begin("3D");
 		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
 		ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
@@ -107,6 +136,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color,pro);
 		//
 
+		
+		player_->Updet();
+		player_->Draw(pro);
 	
 		
 		FrameManagement::EndFrame();

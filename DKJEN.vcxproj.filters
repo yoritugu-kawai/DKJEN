@@ -61,6 +61,12 @@
     <Filter Include="DKJEN\CameraProjection">
       <UniqueIdentifier>{c70e3590-af8e-4ca0-9a1d-2bd7482326cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{f25a6621-1e8c-4160-b1e1-315caa4dadb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Player">
+      <UniqueIdentifier>{cefde742-dc1d-4c7c-b126-bdb95e33f294}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -171,6 +177,9 @@
     <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp">
       <Filter>DKJEN\CameraProjection</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\Player\Player.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -280,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h">
       <Filter>DKJEN\CameraProjection</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Player\Player.h">
+      <Filter>Game\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
