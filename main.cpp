@@ -31,6 +31,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	CameraProjection pro;
 	pro.Initialize();
 
+	
+
 	Sprite* SpriteTex = new Sprite;
 	SpriteTex->Initialize(tex3);
 	Obj3D* obj3D = new Obj3D;
@@ -90,7 +92,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		
 		ImGui::Begin("3");
 	
-		ImGui::SliderFloat3("scale", &pro.translate.x, -0.0f, 5.0f);
+		ImGui::SliderFloat3("scale", &pro.translate.x, 0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &pro.rotate.x, -10.0f, 10.0f);
 		
 		ImGui::End();
