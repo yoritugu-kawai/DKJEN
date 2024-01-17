@@ -58,6 +58,9 @@
     <Filter Include="DKJEN\Type\3D">
       <UniqueIdentifier>{ef5c8bc5-9c2a-4343-b48a-7498e51e6ef6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\CameraProjection">
+      <UniqueIdentifier>{c70e3590-af8e-4ca0-9a1d-2bd7482326cd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -165,6 +168,9 @@
     <ClCompile Include="DKJEN\Management\TypeManagement.cpp">
       <Filter>DKJEN\Management</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp">
+      <Filter>DKJEN\CameraProjection</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -271,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Management\TypeManagement.h">
       <Filter>DKJEN\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h">
+      <Filter>DKJEN\CameraProjection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

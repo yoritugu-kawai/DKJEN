@@ -154,6 +154,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Base\SpritePSO.cpp" />
     <ClCompile Include="DKJEN\Base\TexturePSO.cpp" />
     <ClCompile Include="DKJEN\Base\WinApp.cpp" />
+    <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp" />
     <ClCompile Include="DKJEN\externals\imgui\imgui.cpp" />
     <ClCompile Include="DKJEN\externals\imgui\imgui_demo.cpp" />
     <ClCompile Include="DKJEN\externals\imgui\imgui_draw.cpp" />
@@ -189,6 +190,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Base\SpritePSO.h" />
     <ClInclude Include="DKJEN\Base\TexturePSO.h" />
     <ClInclude Include="DKJEN\Base\WinApp.h" />
+    <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h" />
     <ClInclude Include="DKJEN\externals\imgui\imconfig.h" />
     <ClInclude Include="DKJEN\externals\imgui\imgui.h" />
     <ClInclude Include="DKJEN\externals\imgui\imgui_impl_dx12.h" />

@@ -5,6 +5,7 @@
 #include"../Base/TexturePSO.h"
 #include"../Base/LightPSO.h"
 #include"../Base/ImageLoading.h"
+#include"../CameraProjection/CameraProjection.h"
 #include<fstream>
 #include<sstream>
 struct MaterialData {
@@ -32,7 +33,7 @@ public:
 	/// <param name="Vector3 rotate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector3 translate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector4 color = { 1.0f,1.0f,1.0f,1.0f }"></param>
-	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
+	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraProjection pro);
 	//void Release();
 	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 

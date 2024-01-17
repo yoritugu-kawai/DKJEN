@@ -20,9 +20,9 @@ void Obj3D::Initialize(TexProeerty  tex,const std::string& filename)
 	pos = { 0.0f,0.0f,5.0f };
 }
 
-void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
+void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraProjection pro)
 {
-	
+	pro;
 	translate.z = translate.z + pos.z;
 	matrix = MakeAffineMatrix(scale,rotate, translate);
 	
@@ -44,7 +44,7 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 
 	Matrix4x4 CameraMatrix = MakeIdentity4x4();
 
-	matrix = Multiply(matrix, Multiply(CameraMatrix, ProjectionMatrix));
+	matrix = Multiply(matrix, Multiply(pro.view, pro.projection));
 	matrixData->WVP = matrix;
 	matrixData->World = MakeIdentity4x4();
 	*materialData = Color;

@@ -7,6 +7,8 @@
 
 #include"DKJEN/Utilipy/rektyk.h"
 
+#include"DKJEN/CameraProjection/CameraProjection.h"
+
 #include"DKJEN/Management/TypeManagement.h"
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
@@ -27,8 +29,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	imageLoading->Initiluze();
 	TexProeerty tex2 = imageLoading->LoadTexture("resource/uvChecker.png");
 	TexProeerty tex3 = imageLoading->LoadTexture("resource/iras.png");
-	
-
+	CameraProjection pro;
+	pro.Initialize();
 
 	Sprite* SpriteTex = new Sprite;
 	SpriteTex->Initialize(tex3);
@@ -67,7 +69,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 
 		
-
+		pro.Update();
 
 		ImGui::Begin("Sprite");
 		ImGui::ColorEdit4("color", (float*)&imGuiSprite.color);
@@ -88,6 +90,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		
 		ImGui::Begin("3D");
+	
+		ImGui::SliderFloat3("scale", &pro.translate.x, -0.0f, 5.0f);
+		ImGui::SliderFloat3("rotate", &pro.rotate.x, -10.0f, 10.0f);
+		
+		ImGui::End();
+
+
+		ImGui::Begin("3");
 		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
 		ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
@@ -95,7 +105,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 
 		
-		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color);
+		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color,pro);
 		//
 
 	
