@@ -88,7 +88,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 
 		
-		ImGui::Begin("3D");
+		ImGui::Begin("3");
 	
 		ImGui::SliderFloat3("scale", &pro.translate.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &pro.rotate.x, -10.0f, 10.0f);
@@ -96,7 +96,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 
 
-		ImGui::Begin("3");
+		ImGui::Begin("3D");
 		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
 		ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
