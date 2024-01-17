@@ -41,7 +41,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	SpriteTex2->Initialize(texUV);
 
 	Obj3D* obj3D = new Obj3D;
-	obj3D->Initialize(texUV,"resource/p","axis.obj");
+	obj3D->Initialize(texUV,"resource","axis.obj");
 	//ゲームキャラクター
 	ImGguiTransfrom playerTransfrom;
 	playerTransfrom.scale = { 0.5f, 0.5f, 0.5f };
