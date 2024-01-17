@@ -2,7 +2,6 @@
 
 void Obj3D::Initialize(TexProeerty  tex,const std::string& filename)
 {
-	tex_ = tex;
 	
 	modelData = LoadObjFile("resource", filename);
 
@@ -18,6 +17,7 @@ void Obj3D::Initialize(TexProeerty  tex,const std::string& filename)
     matrix = MakeIdentity4x4();
 
 	pos = { 0.0f,0.0f,5.0f };
+	tex_ = tex;
 }
 
 void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraProjection pro)

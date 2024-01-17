@@ -31,12 +31,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	CameraProjection pro;
 	pro.Initialize();
 
+	Obj3D* obj3D2 = new Obj3D;
+	obj3D2->Initialize(tex3, "axis.obj");
+
 	Sprite* SpriteTex = new Sprite;
-	SpriteTex->Initialize(tex3);
+	SpriteTex->Initialize(tex2);
 	Obj3D* obj3D = new Obj3D;
 	obj3D->Initialize(tex2,"axis.obj");
 
-
+	
 	
 
 	ImGguiTransfrom imGuiSprite;
@@ -54,6 +57,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	}
 
+	ImGguiTransfrom imGui3;
+	for (int i = 0; i < 1; i++) {
+		imGui3.scale = { 0.5f, 0.5f, 0.5f };
+		imGui3.rotate = { 0.0f, 0.0f, 0.0f };
+		imGui3.translate = { 0.0f, 0.0f, 0.0f };
+		imGui3.color = { 1.0f,1.0f,1.0f,1.0f };
+
+	}
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -88,7 +99,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	
 
 		
-		ImGui::Begin("3D");
+		ImGui::Begin("pro");
 	
 		ImGui::SliderFloat3("scale", &pro.translate.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &pro.rotate.x, -10.0f, 10.0f);
@@ -96,7 +107,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 
 
-		ImGui::Begin("3");
+		ImGui::Begin("3D");
 		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
 		ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
@@ -105,6 +116,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		
 		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color,pro);
+		obj3D2->Draw(imGui3.scale, imGui3.rotate, imGui3.translate, imGui3.color, pro);
 		//
 
 	
