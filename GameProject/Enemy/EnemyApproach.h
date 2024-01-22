@@ -2,10 +2,11 @@
 #include "../Enemy/IEnemyState.h"
 #include "../Enemy/Enemy.h"
 #include "../../DKJEN/Math/Math.h"
-class EnemyStateLeave : public IEnemyState {
+#include"EnemyLeaveh.h"
+class EnemyStateApproach : public IEnemyState {
 public:
-	void Update(Enemy* enemy) override;
+	void Update(Enemy* enemy)override;
 
 private:
-	Coordinate pos_;
+	Coordinate pos_ ;
 };

@@ -200,6 +200,9 @@
     <ClCompile Include="GameProject\Enemy\EnemyLeaveh.cpp">
       <Filter>Game\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\Enemy\EnemyApproach.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -326,6 +329,9 @@
       <Filter>Game\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\Enemy\EnemyLeaveh.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Enemy\EnemyApproach.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
