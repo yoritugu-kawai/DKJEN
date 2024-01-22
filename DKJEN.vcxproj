@@ -180,6 +180,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Utilipy\Input.cpp" />
     <ClCompile Include="DKJEN\WorldCoordinate\WorldCoordinate.cpp" />
     <ClCompile Include="GameProject\Enemy\Enemy.cpp" />
+    <ClCompile Include="GameProject\Enemy\EnemyLeaveh.cpp" />
     <ClCompile Include="GameProject\Enemy\IEnemyState.cpp" />
     <ClCompile Include="GameProject\Player\Bullet.cpp" />
     <ClCompile Include="GameProject\Player\Player.cpp" />
@@ -225,6 +226,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\WorldCoordinate\WorldCoordinate.h" />
     <ClInclude Include="GameProject\Enemy\Enemy.h" />
     <ClInclude Include="GameProject\Enemy\IEnemyState.h" />
+    <ClInclude Include="GameProject\Enemy\EnemyLeaveh.h" />
     <ClInclude Include="GameProject\Player\Bullet.h" />
     <ClInclude Include="GameProject\Player\Player.h" />
   </ItemGroup>

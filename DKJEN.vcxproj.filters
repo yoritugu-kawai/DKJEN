@@ -36,9 +36,6 @@
     <Filter Include="ImguiEx">
       <UniqueIdentifier>{f81999c5-8832-4650-bad1-7d9fb5e33586}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DKJEN\Base\POS">
-      <UniqueIdentifier>{cee9bf10-9630-42ff-af5d-b43297b866de}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DKJEN\Base\DxCommon">
       <UniqueIdentifier>{59756443-50a2-4544-9739-d9e410191d33}</UniqueIdentifier>
     </Filter>
@@ -71,6 +68,9 @@
     </Filter>
     <Filter Include="hlsl">
       <UniqueIdentifier>{cccd3f29-95a6-41bb-b9f3-49214d0ab677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\Base\PSO">
+      <UniqueIdentifier>{cee9bf10-9630-42ff-af5d-b43297b866de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,13 +135,13 @@
       <Filter>DKJEN\Management</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\PolygonPSO.cpp">
-      <Filter>DKJEN\Base\POS</Filter>
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\SpritePSO.cpp">
-      <Filter>DKJEN\Base\POS</Filter>
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\TexturePSO.cpp">
-      <Filter>DKJEN\Base\POS</Filter>
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\DxCommon.cpp">
       <Filter>DKJEN\Base\DxCommon</Filter>
@@ -150,7 +150,7 @@
       <Filter>DKJEN\Base\Win</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\LightPSO.cpp">
-      <Filter>DKJEN\Base\POS</Filter>
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\Base\Function.cpp">
       <Filter>DKJEN\Base\Log</Filter>
@@ -195,6 +195,9 @@
       <Filter>Game\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="GameProject\Enemy\IEnemyState.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Enemy\EnemyLeaveh.cpp">
       <Filter>Game\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
@@ -260,13 +263,13 @@
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\PolygonPSO.h">
-      <Filter>DKJEN\Base\POS</Filter>
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\SpritePSO.h">
-      <Filter>DKJEN\Base\POS</Filter>
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\TexturePSO.h">
-      <Filter>DKJEN\Base\POS</Filter>
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\DxCommon.h">
       <Filter>DKJEN\Base\DxCommon</Filter>
@@ -275,7 +278,7 @@
       <Filter>DKJEN\Base\Win</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\LightPSO.h">
-      <Filter>DKJEN\Base\POS</Filter>
+      <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\Base\Function.h">
       <Filter>DKJEN\Base\Log</Filter>
@@ -320,6 +323,9 @@
       <Filter>Game\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\Enemy\IEnemyState.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Enemy\EnemyLeaveh.h">
       <Filter>Game\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
