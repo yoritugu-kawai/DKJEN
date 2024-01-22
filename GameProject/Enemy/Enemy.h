@@ -8,6 +8,7 @@ public:
 	void Update();
 	void Draw(CameraProjection pro);
 	Coordinate GetPos() { return  pos_; };
+	void SetPos(Coordinate pos);
 private:
 	Obj3D* obj3d_;
 	Coordinate pos_;

@@ -30,3 +30,8 @@ void Enemy::Draw(CameraProjection pro)
 {
 	obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro);
 }
+
+void Enemy::SetPos(Coordinate pos)
+{
+	pos_ = pos;
+}
