@@ -13,6 +13,7 @@
 #include <numbers>
 
 #include"../Base/Log.h"
+
 #pragma comment(lib,"dxguid.lib")
 #pragma comment(lib,"d3d12.lib")
 #pragma comment(lib,"dxgi.lib")
@@ -70,19 +71,27 @@ struct  Transform
 	Vector3 translate;
 	Matrix4x4 matWorld;
 };
+struct Coordinate {
 
-struct ImGguiTransfrom
-{
 	Vector3 scale;
 	Vector3 rotate;
 	Vector3 translate;
 	Vector4 color;
+	Matrix4x4 matWorld;
+
+	void UpdateMatrix();
+	//void TransferMatrix();
+
 };
+
 
 /// <summary>
 /// 数学
 /// </summary>
 /// <returns></returns>
+Vector3 Add(const Vector3& v1, const Vector3& v2);
+
+Vector3 TransFormNormal(const Vector3& v, const Matrix4x4& m);
 Matrix4x4 MakeIdentity4x4();
 Matrix4x4 MakeScaleMatrix(const Vector3 scale);
 Matrix4x4 MakeRotateXMatrix(float radian);

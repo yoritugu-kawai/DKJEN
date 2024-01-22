@@ -2,7 +2,6 @@
 
 void Obj3D::Initialize(TexProeerty  tex, const std::string& directoryPath,const std::string& filename)
 {
-	tex_ = tex;
 	
 	modelData = LoadObjFile(directoryPath, filename);
 
@@ -18,6 +17,7 @@ void Obj3D::Initialize(TexProeerty  tex, const std::string& directoryPath,const 
     matrix = MakeIdentity4x4();
 
 	pos = { 0.0f,0.0f,5.0f };
+	tex_ = tex;
 }
 
 void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraProjection pro)
@@ -48,7 +48,7 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	matrixData->WVP = matrix;
 	matrixData->World = MakeIdentity4x4();
 	*materialData = Color;
-	lightData->direction = { 0.0f,-1.0f,0.0f };
+	lightData->direction = { 0.0f,0.0f,0.0f };
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->intensity = 1.0f;
 	

@@ -13,6 +13,8 @@
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
 
+#include"GameProject/Enemy/Enemy.h"
+#include"GameProject/Player/Bullet.h"
 #include"GameProject/Player/Player.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
@@ -31,8 +33,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	TexProeerty texIro = imageLoading->LoadTexture("resource/iras.png");
 	TexProeerty texUV = imageLoading->LoadTexture("resource/uvChecker.png");
 	TexProeerty texPlayer = imageLoading->LoadTexture("GameResource/Player.png");
+	TexProeerty texEnemy = imageLoading->LoadTexture("GameResource/enemy.png");
 	CameraProjection pro;
 	pro.Initialize();
+
 
 	Sprite* SpriteTex = new Sprite;
 	SpriteTex->Initialize(texIro);
@@ -42,31 +46,42 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	Obj3D* obj3D = new Obj3D;
 	obj3D->Initialize(texUV,"resource","axis.obj");
+
+
 	//ゲームキャラクター
-	ImGguiTransfrom playerTransfrom;
+	Coordinate playerTransfrom;
 	playerTransfrom.scale = { 0.5f, 0.5f, 0.5f };
 	playerTransfrom.rotate = { 0.0f, 0.0f, 0.0f };
 	playerTransfrom.translate = { 0.0f, 0.0f, 0.0f };
 	playerTransfrom.color = { 1.0f,1.0f,1.0f,1.0f };
 
+	Coordinate enemyTransfrom;
+	enemyTransfrom.scale = { 0.5f, 0.5f, 0.5f };
+	enemyTransfrom.rotate = { 0.0f, 0.0f, 0.0f };
+	enemyTransfrom.translate = { 0.0f, 0.0f, 10.0f };
+	enemyTransfrom.color = { 1.0f,1.0f,1.0f,1.0f };
+
 	Player* player_ = new Player;
 	player_->Intiailize(texPlayer, "GameResource", "Player.obj",playerTransfrom);
 
-	
+	Enemy* enemy_ = new Enemy;
+	enemy_->Intiailize(texEnemy, "GameResource", "Player.obj", enemyTransfrom);
+	//Bullet* bullet_ = new Bullet;
+	//bullet_->Intiailize();
 
-	ImGguiTransfrom imGuiSprite;
+	Coordinate imGuiSprite;
 	imGuiSprite.scale = { 1.0f,1.0f,1.0f };
 	imGuiSprite.rotate = { 0.0f,0.0f,0.0f };
 	imGuiSprite.translate = { 0.0f,0.0f,0.0f };
 	imGuiSprite.color = { 1.0f, 1.0f, 1.0, 1.0f };
 	//
-	ImGguiTransfrom imGuiSprite2;
+	Coordinate imGuiSprite2;
 	imGuiSprite2.scale = { 1.0f,1.0f,1.0f };
 	imGuiSprite2.rotate = { 0.0f,0.0f,0.0f };
 	imGuiSprite2.translate = { 50.0f,50.0f,50.0f };
 	imGuiSprite2.color = { 1.0f, 1.0f, 1.0, 1.0f };
 
-	ImGguiTransfrom imGui3D[1];
+	Coordinate imGui3D[1];
 	for (int i = 0; i < 1; i++) {
 		imGui3D[i].scale = { 0.5f, 0.5f, 0.5f };
 		imGui3D[i].rotate = { 0.0f, 0.0f, 0.0f };
@@ -91,7 +106,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		
 		pro.Update();
 
-		ImGui::Begin("Sprite");
+
+		/*ImGui::Begin("Sprite");
 		ImGui::ColorEdit4("color", (float*)&imGuiSprite.color);
 		ImGui::SliderFloat3("scale", &imGuiSprite.scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGuiSprite.rotate.x, -5.0f, 5.0f);
@@ -106,7 +122,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::SliderFloat3("rotate", &imGuiSprite2.rotate.x, -5.0f, 5.0f);
 		ImGui::SliderFloat3("translate", &imGuiSprite2.translate.x, -500.0f, 500.0f);
 		ImGui::End();
-		SpriteTex2->Darw(imGuiSprite2.scale, imGuiSprite2.rotate, imGuiSprite2.translate, imGuiSprite2.color);
+		SpriteTex2->Darw(imGuiSprite2.scale, imGuiSprite2.rotate, imGuiSprite2.translate, imGuiSprite2.color);*/
 		
 //#ifdef _DEBUG
 //		ImGui::Begin("a");
@@ -119,13 +135,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//
 		ImGui::Begin("pro");
 	
-		ImGui::SliderFloat3("scale", &pro.translate.x, -0.0f, 5.0f);
+		ImGui::SliderFloat3("scale", &pro.translate.x, -10.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &pro.rotate.x, -10.0f, 10.0f);
 		
 		ImGui::End();
 
 
-		ImGui::Begin("3D");
+		/*ImGui::Begin("3D");
 		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
 		ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
 		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
@@ -133,12 +149,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::End();
 
 		
-		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color,pro);
+		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color,pro);*/
 		//
 
 		
-		player_->Updet();
+		player_->Update();
 		player_->Draw(pro);
+		enemy_->Update();
+		enemy_->Draw(pro);
+		/*bullet_->Updet();
+		bullet_->Draw(pro);*/
 	
 		
 		FrameManagement::EndFrame();

@@ -33,10 +33,6 @@
     <Filter Include="DKJEN\Type">
       <UniqueIdentifier>{fdf38c82-c957-481f-aceb-4fbc77966666}</UniqueIdentifier>
     </Filter>
-    <Filter Include="hlsl">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="ImguiEx">
       <UniqueIdentifier>{f81999c5-8832-4650-bad1-7d9fb5e33586}</UniqueIdentifier>
     </Filter>
@@ -66,6 +62,15 @@
     </Filter>
     <Filter Include="Game\Player">
       <UniqueIdentifier>{cefde742-dc1d-4c7c-b126-bdb95e33f294}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\WorldCoordinate">
+      <UniqueIdentifier>{2973903f-d131-4a66-b279-7fcd5a182c89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Enemy">
+      <UniqueIdentifier>{33877a3c-a75f-4cee-9caa-5d11a48c8d47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hlsl">
+      <UniqueIdentifier>{cccd3f29-95a6-41bb-b9f3-49214d0ab677}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +185,18 @@
     <ClCompile Include="GameProject\Player\Player.cpp">
       <Filter>Game\Player</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\Player\Bullet.cpp">
+      <Filter>Game\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\WorldCoordinate\WorldCoordinate.cpp">
+      <Filter>DKJEN\WorldCoordinate</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Enemy\Enemy.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Enemy\IEnemyState.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -293,8 +310,29 @@
     <ClInclude Include="GameProject\Player\Player.h">
       <Filter>Game\Player</Filter>
     </ClInclude>
+    <ClInclude Include="GameProject\Player\Bullet.h">
+      <Filter>Game\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\WorldCoordinate\WorldCoordinate.h">
+      <Filter>DKJEN\WorldCoordinate</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Enemy\Enemy.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Enemy\IEnemyState.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="LightObject.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="LightObject.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonObiject3d.VS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonOdject3d.PS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
@@ -308,15 +346,6 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\TextureOdject3d.PS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonObiject3d.VS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="LightObject.PS.hlsl">
-      <Filter>hlsl</Filter>
-    </FxCompile>
-    <FxCompile Include="LightObject.VS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>
