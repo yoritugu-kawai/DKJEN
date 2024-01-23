@@ -13,6 +13,7 @@
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
 
+#include"GameProject/Skydome/Skydome.h"
 #include"GameProject/Enemy/Enemy.h"
 #include"GameProject/Player/Bullet.h"
 #include"GameProject/Player/Player.h"
@@ -34,6 +35,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	TexProeerty texUV = imageLoading->LoadTexture("resource/uvChecker.png");
 	TexProeerty texPlayer = imageLoading->LoadTexture("GameResource/Player.png");
 	TexProeerty texEnemy = imageLoading->LoadTexture("GameResource/enemy.png");
+	TexProeerty texCelestialSphere = imageLoading->LoadTexture("GameResource/CelestialSphere.png");
+
 	CameraProjection pro;
 	pro.Initialize();
 
@@ -66,6 +69,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	Enemy* enemy_ = new Enemy;
 	enemy_->Intiailize(texEnemy, "GameResource", "Player.obj", enemyTransfrom);
+
+	Skydome* skydome_ = new Skydome;
+	skydome_->Intiailize(texCelestialSphere, "GameResource", "CelestialSphere.obj");
 	//Bullet* bullet_ = new Bullet;
 	//bullet_->Intiailize();
 
@@ -157,6 +163,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		player_->Draw(pro);
 		enemy_->Update();
 		enemy_->Draw(pro);
+		skydome_->Draw(pro);
 		/*bullet_->Updet();
 		bullet_->Draw(pro);*/
 	

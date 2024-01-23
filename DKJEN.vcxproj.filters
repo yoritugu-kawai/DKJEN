@@ -72,6 +72,9 @@
     <Filter Include="DKJEN\Base\PSO">
       <UniqueIdentifier>{cee9bf10-9630-42ff-af5d-b43297b866de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Skydome">
+      <UniqueIdentifier>{3de4c1b1-5e56-486b-ba3c-f57579b20e41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -203,6 +206,9 @@
     <ClCompile Include="GameProject\Enemy\EnemyApproach.cpp">
       <Filter>Game\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\Skydome\Skydome.cpp">
+      <Filter>Game\Skydome</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -333,6 +339,9 @@
     </ClInclude>
     <ClInclude Include="GameProject\Enemy\EnemyApproach.h">
       <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Skydome\Skydome.h">
+      <Filter>Game\Skydome</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
