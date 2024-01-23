@@ -16,7 +16,7 @@ void EnemyStateApproach::Update(Enemy* enemy)
 	pos_.color = { 1.0f,1.0f,1.0f,1.0f };
 	pos_.translate.z -= 0.05f;*/
 	enemy->SetPos(Add(enemy->GetPos().translate, enemy->GetVelocty()));
-	if (enemy->GetPos().translate.z < 3)
+	if (enemy->GetPos().translate.z < 5)
 	{
 		enemy->StateChange(new EnemyStateLeave);
 	}
