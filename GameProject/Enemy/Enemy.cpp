@@ -14,26 +14,21 @@ void Enemy::Update()
 {
 
 	enemyState->Update(this);
-	//pos_.translate.z -= 0.05f;
-	//if (pos_.translate.z<=-10) {
-	//	pos_.translate.z = 10.0f;
-	//	pos_.translate.x = 0.0f;
-	//	pos_.translate.y = 0.0f;
-	//}
-	//if (pos_.translate.z<3)
-	//{
+	/*pos_.translate.z -= 0.05f;
+	if (pos_.translate.z<=-10) {
+		pos_.translate.z = 10.0f;
+		pos_.translate.x = 0.0f;
+		pos_.translate.y = 0.0f;
+	}
+	if (pos_.translate.z<3)
+	{
 
-	//	pos_.translate.x += 0.1f;
-	//	pos_.translate.y += 0.1f;
-	//}
+		pos_.translate.x += 0.1f;
+		pos_.translate.y += 0.1f;
+	}*/
 }
 
 void Enemy::Draw(CameraProjection pro)
 {
 	obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro);
-}
-
-void Enemy::SetPos(Coordinate pos)
-{
-	pos_ = pos;
 }

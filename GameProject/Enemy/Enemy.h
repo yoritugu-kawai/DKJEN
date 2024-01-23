@@ -10,13 +10,15 @@ public:
 	void Update();
 	void Draw(CameraProjection pro);
 	Coordinate GetPos() { return  pos_; };
-	void SetPos(Coordinate pos);
+	Vector3 GetVelocty() { return Velocty_; }
+	void SetPos(Vector3 pos) { pos_.translate = pos; };
 
 	void StateChange(IEnemyState* iEnemyState) { enemyState = iEnemyState; }
 private:
 	Obj3D* obj3d_;
 	Coordinate pos_;
-	
+	const float speed = -0.05f;
+	Vector3 Velocty_ = { 0.0f, 0.0f, speed };
 	//Coordinate bulletPos_;
 	IEnemyState* enemyState = nullptr;
 };

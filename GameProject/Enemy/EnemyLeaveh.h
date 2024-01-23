@@ -8,4 +8,5 @@ public:
 
 private:
 	Coordinate pos_;
+	Vector3 versti{ -1,1,-1 };
 };

@@ -9,4 +9,5 @@ public:
 
 private:
 	Coordinate pos_ ;
+	
 };
