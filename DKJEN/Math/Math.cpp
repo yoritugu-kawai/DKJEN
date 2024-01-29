@@ -477,24 +477,24 @@ Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float botto
 	return result;
 }
 
-float Length(const Vector3& v)
-{
-	float result;
-	result = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
-
-	return result;
-}
-Vector3 Normalize(const Vector3& v)
-{
-	Vector3 result;
-	result.x = v.x / Length(v);
-	result.y = v.y / Length(v);
-	result.z = v.z / Length(v);
-
-
-
-	return result;
-}
+//float Length(const Vector3& v)
+//{
+//	float result;
+//	result = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z);
+//
+//	return result;
+//}
+//Vector3 Normalize(const Vector3& v)
+//{
+//	Vector3 result;
+//	result.x = v.x / Length(v);
+//	result.y = v.y / Length(v);
+//	result.z = v.z / Length(v);
+//
+//
+//
+//	return result;
+//}
 Matrix4x4 MakeRotateAxisAngle(const Vector3& axis, float angle)
 {
 	Matrix4x4 result{};
@@ -514,5 +514,48 @@ Matrix4x4 MakeRotateAxisAngle(const Vector3& axis, float angle)
 	result.m[2][0] = (axis.x * axis.z) * (1 - cosAngle) - axis.y * sinAngle;
 	result.m[2][1] = (axis.y * axis.z) * (1 - cosAngle) + axis.x * sinAngle;
 	result.m[2][2] = (axis.z * axis.z) * (1 - cosAngle) + cosAngle;
+	return result;
+}
+//減算 
+Vector3 Subract(const Vector3& v1, const Vector3& v2) {
+	Vector3 result{};
+	result.x = v1.x - v2.x;
+	result.y = v1.y - v2.y;
+	result.z = v1.z - v2.z;
+	return result;
+}
+float Dot(const Vector3& v1, const Vector3& v2) {
+	float result{};
+	result = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+
+	return result;
+}
+Vector3 SlerpFanc(const Vector3& v1, const Vector3& v2, float f)
+{
+	float dot = Dot(v1, v2);
+	float theta = std::acos(dot) * f;
+	Vector3 relaive = { v2.x - v1.x * dot,v2.y - v1.y * dot, v2.z - v1.z * dot };
+	relaive = Normalize(relaive);
+	Vector3 result = {
+		v1.x * cosf(theta) + relaive.x * sinf(theta),
+		v1.y * cosf(theta) + relaive.y * sinf(theta),
+		v1.z * cosf(theta) + relaive.z * sinf(theta)
+
+	};
+	return result;
+}
+float Length(const Vector3& v) {
+	float result{};
+	result = sqrt(Dot(v, v));
+	return result;
+}
+Vector3 Normalize(const Vector3& v) {
+	Vector3 result{};
+	float length = Length(v);
+	if (length != 0.0f) {
+		result.x = v.x / length;
+		result.y = v.y / length;
+		result.z = v.z / length;
+	}
 	return result;
 }

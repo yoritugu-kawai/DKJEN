@@ -1,6 +1,6 @@
 #include "Obj3D.h"
 
-void Obj3D::Initialize(TexProeerty  tex, const std::string& directoryPath,const std::string& filename)
+void Obj3D::Initialize( const std::string& directoryPath,const std::string& filename)
 {
 	
 	modelData = LoadObjFile(directoryPath, filename);
@@ -17,10 +17,10 @@ void Obj3D::Initialize(TexProeerty  tex, const std::string& directoryPath,const 
     matrix = MakeIdentity4x4();
 
 	pos = { 0.0f,0.0f,5.0f };
-	tex_ = tex;
+	//tex_ = tex;
 }
 
-void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraProjection pro)
+void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraProjection pro, TexProeerty  tex )
 {
 	pro;
 	translate.z = translate.z + pos.z;
@@ -68,7 +68,7 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	commandList->SetGraphicsRootConstantBufferView(1, wvpResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource.Get()->GetGPUVirtualAddress());
 	
-	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
+	commandList->SetGraphicsRootDescriptorTable(2, tex.SrvHandleGPU);
 	commandList->DrawInstanced(UINT(modelData.vertices.size()), 1, 0, 0);
 }
 

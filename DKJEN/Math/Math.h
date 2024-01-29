@@ -110,3 +110,6 @@ Vector3 Normalize(const Vector3& v);
 Matrix4x4 MakeRotateAxisAngle(const Vector3& axis, float angle);
 
 
+Vector3 Subract(const Vector3& v1, const Vector3& v2);
+float Dot(const Vector3& v1, const Vector3& v2);
+Vector3 SlerpFanc(const Vector3& v1, const Vector3& v2,float f);

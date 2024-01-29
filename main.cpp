@@ -17,6 +17,7 @@
 #include"GameProject/Enemy/Enemy.h"
 #include"GameProject/Player/Bullet.h"
 #include"GameProject/Player/Player.h"
+#include"GameProject/Collder/CollisionManager.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -35,7 +36,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	TexProeerty texUV = imageLoading->LoadTexture("resource/uvChecker.png");
 	TexProeerty texPlayer = imageLoading->LoadTexture("GameResource/Player.png");
 	TexProeerty texEnemy = imageLoading->LoadTexture("GameResource/enemy.png");
-	TexProeerty texCelestialSphere = imageLoading->LoadTexture("GameResource/CelestialSphere.png");
+	TexProeerty texCelestialSphere = imageLoading->LoadTexture("GameResource/uvChecker.png");
 
 	CameraProjection pro;
 	pro.Initialize();
@@ -47,8 +48,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Sprite* SpriteTex2 = new Sprite;
 	SpriteTex2->Initialize(texUV);
 
-	Obj3D* obj3D = new Obj3D;
-	obj3D->Initialize(texUV,"resource","axis.obj");
+	/*Obj3D* obj3D = new Obj3D;
+	obj3D->Initialize(texUV,"resource","axis.obj");*/
 
 
 	//ゲームキャラクター
@@ -65,15 +66,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	enemyTransfrom.color = { 1.0f,1.0f,1.0f,1.0f };
 
 	Player* player_ = new Player;
-	player_->Intiailize(texPlayer, "GameResource", "Player.obj",playerTransfrom);
+	player_->Intiailize( "GameResource", "Player.obj",playerTransfrom);
 
-	Enemy* enemy_ = new Enemy;
-	enemy_->Intiailize(texEnemy, "GameResource", "Player.obj", enemyTransfrom);
+	Enemy* enemy_ = new Enemy();
+	enemy_->Intiailize( "GameResource", "Player.obj", enemyTransfrom);
+	
 
 	Skydome* skydome_ = new Skydome;
-	skydome_->Intiailize(texCelestialSphere, "GameResource", "CelestialSphere.obj");
+	skydome_->Intiailize( "GameResource", "CelestialSphere.obj");
 	//Bullet* bullet_ = new Bullet;
 	//bullet_->Intiailize();
+	CollisionManager* collisionManager_ = new CollisionManager;
 
 	Coordinate imGuiSprite;
 	imGuiSprite.scale = { 1.0f,1.0f,1.0f };
@@ -95,7 +98,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		imGui3D[i].color = { 1.0f,1.0f,1.0f,1.0f };
 
 	}
-
+	
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -141,8 +144,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//
 		ImGui::Begin("pro");
 	
-		ImGui::SliderFloat3("scale", &pro.translate.x, -10.0f, 5.0f);
-		ImGui::SliderFloat3("rotate", &pro.rotate.x, -10.0f, 10.0f);
+		ImGui::DragFloat3("translate", &pro.translate.x);
+		ImGui::DragFloat3("rotate", &pro.rotate.x);
 		
 		ImGui::End();
 
@@ -160,12 +163,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		
 		player_->Update();
-		player_->Draw(pro);
-		enemy_->Update();
-		enemy_->Draw(pro);
-		skydome_->Draw(pro);
-		/*bullet_->Updet();
-		bullet_->Draw(pro);*/
+		player_->Draw(texPlayer, pro);
+		enemy_->Update(player_);
+		enemy_->Draw(texEnemy, pro);
+		skydome_->Draw(texCelestialSphere, pro);
+
+
+		collisionManager_->CollideClear();
+	   // enemy_->GetBullets();
+		const std::list<Bullet*>& playerBullets = player_->GetBullets();
+		collisionManager_->ColliderPush(player_);
+		collisionManager_->ColliderPush(enemy_);
+		for (Bullet* bullet : playerBullets) {
+			collisionManager_->ColliderPush(bullet);
+		}
+		/*for (EnemyBullet* bullet : enemyBullets) {
+			collisionManager_->ColliderPush(bullet);
+		}*/
+		collisionManager_->CheckAllCollisions();
 	
 		
 		FrameManagement::EndFrame();
@@ -176,7 +191,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	*********   解放  *******
 	*************************
 	*/
-	
+	player_->~Player();
 	
 	/*delete SpriteTex;
 	

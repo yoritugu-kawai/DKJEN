@@ -1,34 +1,53 @@
 #include "Enemy.h"
 
-void Enemy::Intiailize(TexProeerty tex, const std::string& directoryPath, const std::string& filename, Coordinate pos)
+Vector3 Enemy::GetWorldPosition() {
+	Vector3 worldPos = pos_.translate;
+	//{
+	//	this->pos_.matWorld.m[3][0],
+	//	this->pos_.matWorld.m[3][1],
+	//	this->pos_.matWorld.m[3][2]
+	//};
+	return worldPos;
+}
+
+void Enemy::OnCollision()
+{
+	isAlive_ = false;
+}
+
+void Enemy::Intiailize( const std::string& directoryPath, const std::string& filename, Coordinate pos)
 {
 	obj3d_ = new Obj3D;
-	obj3d_->Initialize(tex, directoryPath, filename);
+	obj3d_->Initialize( directoryPath, filename);
 
 	pos_ = pos;
 	enemyState = new EnemyStateApproach;
+	bulletpos_.scale = pos_.scale;
+	bulletpos_.rotate = pos_.rotate;
+	bulletpos_.translate = pos_.translate;
+	bulletpos_.color = { 1.0f,1.0f,0.0f,1.0f };
+	bullet = new EnemyBullet;
+	bullet->Intiailize(bulletpos_);
+	steCollisionAttribute(kCollisionAttributeEnemyr);
+	steCollisionMask(~kCollisionAttributeEnemyr);
+}
+
+void Enemy::Update(Player* player)
+{
 	
-}
-
-void Enemy::Update()
-{
-
 	enemyState->Update(this);
-	/*pos_.translate.z -= 0.05f;
-	if (pos_.translate.z<=-10) {
-		pos_.translate.z = 10.0f;
-		pos_.translate.x = 0.0f;
-		pos_.translate.y = 0.0f;
-	}
-	if (pos_.translate.z<3)
-	{
-
-		pos_.translate.x += 0.1f;
-		pos_.translate.y += 0.1f;
-	}*/
+	const float kBulletSpeed = -1.0f;
+	//
+	bullet->Updet(pos_,player);
+	pos_.UpdateMatrix();
 }
 
-void Enemy::Draw(CameraProjection pro)
+void Enemy::Draw(TexProeerty tex, CameraProjection pro)
 {
-	obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro);
+	if (isAlive_)
+	{
+		obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro, tex);
+		bullet->Draw(pro);
+	}
+
 }

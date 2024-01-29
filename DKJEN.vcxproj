@@ -179,8 +179,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Type\Texture.cpp" />
     <ClCompile Include="DKJEN\Utilipy\Input.cpp" />
     <ClCompile Include="DKJEN\WorldCoordinate\WorldCoordinate.cpp" />
+    <ClCompile Include="GameProject\Collder\CollisionManager.cpp" />
     <ClCompile Include="GameProject\Enemy\Enemy.cpp" />
     <ClCompile Include="GameProject\Enemy\EnemyApproach.cpp" />
+    <ClCompile Include="GameProject\Enemy\EnemyBullet.cpp" />
     <ClCompile Include="GameProject\Enemy\EnemyLeaveh.cpp" />
     <ClCompile Include="GameProject\Enemy\IEnemyState.cpp" />
     <ClCompile Include="GameProject\Player\Bullet.cpp" />
@@ -226,8 +228,12 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Utilipy\Pch.h" />
     <ClInclude Include="DKJEN\Utilipy\rektyk.h" />
     <ClInclude Include="DKJEN\WorldCoordinate\WorldCoordinate.h" />
+    <ClInclude Include="GameProject\Collder\Collder.h" />
+    <ClInclude Include="GameProject\Collder\CollisionConfig.h" />
+    <ClInclude Include="GameProject\Collder\CollisionManager.h" />
     <ClInclude Include="GameProject\Enemy\Enemy.h" />
     <ClInclude Include="GameProject\Enemy\EnemyApproach.h" />
+    <ClInclude Include="GameProject\Enemy\EnemyBullet.h" />
     <ClInclude Include="GameProject\Enemy\IEnemyState.h" />
     <ClInclude Include="GameProject\Enemy\EnemyLeaveh.h" />
     <ClInclude Include="GameProject\Player\Bullet.h" />

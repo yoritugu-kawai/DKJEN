@@ -4,9 +4,9 @@ class Skydome
 {
 public:
 	
-	void Intiailize(TexProeerty  tex, const std::string& directoryPath, const std::string& filename);
+	void Intiailize( const std::string& directoryPath, const std::string& filename);
 	void Update();
-	void Draw(CameraProjection pro);
+	void Draw(TexProeerty  tex, CameraProjection pro);
 private:
 	Obj3D* obj3d_;
 	Coordinate pos_;

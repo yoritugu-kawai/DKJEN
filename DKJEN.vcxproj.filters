@@ -75,6 +75,9 @@
     <Filter Include="Game\Skydome">
       <UniqueIdentifier>{3de4c1b1-5e56-486b-ba3c-f57579b20e41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Collder">
+      <UniqueIdentifier>{f97c5ec8-f30a-4337-aa9b-d7cfc32eda8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -209,6 +212,12 @@
     <ClCompile Include="GameProject\Skydome\Skydome.cpp">
       <Filter>Game\Skydome</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\Collder\CollisionManager.cpp">
+      <Filter>Game\Collder</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Enemy\EnemyBullet.cpp">
+      <Filter>Game\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -342,6 +351,18 @@
     </ClInclude>
     <ClInclude Include="GameProject\Skydome\Skydome.h">
       <Filter>Game\Skydome</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Enemy\EnemyBullet.h">
+      <Filter>Game\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Collder\Collder.h">
+      <Filter>Game\Collder</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Collder\CollisionConfig.h">
+      <Filter>Game\Collder</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Collder\CollisionManager.h">
+      <Filter>Game\Collder</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

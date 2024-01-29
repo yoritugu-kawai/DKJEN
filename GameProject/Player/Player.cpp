@@ -1,15 +1,33 @@
 #include "Player.h"
 #include"../../DKJEN/Utilipy/Input.h"
 
-void Player::Intiailize(TexProeerty  tex, const std::string& directoryPath, const std::string& filename, Coordinate pos)
+Player::~Player()
+{
+
+	for (Bullet* bullet : bullets_) {
+		delete bullet;
+	}
+}
+Vector3 Player::GetWorldPosition() {
+	Vector3 result
+	{
+		this->pos_.matWorld.m[3][0],
+		this->pos_.matWorld.m[3][1],
+		this->pos_.matWorld.m[3][2]
+	};
+	return result;
+}
+void Player::Intiailize( const std::string& directoryPath, const std::string& filename, Coordinate pos)
 {
 	//GameResource
 	obj3d_ = new Obj3D;
-	obj3d_->Initialize(tex, directoryPath, filename);
+	obj3d_->Initialize( directoryPath, filename);
 
 	pos_ = pos;
 	
 	bulletPos_.color = { 1.0f,1.0f,1.0f,1.0f };
+	steCollisionAttribute(kCollisionAttributePlayer);
+	steCollisionMask(~kCollisionAttributePlayer);
 }
 
 void Player::Update()
@@ -20,7 +38,7 @@ void Player::Update()
 		//velocity = TransFormNormal(velocity, pos_.matWorld);
 		velocity = Normalize(velocity);
 
-		Bullet* newBullet = new Bullet;
+		Bullet* newBullet = new Bullet();
 		newBullet->Intiailize(bulletPos_, velocity);
 		
 		bullets_.push_back(newBullet);
@@ -65,12 +83,17 @@ void Player::Update()
 		}
 		return false;
 		});
+	pos_.UpdateMatrix();
 }
 
-void Player::Draw(CameraProjection pro)
+void Player::Draw(TexProeerty  tex, CameraProjection pro)
 {
-	obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro);
+	obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro, tex );
 	for (Bullet* bullet : bullets_) {
 		bullet->Draw(pro);
 	}
+}
+
+void Player::OnCollision()
+{
 }
