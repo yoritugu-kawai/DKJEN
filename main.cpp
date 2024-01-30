@@ -66,7 +66,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	enemyTransfrom.color = { 1.0f,1.0f,1.0f,1.0f };
 
 	Player* player_ = new Player;
-	player_->Intiailize( "GameResource", "Player.obj",playerTransfrom, texSprite);
+	player_->Intiailize( "GameResource", "Player.obj",playerTransfrom);
 
 	Enemy* enemy_ = new Enemy();
 	enemy_->Intiailize( "GameResource", "Player.obj", enemyTransfrom);
@@ -162,7 +162,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//
 
 		
-		player_->Update(pro);
+		player_->Update();
 		player_->Draw(texPlayer, pro);
 		enemy_->Update(player_);
 		enemy_->Draw(texEnemy, pro);
