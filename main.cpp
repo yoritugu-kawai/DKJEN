@@ -32,8 +32,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	PSOCopileManagement::Set();
 	ImageLoading* imageLoading = new ImageLoading;
 	imageLoading->Initiluze();
-	TexProeerty texIro = imageLoading->LoadTexture("resource/iras.png");
-	TexProeerty texUV = imageLoading->LoadTexture("resource/uvChecker.png");
+	TexProeerty sta1 = imageLoading->LoadTexture("GameResource/sta2.png");
+	TexProeerty sta2= imageLoading->LoadTexture("GameResource/sta1.png");
 	TexProeerty texPlayer = imageLoading->LoadTexture("GameResource/Player.png");
 	TexProeerty texEnemy = imageLoading->LoadTexture("GameResource/enemy.png");
 	TexProeerty texCelestialSphere = imageLoading->LoadTexture("GameResource/uvChecker.png");
@@ -43,10 +43,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 	Sprite* SpriteTex = new Sprite;
-	SpriteTex->Initialize(texIro);
+	SpriteTex->Initialize(sta1);
 
 	Sprite* SpriteTex2 = new Sprite;
-	SpriteTex2->Initialize(texUV);
+	SpriteTex2->Initialize(sta2);
 
 	/*Obj3D* obj3D = new Obj3D;
 	obj3D->Initialize(texUV,"resource","axis.obj");*/
@@ -91,7 +91,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Coordinate imGuiSprite2;
 	imGuiSprite2.scale = { 1.0f,1.0f,1.0f };
 	imGuiSprite2.rotate = { 0.0f,0.0f,0.0f };
-	imGuiSprite2.translate = { 50.0f,50.0f,50.0f };
+	imGuiSprite2.translate = { 0.0f,0.0f,0.0f };
 	imGuiSprite2.color = { 1.0f, 1.0f, 1.0, 1.0f };
 
 	Coordinate imGui3D[1];
@@ -160,26 +160,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			skydome_->Draw(texCelestialSphere, pro);
 
 
-			collisionManager_->CollideClear();
-			// enemy_->GetBullets();
-			const std::list<Bullet*>& playerBullets = player_->GetBullets();
-			collisionManager_->ColliderPush(player_);
-			collisionManager_->ColliderPush(enemy_);
-			for (Bullet* bullet : playerBullets) {
-				collisionManager_->ColliderPush(bullet);
-
-			}
-			/*for (EnemyBullet* bullet : enemyBullets) {
-				collisionManager_->ColliderPush(bullet);
-			}*/
-			collisionManager_->CheckAllCollisions();
+			
 
 			break;
 		case 3:
 			break;
 		}
 		
-		
+		collisionManager_->CollideClear();
+		// enemy_->GetBullets();
+		const std::list<Bullet*>& playerBullets = player_->GetBullets();
+		collisionManager_->ColliderPush(player_);
+		collisionManager_->ColliderPush(enemy_);
+		for (Bullet* bullet : playerBullets) {
+			collisionManager_->ColliderPush(bullet);
+
+		}
+		/*for (EnemyBullet* bullet : enemyBullets) {
+			collisionManager_->ColliderPush(bullet);
+		}*/
+		collisionManager_->CheckAllCollisions();
 		FrameManagement::EndFrame();
 	}
 
