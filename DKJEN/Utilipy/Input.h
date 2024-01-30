@@ -3,17 +3,16 @@
 #include <wrl.h>
 #include <vector>
 #include <array>
-#include <Xinput.h>
+
 #include <cassert>
+
+#define DIRECTINPUT_VERSION 0x0800
+#include <Xinput.h>
 
 #pragma comment(lib,"xinput.lib")
 #pragma comment(lib,"dinput8.lib")
 #pragma comment(lib,"dxguid.lib")
 
-#define XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  7849
-#define XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE 8689
-#define XINPUT_GAMEPAD_TRIGGER_THRESHOLD    30
-#define DIRECTINPUT_VERSION 0x0800
 #include <dinput.h>
 #include "../Base/WinApp.h"
 #include"../Base/Log.h"

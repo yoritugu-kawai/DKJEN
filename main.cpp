@@ -66,7 +66,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	enemyTransfrom.color = { 1.0f,1.0f,1.0f,1.0f };
 
 	Player* player_ = new Player;
-	player_->Intiailize( "GameResource", "Player.obj",playerTransfrom);
+	player_->Intiailize(texSprite,"GameResource", "Player.obj",playerTransfrom);
 
 	Enemy* enemy_ = new Enemy();
 	enemy_->Intiailize( "GameResource", "Player.obj", enemyTransfrom);
@@ -116,31 +116,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		pro.Update();
 
 
-		/*ImGui::Begin("Sprite");
-		ImGui::ColorEdit4("color", (float*)&imGuiSprite.color);
-		ImGui::SliderFloat3("scale", &imGuiSprite.scale.x, -0.0f, 5.0f);
-		ImGui::SliderFloat3("rotate", &imGuiSprite.rotate.x, -5.0f, 5.0f);
-		ImGui::SliderFloat3("translate", &imGuiSprite.translate.x, -500.0f, 500.0f);
-		ImGui::End();
-		
-		SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
-
-		ImGui::Begin("Sprite2");
-		ImGui::ColorEdit4("color", (float*)&imGuiSprite2.color);
-		ImGui::SliderFloat3("scale", &imGuiSprite2.scale.x, -0.0f, 5.0f);
-		ImGui::SliderFloat3("rotate", &imGuiSprite2.rotate.x, -5.0f, 5.0f);
-		ImGui::SliderFloat3("translate", &imGuiSprite2.translate.x, -500.0f, 500.0f);
-		ImGui::End();
-		SpriteTex2->Darw(imGuiSprite2.scale, imGuiSprite2.rotate, imGuiSprite2.translate, imGuiSprite2.color);*/
-		
-//#ifdef _DEBUG
-//		ImGui::Begin("a");
-//
-//		ImGui::End();
-//
-//#endiftry
-	
-
 		//
 		ImGui::Begin("pro");
 	
@@ -149,20 +124,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		
 		ImGui::End();
 
-
-		/*ImGui::Begin("3D");
-		ImGui::ColorEdit4("color", (float*)&imGui3D[0].color);
-		ImGui::SliderFloat3("scale", &imGui3D[0].scale.x, -0.0f, 5.0f);
-		ImGui::SliderFloat3("rotate", &imGui3D[0].rotate.x, -10.0f, 10.0f);
-		ImGui::SliderFloat3("translate", &imGui3D[0].translate.x, -5.0f, 5.0f);
-		ImGui::End();
-
 		
-		obj3D->Draw(imGui3D[0].scale, imGui3D[0].rotate, imGui3D[0].translate, imGui3D[0].color,pro);*/
-		//
-
-		
-		player_->Update();
+		player_->Update(pro);
 		player_->Draw(texPlayer, pro);
 		enemy_->Update(player_);
 		enemy_->Draw(texEnemy, pro);

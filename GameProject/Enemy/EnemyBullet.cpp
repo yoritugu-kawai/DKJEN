@@ -24,15 +24,22 @@ void EnemyBullet::Updet(  Coordinate pos,Player*player)
 
 	float velocityXZ_ = sqrt(velocity_.x * velocity_.x + velocity_.z * velocity_.z);
 	float velocityY_ = velocity_.y;
+	int time = 240;
 
+	time--;
 	pos_.rotate.y = atan2(velocity_.x, velocity_.z);
 	pos_.rotate.x = atan2(velocityY_, velocityXZ_);
 
 	pos_.translate = Add(pos_.translate, velocity_);
 	if (pos_.translate.z <= -50) {
 		pos_.translate = pos.translate;
+		time = 0;
 
 	}
+	else if(time==0){
+		time = 0;
+		pos_.translate = pos.translate;
+	} 
 }
 
 void EnemyBullet::Draw(CameraProjection pro)
