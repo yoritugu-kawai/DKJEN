@@ -77,6 +77,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//Bullet* bullet_ = new Bullet;
 	//bullet_->Intiailize();
 	CollisionManager* collisionManager_ = new CollisionManager;
+	//フラグ
+	int nem = 1;
+	int sta = 0;
+	int tim = 0;
 
 	Coordinate imGuiSprite;
 	imGuiSprite.scale = { 1.0f,1.0f,1.0f };
@@ -124,31 +128,57 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		
 		ImGui::End();
 
-		switch (switch_on)
+		switch (nem)
 		{
+		case 1:
+			if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)) {
+				sta = 1;
+				
+			}
+			if (sta == 1)
+			{
+				imGuiSprite.translate.x -= 15;
+				imGuiSprite2.translate.x += 15;
+				tim += 1;
+			}
+			if (tim == 60)
+			{
+				sta = 0;
+
+				tim = 0;
+				nem = 2;
+			}
+			SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
+			SpriteTex2->Darw(imGuiSprite2.scale, imGuiSprite2.rotate, imGuiSprite2.translate, imGuiSprite2.color);
 		
 			break;
-		}
-		player_->Update(pro);
-		player_->Draw(texPlayer, pro);
-		enemy_->Update(player_);
-		enemy_->Draw(texEnemy, pro);
-		skydome_->Draw(texCelestialSphere, pro);
+		case 2:
+			player_->Update(pro);
+			player_->Draw(texPlayer, pro);
+			enemy_->Update(player_);
+			enemy_->Draw(texEnemy, pro);
+			skydome_->Draw(texCelestialSphere, pro);
 
 
-		collisionManager_->CollideClear();
-	   // enemy_->GetBullets();
-		const std::list<Bullet*>& playerBullets = player_->GetBullets();
-		collisionManager_->ColliderPush(player_);
-		collisionManager_->ColliderPush(enemy_);
-		for (Bullet* bullet : playerBullets) {
-			collisionManager_->ColliderPush(bullet);
+			collisionManager_->CollideClear();
+			// enemy_->GetBullets();
+			const std::list<Bullet*>& playerBullets = player_->GetBullets();
+			collisionManager_->ColliderPush(player_);
+			collisionManager_->ColliderPush(enemy_);
+			for (Bullet* bullet : playerBullets) {
+				collisionManager_->ColliderPush(bullet);
+
+			}
+			/*for (EnemyBullet* bullet : enemyBullets) {
+				collisionManager_->ColliderPush(bullet);
+			}*/
+			collisionManager_->CheckAllCollisions();
+
+			break;
+		case 3:
+			break;
 		}
-		/*for (EnemyBullet* bullet : enemyBullets) {
-			collisionManager_->ColliderPush(bullet);
-		}*/
-		collisionManager_->CheckAllCollisions();
-	
+		
 		
 		FrameManagement::EndFrame();
 	}
