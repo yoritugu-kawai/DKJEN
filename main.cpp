@@ -124,7 +124,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		
 		ImGui::End();
 
+		switch (switch_on)
+		{
 		
+			break;
+		}
 		player_->Update(pro);
 		player_->Draw(texPlayer, pro);
 		enemy_->Update(player_);
