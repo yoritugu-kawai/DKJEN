@@ -49,7 +49,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	SpriteTex2->Initialize(sta2);
 
 	/*Obj3D* obj3D = new Obj3D;
-	obj3D->Initialize(texUV,"resource","axis.obj");*/
+	obj3D->Initialize("GameResource","ro.obj");*/
 
 
 	//ゲームキャラクター
@@ -66,7 +66,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	enemyTransfrom.color = { 1.0f,1.0f,1.0f,1.0f };
 
 	Player* player_ = new Player;
-	player_->Intiailize(texSprite,"GameResource", "Player.obj",playerTransfrom);
+	player_->Intiailize(texSprite,"GameResource", "Player.obj", "GameResource", "ro.obj",playerTransfrom);
 
 	Enemy* enemy_ = new Enemy();
 	enemy_->Intiailize( "GameResource", "Player.obj", enemyTransfrom);
@@ -81,15 +81,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int nem = 1;
 	int sta = 0;
 	int tim = 0;
-
+	XINPUT_STATE joyState;
 	Coordinate imGuiSprite;
-	imGuiSprite.scale = { 1.0f,1.0f,1.0f };
+	imGuiSprite.scale = { 4.5f,4.0f,1.0f };
 	imGuiSprite.rotate = { 0.0f,0.0f,0.0f };
 	imGuiSprite.translate = { 0.0f,0.0f,0.0f };
 	imGuiSprite.color = { 1.0f, 1.0f, 1.0, 1.0f };
 	//
 	Coordinate imGuiSprite2;
-	imGuiSprite2.scale = { 1.0f,1.0f,1.0f };
+	imGuiSprite2.scale = { 4.5f,4.0f,1.0f };
 	imGuiSprite2.rotate = { 0.0f,0.0f,0.0f };
 	imGuiSprite2.translate = { 0.0f,0.0f,0.0f };
 	imGuiSprite2.color = { 1.0f, 1.0f, 1.0, 1.0f };
@@ -102,7 +102,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		imGui3D[i].color = { 1.0f,1.0f,1.0f,1.0f };
 
 	}
-	
+	Vector3 rot = { 0.0f,0.0f,0.0f };
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -131,7 +131,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		switch (nem)
 		{
 		case 1:
-			if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)) {
+			Input::GetInstance()->NoneJoyState(joyState);
+			
+			if (Input::GetInstance()->PushKeyPressed(DIK_SPACE)|| joyState.Gamepad.wButtons & XINPUT_GAMEPAD_A) {
 				sta = 1;
 				
 			}
@@ -150,7 +152,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 			SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
 			SpriteTex2->Darw(imGuiSprite2.scale, imGuiSprite2.rotate, imGuiSprite2.translate, imGuiSprite2.color);
-		
+			player_->Draw(texPlayer, pro);
+			enemy_->Draw(texEnemy, pro);
+			//skydome_->Draw(texCelestialSphere, pro);
+
 			break;
 		case 2:
 			player_->Update(pro);
@@ -158,9 +163,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			enemy_->Update(player_);
 			enemy_->Draw(texEnemy, pro);
 			skydome_->Draw(texCelestialSphere, pro);
-
-
-			
+		
 
 			break;
 		case 3:

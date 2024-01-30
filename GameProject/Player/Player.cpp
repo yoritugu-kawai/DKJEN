@@ -18,11 +18,13 @@ Vector3 Player::GetWorldPosition() {
 	};
 	return result;
 }
-void Player::Intiailize(TexProeerty  tex, const std::string& directoryPath, const std::string& filename, Coordinate pos)
+void Player::Intiailize(TexProeerty  tex, const std::string& directoryPath, const std::string& filename, const std::string& directoryPath2, const std::string& filename2, Coordinate pos)
 {
 	//GameResource
 	obj3d_ = new Obj3D;
 	obj3d_->Initialize( directoryPath, filename);
+	obj3d2_ = new Obj3D;
+	obj3d2_->Initialize(directoryPath2, filename2);
 	sprite2DReticle_ = new Sprite;
 	sprite2DReticle_->Initialize(tex);
 	pos_ = pos;
@@ -179,10 +181,12 @@ void Player::GetMouse(CameraProjection viewProjection) {
 	//
 	worldTransform3DReticle_.UpdateMatrix();
 	//worldTransform3DReticle_.TransferMatrix();
+	rot.y += 0.05f;
 }
 void Player::Draw(TexProeerty  tex, CameraProjection pro)
 {
 	obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro, tex );
+	obj3d2_->Draw(pos_.scale, rot, pos_.translate, pos_.color, pro, tex);
 	for (Bullet* bullet : bullets_) {
 		bullet->Draw(pro);
 	}

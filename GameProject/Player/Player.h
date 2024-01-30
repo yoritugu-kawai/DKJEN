@@ -8,7 +8,7 @@ class Player :public Collider
 {
 public:
 	~Player();
-	void Intiailize(TexProeerty  tex,const std::string& directoryPath, const std::string& filename, Coordinate pos);
+	void Intiailize(TexProeerty  tex,const std::string& directoryPath, const std::string& filename, const std::string& directoryPath2, const std::string& filename2, Coordinate pos);
 	void Update(CameraProjection pro);
 	void Attack();
 	void GetMouse(CameraProjection viewProjection);
@@ -19,9 +19,11 @@ public:
 	const std::list<Bullet*>& GetBullets() const { return bullets_; }
 private:
 	Obj3D* obj3d_;
+	Obj3D* obj3d2_;
 	Coordinate pos_;
 	list<Bullet*>bullets_;
-	
+	Vector3 rot = { 0.0f,0.0f,0.0f };
+	Vector3 trn = { 0.5f,0.0f,0.0f };
 	Coordinate bulletPos_;
 	//
 	Coordinate worldTransform3DReticle_;
