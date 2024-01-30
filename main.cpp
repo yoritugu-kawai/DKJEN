@@ -185,7 +185,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 			break;
 		case 3:
-			nem = 1;
+			/*nem = 1;*/
 			break;
 		}
 		
