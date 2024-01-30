@@ -37,7 +37,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	TexProeerty texPlayer = imageLoading->LoadTexture("GameResource/Player.png");
 	TexProeerty texEnemy = imageLoading->LoadTexture("GameResource/enemy.png");
 	TexProeerty texCelestialSphere = imageLoading->LoadTexture("GameResource/uvChecker.png");
-
+	TexProeerty texSprite = imageLoading->LoadTexture("GameResource/anchor.png");
 	CameraProjection pro;
 	pro.Initialize();
 
@@ -66,7 +66,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	enemyTransfrom.color = { 1.0f,1.0f,1.0f,1.0f };
 
 	Player* player_ = new Player;
-	player_->Intiailize( "GameResource", "Player.obj",playerTransfrom);
+	player_->Intiailize( "GameResource", "Player.obj",playerTransfrom, texSprite);
 
 	Enemy* enemy_ = new Enemy();
 	enemy_->Intiailize( "GameResource", "Player.obj", enemyTransfrom);
@@ -162,7 +162,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//
 
 		
-		player_->Update();
+		player_->Update(pro);
 		player_->Draw(texPlayer, pro);
 		enemy_->Update(player_);
 		enemy_->Draw(texEnemy, pro);
