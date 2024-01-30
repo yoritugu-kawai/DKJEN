@@ -33,6 +33,8 @@ private:
 	Vector3 positionReticle;
 	
 	//
+	int sta = 0;
+	int tim = 0;
 	XINPUT_STATE joyState;
 	const float kCharacterSpeed = 0.2f;
 };

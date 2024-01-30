@@ -118,15 +118,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		
 		pro.Update();
-
+	
 
 		//
-		ImGui::Begin("pro");
-	
-		ImGui::DragFloat3("translate", &pro.translate.x);
-		ImGui::DragFloat3("rotate", &pro.rotate.x);
 		
-		ImGui::End();
 
 		switch (nem)
 		{
@@ -158,15 +153,39 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			break;
 		case 2:
+			Input::GetInstance()->NoneJoyState(joyState);
+
+			if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+				
+				sta = 1;
+			}
+			
+
 			player_->Update(pro);
 			player_->Draw(texPlayer, pro);
 			enemy_->Update(player_);
 			enemy_->Draw(texEnemy, pro);
 			skydome_->Draw(texCelestialSphere, pro);
-		
+			ImGui::Begin("pro");
 
+			ImGui::DragFloat3("translate", &pro.translate.x);
+			ImGui::DragFloat3("rotate", &pro.rotate.x);
+
+			ImGui::End();
+			if (sta == 1)
+			{
+				pro.translate.z += 0.05f;
+				tim += 1;
+			}
+			if (tim == 600)
+			{
+				pro.translate.z = -20;
+				sta = 0;
+				nem = 3;
+			}
 			break;
 		case 3:
+			nem = 1;
 			break;
 		}
 		

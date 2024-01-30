@@ -78,6 +78,9 @@
     <Filter Include="Game\Collder">
       <UniqueIdentifier>{f97c5ec8-f30a-4337-aa9b-d7cfc32eda8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Camera">
+      <UniqueIdentifier>{5c64af44-6d1e-457c-bf9c-69c4515d80bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

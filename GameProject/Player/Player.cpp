@@ -108,6 +108,23 @@ void Player::Update(CameraProjection pro)
 	GetMouse(pro);
 
 	Attack();
+	
+	if (!Input::GetInstance()->GetJoystickState(joyState)) {
+		return;
+	}
+	if (joyState.Gamepad.wButtons & XINPUT_GAMEPAD_B) {
+		sta = 1;
+	}
+	if (sta == 1) {
+		tim += 1;
+	pos_.translate.z += 0.05;
+	}
+	if (tim == 599) {
+		sta = 0;
+		pos_.translate.z = 0;
+		tim = 0;
+	}
+
 	for (Bullet* bullet : bullets_) {
 		bullet->Updet();
 	}
@@ -185,6 +202,8 @@ void Player::GetMouse(CameraProjection viewProjection) {
 }
 void Player::Draw(TexProeerty  tex, CameraProjection pro)
 {
+	
+
 	obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro, tex );
 	obj3d2_->Draw(pos_.scale, rot, pos_.translate, pos_.color, pro, tex);
 	for (Bullet* bullet : bullets_) {
