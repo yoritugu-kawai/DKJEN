@@ -32,12 +32,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	PSOCopileManagement::Set();
 	ImageLoading* imageLoading = new ImageLoading;
 	imageLoading->Initiluze();
+	ImageLoading* imageLoading2 = new ImageLoading;
+	imageLoading2->Initiluze();
 	TexProeerty sta1 = imageLoading->LoadTexture("GameResource/sta2.png");
 	TexProeerty sta2= imageLoading->LoadTexture("GameResource/sta1.png");
 	TexProeerty texPlayer = imageLoading->LoadTexture("GameResource/Player.png");
 	TexProeerty texEnemy = imageLoading->LoadTexture("GameResource/enemy.png");
 	TexProeerty texCelestialSphere = imageLoading->LoadTexture("GameResource/uvChecker.png");
 	TexProeerty texSprite = imageLoading->LoadTexture("GameResource/anchor.png");
+	TexProeerty texEnd = imageLoading2->LoadTexture("GameResource/end.png");
+	TexProeerty pphs = imageLoading2->LoadTexture("GameResource/push.png");
+
 	CameraProjection pro;
 	pro.Initialize();
 
@@ -47,6 +52,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	Sprite* SpriteTex2 = new Sprite;
 	SpriteTex2->Initialize(sta2);
+	Sprite* End = new Sprite;
+	End->Initialize(sta1);
+
+	Sprite* push = new Sprite;
+	push->Initialize(pphs);
 
 	/*Obj3D* obj3D = new Obj3D;
 	obj3D->Initialize("GameResource","ro.obj");*/
@@ -94,6 +104,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	imGuiSprite2.translate = { 0.0f,0.0f,0.0f };
 	imGuiSprite2.color = { 1.0f, 1.0f, 1.0, 1.0f };
 
+	Coordinate imGuiSprite3;
+	imGuiSprite3.scale = { 4.5f,4.0f,1.0f };
+	imGuiSprite3.rotate = { 0.0f,0.0f,0.0f };
+	imGuiSprite3.translate = { 0.0f,0.0f,0.0f };
+	imGuiSprite3.color = { 1.0f, 1.0f, 1.0, 1.0f };
+
+
+	Coordinate imGuiSprite4;
+	imGuiSprite4.scale = { 4.5f,4.0f,1.0f };
+	imGuiSprite4.rotate = { 0.0f,0.0f,0.0f };
+	imGuiSprite4.translate = { 0.0f,0.0f,0.0f };
+	imGuiSprite4.color = { 1.0f, 1.0f, 1.0, 1.0f };
 	Coordinate imGui3D[1];
 	for (int i = 0; i < 1; i++) {
 		imGui3D[i].scale = { 0.5f, 0.5f, 0.5f };
@@ -102,6 +124,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		imGui3D[i].color = { 1.0f,1.0f,1.0f,1.0f };
 
 	}
+	int i=0;
 	Vector3 rot = { 0.0f,0.0f,0.0f };
 	//　メインループ
 	MSG msg{};
@@ -145,11 +168,27 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tim = 0;
 				nem = 2;
 			}
+			if (i == 0) {
+
+			imGuiSprite4.scale.x -= 0.01f;
+			}
+			if (imGuiSprite4.scale.x >= 1.0f) {
+				imGuiSprite4.scale.x -= 0.01f;
+			}
+
+			if (imGuiSprite4.scale.x <= 1.0f) {
+				i = 1;
+				imGuiSprite4.scale.x += 0.01f;
+			}
+
+
+
 			SpriteTex->Darw(imGuiSprite.scale, imGuiSprite.rotate, imGuiSprite.translate, imGuiSprite.color);
 			SpriteTex2->Darw(imGuiSprite2.scale, imGuiSprite2.rotate, imGuiSprite2.translate, imGuiSprite2.color);
 			player_->Draw(texPlayer, pro);
 			enemy_->Draw(texEnemy, pro);
-			//skydome_->Draw(texCelestialSphere, pro);
+			push->Darw(imGuiSprite4.scale, imGuiSprite4.rotate, imGuiSprite4.translate, imGuiSprite4.color);
+			skydome_->Draw(texCelestialSphere, pro);
 
 			break;
 		case 2:
@@ -186,6 +225,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 		case 3:
 			/*nem = 1;*/
+			End->Darw(imGuiSprite3.scale, imGuiSprite3.rotate, imGuiSprite3.translate, imGuiSprite3.color);
 			break;
 		}
 		
