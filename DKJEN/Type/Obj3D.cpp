@@ -9,8 +9,8 @@ void Obj3D::Initialize( const std::string& directoryPath,const std::string& file
 	materialResource = CreateBufferResource(sizeof(Vector4));
 	wvpResource = CreateBufferResource(sizeof(TransformationMatrix));
 	lightResource = CreateBufferResource(sizeof(DirectionalLight));
-
-
+	cameraResource = CreateBufferResource(sizeof(CameraCBuffer));
+	
 	vertxBufferView.BufferLocation = vetexResource.Get()->GetGPUVirtualAddress();
 	vertxBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData.vertices.size());
 	vertxBufferView.StrideInBytes = sizeof(VertexData);
@@ -31,12 +31,15 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	Vector4* materialData = nullptr;
 	TransformationMatrix* matrixData = nullptr;
 	DirectionalLight* lightData = nullptr;
-
+	CameraCBuffer* cameraData = nullptr;
 
 	vetexResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 	materialResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 	wvpResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&matrixData));
 	lightResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
+
+	this->cameraResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&cameraData));
+	cameraData->pos = pro.translate;
 	std::memcpy(vertexData, modelData.vertices.data(), sizeof(VertexData)*modelData.vertices.size());
 	//
 	// 
@@ -48,11 +51,13 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	matrixData->WVP = matrix;
 	matrixData->World = MakeIdentity4x4();
 	*materialData = Color;
-	lightData->direction = { 0.0f,0.0f,0.0f };
+	//lightData->direction = { 0.0f,1.0f,0.0f };
 	lightData->color = { 1.0f,1.0f,1.0f,1.0f };
 	lightData->intensity = 1.0f;
-	
-
+	ImGui::Begin("direction");
+	ImGui::SliderFloat3("t", &direction_.x, -1.0f, 1.0f);
+	ImGui::End();
+	lightData->direction = direction_;
 	//
 	ID3D12GraphicsCommandList* commandList = DxCommon::GetInstance()->GetCommandList();
 	PSOProperty pso_ = LightPSO::GetInstance()->GetPSO().Texture;
@@ -67,7 +72,8 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(1, wvpResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource.Get()->GetGPUVirtualAddress());
-	
+	commandList->SetGraphicsRootConstantBufferView(4,this->cameraResource.Get()->GetGPUVirtualAddress());
+
 	commandList->SetGraphicsRootDescriptorTable(2, tex.SrvHandleGPU);
 	commandList->DrawInstanced(UINT(modelData.vertices.size()), 1, 0, 0);
 }

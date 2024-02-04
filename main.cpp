@@ -34,20 +34,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	imageLoading3->Initiluze();
 
 
-	TexProeerty texNeedle = imageLoading2->LoadTexture("resource/p/needle.png");
+	TexProeerty texball = imageLoading2->LoadTexture("resource/ball.png");
 
-	TexProeerty texNeedle2 = imageLoading3->LoadTexture("resource/p/needle2.png");
-	TexProeerty texTime = imageLoading->LoadTexture("resource/p/time.png");
+	/*TexProeerty texNeedle2 = imageLoading3->LoadTexture("resource/p/needle2.png");
+	TexProeerty texTime = imageLoading->LoadTexture("resource/p/time.png");*/
 
 	CameraProjection pro;
 	pro.Initialize();
 	Obj3D* time = new Obj3D;
-	time->Initialize("resource/p", "time.obj");
+	time->Initialize("resource", "ball.obj");
 
-	Obj3D* needle = new Obj3D;
-	needle->Initialize("resource/p", "needle.obj");
-	Obj3D* needle2 = new Obj3D;
-	needle2->Initialize("resource/p", "needle2.obj");
+	//Obj3D* needle = new Obj3D;
+	//needle->Initialize("resource/p", "needle.obj");
+	//Obj3D* needle2 = new Obj3D;
+	//needle2->Initialize("resource/p", "needle2.obj");
 
 
 	Coordinate timePos_;
@@ -85,9 +85,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　　描画処理
 		//////
 
-		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, pro, texTime);
-		needle->Draw(timePos_.scale, needleRotate_, timePos_.translate, timePos_.color, pro, texNeedle);
-		needle2->Draw(timePos_.scale, needleRotate2_, timePos_.translate, timePos_.color, pro, texNeedle2);
+		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, pro, texball);
+		/*needle->Draw(timePos_.scale, needleRotate_, timePos_.translate, timePos_.color, pro, texNeedle);
+		needle2->Draw(timePos_.scale, needleRotate2_, timePos_.translate, timePos_.color, pro, texNeedle2);*/
 		//////
 		//　　描画処理
 		//////

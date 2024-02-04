@@ -83,8 +83,9 @@ struct Coordinate {
 	//void TransferMatrix();
 
 };
-
-
+struct Camera {
+	Vector3 cameraPos;
+};
 /// <summary>
 /// 数学
 /// </summary>

@@ -32,7 +32,13 @@ struct DirectionalLight {
 	Vector3 direction;
 	float intensity;
 
+
 };
+
+struct CameraCBuffer {
+	Vector3 pos;
+};
+
 struct UVMaterial {
 
 	Vector4 color;

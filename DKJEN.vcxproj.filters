@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="..\..\..\2年前期課題\CG\DirectＸ\Object3d.hlsli">
+    <None Include="Object3d.hlsli">
       <Filter>hlsl</Filter>
     </None>
   </ItemGroup>

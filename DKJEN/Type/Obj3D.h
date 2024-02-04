@@ -45,12 +45,15 @@ private:
 	ComPtr<ID3D12Resource> materialResource;
 	ComPtr<ID3D12Resource> wvpResource;
 	ComPtr<ID3D12Resource> lightResource;
+	ComPtr<ID3D12Resource> cameraResource;
+
 
 	D3D12_VERTEX_BUFFER_VIEW vertxBufferView{};
 	ModelData modelData;
 	Matrix4x4 matrix;
 	TexProeerty  tex_;
 	ImageLoading* imageLoading = new ImageLoading;
+	Vector3 direction_ = { 0.0f,1.0f,0.0f };
 
 	Vector3 pos;
 };
