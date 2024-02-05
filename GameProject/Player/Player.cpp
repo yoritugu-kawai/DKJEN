@@ -117,7 +117,7 @@ void Player::Update(CameraOperation pro)
 	}
 	if (sta == 1) {
 		tim += 1;
-	pos_.translate.z += 0.05;
+	pos_.translate.z += 0.05f;
 	}
 	if (tim == 599) {
 		sta = 0;
