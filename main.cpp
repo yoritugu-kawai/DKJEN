@@ -69,7 +69,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
-		
+		//pro.translate
 	
 	
 		//////
