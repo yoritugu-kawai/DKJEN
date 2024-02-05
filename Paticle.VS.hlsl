@@ -21,10 +21,8 @@ VertexShaderOutput main(VertexShaderInput input, uint32_t instanceId : SV_Instan
 
 	output.position = mul(input.position, gTransformationMatrix[instanceId].WVP);
 
-	float32_t3 texposition;
+	float32_t2 texposition;
 	texposition.rg = input.texcoord.rg;
-	texposition.b = 0;
-	texposition.a = 1;
 
 	texposition = mul(texposition, gTransformationMatrix[instanceId].uvTransform);
 
