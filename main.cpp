@@ -24,17 +24,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Input::Initialize();
 	
 	PSOCopileManagement::Set();
-	ImageLoading* imageLoading = new ImageLoading;
-	imageLoading->Initiluze();
+
 	
-	ImageLoading* imageLoading2 = new ImageLoading;
-	imageLoading2->Initiluze();
-
-	ImageLoading* imageLoading3 = new ImageLoading;
-	imageLoading3->Initiluze();
+	ImageLoading::Initiluze();
 
 
-	TexProeerty texball = imageLoading2->LoadTexture("resource/ball.png");
+
+
+	TexProeerty texball = ImageLoading::LoadTexture("resource/ball.png");
 
 	/*TexProeerty texNeedle2 = imageLoading3->LoadTexture("resource/p/needle2.png");
 	TexProeerty texTime = imageLoading->LoadTexture("resource/p/time.png");*/
