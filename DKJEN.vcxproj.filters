@@ -225,7 +225,7 @@
       <Filter>Game\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\TexInformation\TexInformation.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>DKJEN\TexInformation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
