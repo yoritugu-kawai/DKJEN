@@ -79,6 +79,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 	
+#ifdef USE_IMGUI
+
+		ImGui::Begin("buildTest");
+		ImGui::End();
+
+
+#endif // USE_IMGUI
+
+
+
 		//////
 		//　ゲーム処理
 		//////
