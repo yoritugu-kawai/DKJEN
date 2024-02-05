@@ -7,7 +7,7 @@ class EnemyBullet :public Collider
 public:
 	void Intiailize(Coordinate pos);
 	void Updet( Coordinate pos, Player* player);
-	void Draw(CameraProjection pro);
+	void Draw(CameraOperation pro);
 	static const int32_t kLifeTime = 60 * 5;
 	bool IsDead() const { return isDead_; }
 	Coordinate GetPos() { return pos_; }

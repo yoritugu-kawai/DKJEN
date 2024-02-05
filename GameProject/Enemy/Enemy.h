@@ -11,7 +11,7 @@ class Enemy :public Collider
 public:
 	void Intiailize( const std::string& directoryPath, const std::string& filename, Coordinate pos);
 	void Update(Player* player);
-	void Draw(TexProeerty  tex, CameraProjection pro);
+	void Draw(TexProeerty  tex, CameraOperation pro);
 	Vector3 GetWorldPosition() override;
 	Coordinate GetPos() { return  pos_; };
 	Vector3 GetVelocty() { return Velocty_; }

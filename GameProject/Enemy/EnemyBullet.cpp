@@ -42,7 +42,7 @@ void EnemyBullet::Updet(  Coordinate pos,Player*player)
 	} 
 }
 
-void EnemyBullet::Draw(CameraProjection pro)
+void EnemyBullet::Draw(CameraOperation pro)
 {
 	if (isDead_ == false) {
 		obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro, tex);

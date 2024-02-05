@@ -2,7 +2,7 @@
 #include"../Math/Math.h"
 #include"../Base/WinApp.h"
 
-struct CameraProjection {
+struct CameraOperation {
 	Matrix4x4 projection;      
 	Matrix4x4 view;
 	Vector3 rotate = { 0.0f,0.0f,0.0f };

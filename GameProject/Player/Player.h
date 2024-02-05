@@ -9,10 +9,10 @@ class Player :public Collider
 public:
 	~Player();
 	void Intiailize(TexProeerty  tex,const std::string& directoryPath, const std::string& filename, const std::string& directoryPath2, const std::string& filename2, Coordinate pos);
-	void Update(CameraProjection pro);
+	void Update(CameraOperation pro);
 	void Attack();
-	void GetMouse(CameraProjection viewProjection);
-	void Draw(TexProeerty  tex, CameraProjection pro);
+	void GetMouse(CameraOperation viewProjection);
+	void Draw(TexProeerty  tex, CameraOperation pro);
 	void OnCollision() override;
 	Vector3 GetWorldPosition() override;
 	Coordinate GetPos() { return pos_; }

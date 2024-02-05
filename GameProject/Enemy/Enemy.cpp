@@ -42,7 +42,7 @@ void Enemy::Update(Player* player)
 	pos_.UpdateMatrix();
 }
 
-void Enemy::Draw(TexProeerty tex, CameraProjection pro)
+void Enemy::Draw(TexProeerty tex, CameraOperation pro)
 {
 	if (isAlive_)
 	{

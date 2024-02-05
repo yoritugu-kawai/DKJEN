@@ -1,12 +1,12 @@
 #include "CameraProjection.h"
 
-void CameraProjection::Initialize()
+void CameraOperation::Initialize()
 {
 	view = MakeIdentity4x4();
 
 }
 
-void CameraProjection::Update()
+void CameraOperation::Update()
 {
 	Matrix4x4 rx = MakeRotateXMatrix(rotate.x);
 	Matrix4x4 ry = MakeRotateYMatrix(rotate.y);

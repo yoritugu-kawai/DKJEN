@@ -37,7 +37,7 @@ void Player::Intiailize(TexProeerty  tex, const std::string& directoryPath, cons
 	steCollisionMask(~kCollisionAttributePlayer);
 }
 
-void Player::Update(CameraProjection pro)
+void Player::Update(CameraOperation pro)
 {
 
 
@@ -166,7 +166,7 @@ void Player::Attack()
 	}
 }
 
-void Player::GetMouse(CameraProjection viewProjection) {
+void Player::GetMouse(CameraOperation viewProjection) {
 	POINT mousePosition;
 	GetCursorPos(&mousePosition);
 	HWND hwnd = WinApp::GetInstance()->GetHwnd();
@@ -200,7 +200,7 @@ void Player::GetMouse(CameraProjection viewProjection) {
 	//worldTransform3DReticle_.TransferMatrix();
 	rot.y += 0.05f;
 }
-void Player::Draw(TexProeerty  tex, CameraProjection pro)
+void Player::Draw(TexProeerty  tex, CameraOperation pro)
 {
 	
 

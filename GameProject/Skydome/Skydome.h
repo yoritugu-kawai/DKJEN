@@ -6,7 +6,7 @@ public:
 	
 	void Intiailize( const std::string& directoryPath, const std::string& filename);
 	void Update();
-	void Draw(TexProeerty  tex, CameraProjection pro);
+	void Draw(TexProeerty  tex, CameraOperation pro);
 private:
 	Obj3D* obj3d_;
 	Coordinate pos_;

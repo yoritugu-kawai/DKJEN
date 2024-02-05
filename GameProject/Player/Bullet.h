@@ -6,7 +6,7 @@ class Bullet :public Collider
 public:
 	void Intiailize(Coordinate pos, const Vector3& velocuty);
 	void Updet();
-	void Draw(CameraProjection pro);
+	void Draw(CameraOperation pro);
 	static const int32_t kLifeTime = 60 * 5;
 	bool IsDead() const { return isDead_; }
 	void OnCollision() override;

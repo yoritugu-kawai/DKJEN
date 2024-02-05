@@ -36,11 +36,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	/*TexProeerty texNeedle2 = imageLoading3->LoadTexture("resource/p/needle2.png");
 	TexProeerty texTime = imageLoading->LoadTexture("resource/p/time.png");*/
 
-	CameraProjection pro;
+	CameraOperation pro;
 	pro.Initialize();
 	Obj3D* time = new Obj3D;
 	time->Initialize("resource", "ball.obj");
-
+	Sprite* sprite_ = new Sprite;
+	sprite_->Initialize(texball);
 
 	Coordinate timePos_;
 	timePos_.scale = { 1.0f,1.0f,1.0f };
@@ -69,14 +70,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
-		//pro.translate
-	
+		ImGui::Begin("Camera");
+
+		ImGui::DragFloat3("translate", &pro.translate.x);
+		ImGui::DragFloat3("rotate", &pro.rotate.x);
+
+		ImGui::End();
 	
 		//////
 		//　　描画処理
 		//////
 
 		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, pro, texball);
+		sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
 	
 		//////
 		//　　描画処理

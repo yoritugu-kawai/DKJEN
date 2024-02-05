@@ -14,7 +14,7 @@ void Skydome::Update()
 {
 }
 
-void Skydome::Draw(TexProeerty tex, CameraProjection pro)
+void Skydome::Draw(TexProeerty tex, CameraOperation pro)
 {
 	obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro,tex );
 }

@@ -34,7 +34,7 @@ void Bullet::Updet()
 	pos_.UpdateMatrix();
 }
 
-void Bullet::Draw(CameraProjection pro)
+void Bullet::Draw(CameraOperation pro)
 {
 
 	if (isDead_ == false) {

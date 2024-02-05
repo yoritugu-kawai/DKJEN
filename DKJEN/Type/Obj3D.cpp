@@ -20,7 +20,7 @@ void Obj3D::Initialize( const std::string& directoryPath,const std::string& file
 	//tex_ = tex;
 }
 
-void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraProjection pro, TexProeerty  tex )
+void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraOperation pro, TexProeerty  tex )
 {
 	pro;
 	translate.z = translate.z + pos.z;
