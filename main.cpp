@@ -41,11 +41,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Obj3D* time = new Obj3D;
 	time->Initialize("resource", "ball.obj");
 
-	//Obj3D* needle = new Obj3D;
-	//needle->Initialize("resource/p", "needle.obj");
-	//Obj3D* needle2 = new Obj3D;
-	//needle2->Initialize("resource/p", "needle2.obj");
-
 
 	Coordinate timePos_;
 	timePos_.scale = { 1.0f,1.0f,1.0f };
@@ -70,8 +65,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　ゲーム処理
 		//////
-		needleRotate_.z -= 0.01f;
-		needleRotate2_.z -= 0.001f;
+	
 		//////
 		//　ゲーム処理
 		//////
@@ -83,8 +77,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 
 		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, pro, texball);
-		/*needle->Draw(timePos_.scale, needleRotate_, timePos_.translate, timePos_.color, pro, texNeedle);
-		needle2->Draw(timePos_.scale, needleRotate2_, timePos_.translate, timePos_.color, pro, texNeedle2);*/
+	
 		//////
 		//　　描画処理
 		//////
