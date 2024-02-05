@@ -81,6 +81,9 @@
     <Filter Include="Game\Camera">
       <UniqueIdentifier>{5c64af44-6d1e-457c-bf9c-69c4515d80bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\TexInformation">
+      <UniqueIdentifier>{81045715-06bb-4a2d-ad08-6b01c387f5a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -220,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="GameProject\Enemy\EnemyBullet.cpp">
       <Filter>Game\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\TexInformation\TexInformation.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -366,6 +372,9 @@
     </ClInclude>
     <ClInclude Include="GameProject\Collder\CollisionManager.h">
       <Filter>Game\Collder</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\TexInformation\TexInformation.h">
+      <Filter>DKJEN\TexInformation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

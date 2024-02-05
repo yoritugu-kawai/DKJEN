@@ -49,14 +49,16 @@ struct UVMaterial {
 class ImageLoading
 {
 public:
-	void Initiluze();
-	TexProeerty LoadTexture(const std::string& filePath);
+	static ImageLoading* GetInstance();
+
+	static void Initiluze();
+	static TexProeerty LoadTexture(const std::string& filePath);
 	//void Draw();
-	void End();
-	DirectX::ScratchImage LoadTextureData(const std::string& filePath);
-	ID3D12Resource* CreateTexResource(ID3D12Device* device, const DirectX::TexMetadata& metadata);
-	void UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages);
-	void ShaderResourceView();
+	static void End();
+	static DirectX::ScratchImage LoadTextureData(const std::string& filePath);
+	static ID3D12Resource* CreateTexResource(ID3D12Device* device, const DirectX::TexMetadata& metadata);
+	static void UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages);
+	static void ShaderResourceView();
 
 	
 private:

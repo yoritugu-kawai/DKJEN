@@ -1,16 +1,28 @@
 #include"ImageLoading.h"
 
 static uint32_t LoadCount;
+ImageLoading* ImageLoading::GetInstance()
+{
+	static ImageLoading instance;
+
+	return &instance;
+}
 
 void ImageLoading::Initiluze()
 {
-
+	uint32_t descriptorSizeSRV= ImageLoading::GetInstance()->descriptorSizeSRV;
+	uint32_t descriptorSizeRTV=ImageLoading::GetInstance()->descriptorSizeRTV;
+	uint32_t descriptorSizeDSV=ImageLoading::GetInstance()->descriptorSizeDSV;
 	CoInitializeEx(0, COINIT_MULTITHREADED);
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 	descriptorSizeSRV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	descriptorSizeRTV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	descriptorSizeDSV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 	LoadCount = 0;
+	ImageLoading::GetInstance()->descriptorSizeSRV=  descriptorSizeSRV ;
+	ImageLoading::GetInstance()->descriptorSizeRTV =  descriptorSizeRTV ;
+	ImageLoading::GetInstance()->descriptorSizeDSV =  descriptorSizeDSV ;
+
 }
 
 DirectX::ScratchImage ImageLoading::LoadTextureData(const std::string& filePath)
@@ -99,6 +111,8 @@ void ImageLoading::ShaderResourceView()
 
 TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 {
+
+	uint32_t descriptorSizeSRV = ImageLoading::GetInstance()->descriptorSizeSRV;
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 	ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
 
@@ -148,7 +162,7 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 	TexProeerty tex;
 	//tex.Resource = textureResource;
 	tex.SrvHandleGPU = texSrvHandleGPU;
-
+	ImageLoading::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
 	return tex;
 }
 
