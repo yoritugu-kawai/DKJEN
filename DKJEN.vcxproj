@@ -142,7 +142,12 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="Object3d.hlsli" />
+    <None Include="Object3d.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Paticle.hlsli">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DKJEN\Base\DxCommon.cpp" />
@@ -150,6 +155,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Base\ImageLoading.cpp" />
     <ClCompile Include="DKJEN\Base\LightPSO.cpp" />
     <ClCompile Include="DKJEN\Base\Log.cpp" />
+    <ClCompile Include="DKJEN\Base\ParyiclePSO.cpp" />
     <ClCompile Include="DKJEN\Base\PolygonPSO.cpp" />
     <ClCompile Include="DKJEN\Base\SpritePSO.cpp" />
     <ClCompile Include="DKJEN\Base\TexturePSO.cpp" />
@@ -168,12 +174,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Management\TypeManagement.cpp" />
     <ClCompile Include="DKJEN\Math\Math.cpp" />
     <ClCompile Include="DKJEN\Shader\LightCompileShader.cpp" />
+    <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp" />
     <ClCompile Include="DKJEN\TexInformation\TexInformation.cpp" />
     <ClCompile Include="DKJEN\Type\Camera.cpp" />
     <ClCompile Include="DKJEN\Type\Obj3D.cpp" />
+    <ClCompile Include="DKJEN\Type\Particle.cpp" />
     <ClCompile Include="DKJEN\Type\Polygon.cpp" />
     <ClCompile Include="DKJEN\Type\Sphere.cpp" />
     <ClCompile Include="DKJEN\Type\Sprite.cpp" />
@@ -197,6 +205,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Base\ImageLoading.h" />
     <ClInclude Include="DKJEN\Base\LightPSO.h" />
     <ClInclude Include="DKJEN\Base\Log.h" />
+    <ClInclude Include="DKJEN\Base\ParyiclePSO.h" />
     <ClInclude Include="DKJEN\Base\PolygonPSO.h" />
     <ClInclude Include="DKJEN\Base\SpritePSO.h" />
     <ClInclude Include="DKJEN\Base\TexturePSO.h" />
@@ -216,12 +225,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Management\TypeManagement.h" />
     <ClInclude Include="DKJEN\Math\Math.h" />
     <ClInclude Include="DKJEN\Shader\LightCompileShader.h" />
+    <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\TextureCompileShader.h" />
     <ClInclude Include="DKJEN\TexInformation\TexInformation.h" />
     <ClInclude Include="DKJEN\Type\Camera.h" />
     <ClInclude Include="DKJEN\Type\Obj3D.h" />
+    <ClInclude Include="DKJEN\Type\Particle.h" />
     <ClInclude Include="DKJEN\Type\Polygon.h" />
     <ClInclude Include="DKJEN\Type\Sphere.h" />
     <ClInclude Include="DKJEN\Type\Sprite.h" />
@@ -274,6 +285,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <FxCompile Include="LightObject.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Paticle.PS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Paticle.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

@@ -43,6 +43,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Sprite* sprite_ = new Sprite;
 	sprite_->Initialize(texball);
 
+
+
+	Particle* particle = new Particle;
+
+	particle->Initialize(texball);
+	Coordinate imGuiParticle;
+	imGuiParticle.scale = { 1.0f,1.0f,1.0f };
+	imGuiParticle.rotate = { 0.0f,0.0f,0.0f };
+	imGuiParticle.translate = { 0.0f,0.0f,0.0f };
+	imGuiParticle.color = { 1.0f, 1.0f, 1.0, 1.0f };
+
+	//座標
 	Coordinate timePos_;
 	timePos_.scale = { 1.0f,1.0f,1.0f };
 	timePos_.rotate = { 0.0f,0.0f,0.0f };
@@ -83,6 +95,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, pro, texball);
 		sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
+		particle->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
 	
 		//////
 		//　　描画処理

@@ -90,6 +90,9 @@
     <None Include="Object3d.hlsli">
       <Filter>hlsl</Filter>
     </None>
+    <None Include="Paticle.hlsli">
+      <Filter>hlsl</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -226,6 +229,15 @@
     </ClCompile>
     <ClCompile Include="DKJEN\TexInformation\TexInformation.cpp">
       <Filter>DKJEN\TexInformation</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Shader\ParticleCompileShader.cpp">
+      <Filter>DKJEN\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Base\ParyiclePSO.cpp">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\Type\Particle.cpp">
+      <Filter>DKJEN\Type</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +388,15 @@
     <ClInclude Include="DKJEN\TexInformation\TexInformation.h">
       <Filter>DKJEN\TexInformation</Filter>
     </ClInclude>
+    <ClInclude Include="DKJEN\Shader\ParticleCompileShader.h">
+      <Filter>DKJEN\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\ParyiclePSO.h">
+      <Filter>DKJEN\Base\PSO</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Particle.h">
+      <Filter>DKJEN\Type</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="LightObject.PS.hlsl">
@@ -400,6 +421,12 @@
       <Filter>hlsl</Filter>
     </FxCompile>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\TextureOdject3d.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Paticle.PS.hlsl">
+      <Filter>hlsl</Filter>
+    </FxCompile>
+    <FxCompile Include="Paticle.VS.hlsl">
       <Filter>hlsl</Filter>
     </FxCompile>
   </ItemGroup>
