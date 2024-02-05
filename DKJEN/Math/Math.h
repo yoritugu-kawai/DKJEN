@@ -83,6 +83,12 @@ struct Coordinate {
 	//void TransferMatrix();
 
 };
+struct ParticleTransform {
+	Transform transform;
+	Vector3 Velocity;
+};
+
+
 struct Camera {
 	Vector3 cameraPos;
 };

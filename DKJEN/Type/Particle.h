@@ -6,6 +6,7 @@
 #include"../Type/Obj3D.h"
 #include<fstream>
 #include<sstream>
+#include<random>
 class Particle
 {
 public:
@@ -43,4 +44,9 @@ private:
 	Matrix4x4 matrix;
 	ModelData model;
 	VertexData v;
+	const uint32_t kNumInstance = 10;
+	ParticleTransform particles_[10];
+
+	std::random_device seedGenerator;
+	
 };

@@ -17,7 +17,7 @@ void Particle::Initialize(TexProeerty  tex)
 
 
 	tex_ = tex;// spriteLoad_->Load("resource/e.png");
-
+	
 	vertexResourceSprite = CreateBufferResource(sizeof(VertexData) * 6);
 	transformationMatrixResourceSprote = CreateBufferResource(sizeof(Matrix4x4));
 	materialResource = CreateBufferResource(sizeof(UVMaterial));
@@ -33,6 +33,15 @@ void Particle::Initialize(TexProeerty  tex)
 	indexBufferViewSprite.BufferLocation = indexResourceSprite->GetGPUVirtualAddress();
 	indexBufferViewSprite.SizeInBytes = sizeof(uint32_t) * 6;
 	indexBufferViewSprite.Format = DXGI_FORMAT_R32_UINT;
+	for (uint32_t i = 0; i < kNumInstance; ++i)
+	{
+		particles_[i].transform.scale = { 1.0f,1.0f,1.0f };
+		particles_[i].transform.rotate = { 0.0f,0.0f,0.0f };
+		particles_[i].transform.translate = { i * 0.1f,i * 0.1f,i * 0.1f + 20.0f };
+
+		particles_[i].Velocity = { 0.0f,0.0f,0.0f };
+		const float kDeltaTime = 1.0f / 60.0f;
+	}
 }
 
 void  Particle::Vertex()
@@ -64,7 +73,7 @@ void  Particle::Vertex()
 
 	
 
-	const uint32_t kNumInstance = 10;
+	
 	TransformationMatrix* instancingData = nullptr;
 	uint32_t* indexData = nullptr;
 	indexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
@@ -81,18 +90,13 @@ void  Particle::Vertex()
 		instancingData[index].World= MakeIdentity4x4();
 
 	}
-	Transform transfom[10];
-	for (uint32_t i = 0; i < kNumInstance; ++i)
-	{
-		transfom[i].scale = { 1.0f,1.0f,1.0f };
-		transfom[i].rotate = { 0.0f,0.0f,0.0f };
-		transfom[i].translate = { i * 0.1f,i * 0.1f,i * 0.1f +20.0f};
-	}
+
+
 	Matrix4x4 ProjectionMatrix = MakePerspectiveFovMatrix(0.45f, float(1280.0f / 720.0f), 0.1f, 100.0f);
 
 	for (uint32_t i = 0; i < kNumInstance; ++i)
 	{
-		Matrix4x4 woldMatrix = MakeAffineMatrix(transfom[i].scale, transfom[i].rotate, transfom[i].translate);
+		Matrix4x4 woldMatrix = MakeAffineMatrix(particles_[i].transform.scale, particles_[i].transform.rotate, particles_[i].transform.translate);
 		Matrix4x4 woldViewProMatrix = Multiply(woldMatrix, ProjectionMatrix);
 		instancingData[i].WVP = woldViewProMatrix;
 		instancingData[i].World = woldViewProMatrix;
@@ -100,6 +104,7 @@ void  Particle::Vertex()
 		instancingData[i].uvTransform_ = MakeIdentity4x4();
 	}
 	
+
 }
 void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
@@ -112,6 +117,14 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 	Vertex();
 	SRV();
 
+	std::mt19937 randomEngine(this->seedGenerator());
+	std::uniform_real_distribution<float>  distribution(-0.1f,0.1f);
+
+	for (uint32_t i = 0; i < kNumInstance; ++i)
+	{
+		particles_[i].Velocity = { distribution(randomEngine),distribution(randomEngine) ,0.0f };
+		particles_[i].transform.translate = Add(particles_[i].transform.translate, particles_[i].Velocity);//;*kDeltaTime);
+	}
 	Matrix4x4 m2 = MakeAffineMatrix(uvTranformSprite.scale, uvTranformSprite.rotate, uvTranformSprite.translate);
 	materialDeta->uvTransform = m2;
 
