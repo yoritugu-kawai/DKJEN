@@ -137,16 +137,7 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
 	//
 
-	/*D3D12_GPU_DESCRIPTOR_HANDLE texSrvHandleGPU =
-		GetGPUDescriptorHandle(
-			srvDescriptorHeap, descriptorSizeSRV, LoadCount);
-	D3D12_CPU_DESCRIPTOR_HANDLE texSrvHandleCPU =
-		GetCPUDescriptorHandle(
-			srvDescriptorHeap, descriptorSizeSRV, LoadCount);
-
-	texSrvHandleCPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	texSrvHandleGPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	device->CreateShaderResourceView(textureResource.Get(), &srvDesc, texSrvHandleCPU);*/
+	
 	DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, LoadCount, srvDesc, textureResource);
 	
 	
