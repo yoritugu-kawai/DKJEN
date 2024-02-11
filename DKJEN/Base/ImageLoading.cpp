@@ -137,7 +137,7 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
 	//
 
-	D3D12_GPU_DESCRIPTOR_HANDLE texSrvHandleGPU =
+	/*D3D12_GPU_DESCRIPTOR_HANDLE texSrvHandleGPU =
 		GetGPUDescriptorHandle(
 			srvDescriptorHeap, descriptorSizeSRV, LoadCount);
 	D3D12_CPU_DESCRIPTOR_HANDLE texSrvHandleCPU =
@@ -146,22 +146,15 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 
 	texSrvHandleCPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	texSrvHandleGPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	device->CreateShaderResourceView(textureResource.Get(), &srvDesc, texSrvHandleCPU);
-
-
-	//テキストのシェダ－2
-	//D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc2{};
-	//srvDesc2.Format = metadata2.format;
-	//srvDesc2.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	//srvDesc2.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	//srvDesc2.Texture2D.MipLevels = UINT(metadata2.mipLevels);
-
+	device->CreateShaderResourceView(textureResource.Get(), &srvDesc, texSrvHandleCPU);*/
+	DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, LoadCount, srvDesc, textureResource);
+	
+	
 	LoadCount++;
 	//
 
 	TexProeerty tex;
-	//tex.Resource = textureResource;
-	tex.SrvHandleGPU = texSrvHandleGPU;
+	tex.SrvHandleGPU = DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV, LoadCount);;
 	ImageLoading::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
 	return tex;
 }

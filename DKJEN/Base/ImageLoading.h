@@ -4,6 +4,7 @@
 #include"../Base/Function.h"
 #include"../externals/DirectXTex/d3dx12.h"
 #include"../externals/DirectXTex/DirectXTex.h"
+#include"../Management/DescriptorManagement.h"
 struct VertexData {
 	Vector4 position;
 	Vector2 texcoord;

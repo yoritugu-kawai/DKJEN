@@ -238,6 +238,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="DKJEN\externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="DKJEN\Imgui\imguiManager.cpp" />
+    <ClCompile Include="DKJEN\Management\DescriptorManagement.cpp" />
     <ClCompile Include="DKJEN\Management\FrameManagement.cpp" />
     <ClCompile Include="DKJEN\Management\PSOCopileManagement.cpp" />
     <ClCompile Include="DKJEN\Management\TypeManagement.cpp" />
@@ -247,7 +248,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Shader\PolygonCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\SpriteCompileShader.cpp" />
     <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp" />
-    <ClCompile Include="DKJEN\TexInformation\TexInformation.cpp" />
+    <ClCompile Include="DKJEN\TexInformation\TexManagement.cpp" />
     <ClCompile Include="DKJEN\Type\Camera.cpp" />
     <ClCompile Include="DKJEN\Type\Obj3D.cpp" />
     <ClCompile Include="DKJEN\Type\Particle.cpp" />
@@ -290,6 +291,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\externals\imgui\imstb_truetype.h" />
     <ClInclude Include="DKJEN\Imgui\imguiManager.h" />
     <ClInclude Include="DKJEN\Management\FrameManagement.h" />
+    <ClInclude Include="DKJEN\Management\DescriptorManagement.h" />
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h" />
     <ClInclude Include="DKJEN\Management\TypeManagement.h" />
     <ClInclude Include="DKJEN\Math\Math.h" />
@@ -298,7 +300,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Shader\PolygonCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\SpriteCompileShader.h" />
     <ClInclude Include="DKJEN\Shader\TextureCompileShader.h" />
-    <ClInclude Include="DKJEN\TexInformation\TexInformation.h" />
+    <ClInclude Include="DKJEN\TexInformation\TexManagement.h" />
     <ClInclude Include="DKJEN\Type\Camera.h" />
     <ClInclude Include="DKJEN\Type\Obj3D.h" />
     <ClInclude Include="DKJEN\Type\Particle.h" />
