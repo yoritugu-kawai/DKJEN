@@ -109,7 +109,7 @@ void ImageLoading::ShaderResourceView()
 }
 
 
-TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
+uint32_t ImageLoading::LoadTexture(const std::string& filePath)
 {
 
 	uint32_t descriptorSizeSRV = ImageLoading::GetInstance()->descriptorSizeSRV;
@@ -137,17 +137,18 @@ TexProeerty ImageLoading::LoadTexture(const std::string& filePath)
 	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
 	//
 
+
+	DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, srvDesc, textureResource);
+	DescriptorManagement::IndexIncrement();
 	
-	DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, LoadCount, srvDesc, textureResource);
 	
 	
-	LoadCount++;
 	//
 
-	TexProeerty tex;
-	tex.SrvHandleGPU = DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV, LoadCount);;
+	
+	DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV);
 	ImageLoading::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
-	return tex;
+	return DescriptorManagement::GetIndex();
 }
 
 

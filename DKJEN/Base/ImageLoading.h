@@ -55,7 +55,7 @@ public:
 	static ImageLoading* GetInstance();
 
 	static void Initiluze();
-	static TexProeerty LoadTexture(const std::string& filePath);
+	static uint32_t LoadTexture(const std::string& filePath);
 	//void Draw();
 	static void End();
 	static DirectX::ScratchImage LoadTextureData(const std::string& filePath);

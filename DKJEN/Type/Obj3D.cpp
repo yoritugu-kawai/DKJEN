@@ -20,7 +20,7 @@ void Obj3D::Initialize( const std::string& directoryPath,const std::string& file
 	//tex_ = tex;
 }
 
-void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraOperation pro, TexProeerty  tex )
+void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraOperation pro)
 {
 	pro;
 	translate.z = translate.z + pos.z;
@@ -74,7 +74,7 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(4,this->cameraResource.Get()->GetGPUVirtualAddress());
 
-	commandList->SetGraphicsRootDescriptorTable(2, tex.SrvHandleGPU);
+	DescriptorManagement::rootParamerterCommand(2, tex_);
 	commandList->DrawInstanced(UINT(modelData.vertices.size()), 1, 0, 0);
 }
 
@@ -186,7 +186,7 @@ ModelData Obj3D::LoadObjFile(const std::string& directoryPath, const std::string
 
 	}
 
-	tex_ = imageLoading->LoadTexture(modelData.material.textureFilePath);
+	tex_=ImageLoading::LoadTexture(modelData.material.textureFilePath);
 
 	return modelData;
 }

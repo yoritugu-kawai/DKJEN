@@ -54,32 +54,14 @@
     <Filter Include="DKJEN\CameraProjection">
       <UniqueIdentifier>{c70e3590-af8e-4ca0-9a1d-2bd7482326cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{f25a6621-1e8c-4160-b1e1-315caa4dadb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Player">
-      <UniqueIdentifier>{cefde742-dc1d-4c7c-b126-bdb95e33f294}</UniqueIdentifier>
-    </Filter>
     <Filter Include="DKJEN\WorldCoordinate">
       <UniqueIdentifier>{2973903f-d131-4a66-b279-7fcd5a182c89}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Enemy">
-      <UniqueIdentifier>{33877a3c-a75f-4cee-9caa-5d11a48c8d47}</UniqueIdentifier>
     </Filter>
     <Filter Include="hlsl">
       <UniqueIdentifier>{cccd3f29-95a6-41bb-b9f3-49214d0ab677}</UniqueIdentifier>
     </Filter>
     <Filter Include="DKJEN\Base\PSO">
       <UniqueIdentifier>{cee9bf10-9630-42ff-af5d-b43297b866de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Skydome">
-      <UniqueIdentifier>{3de4c1b1-5e56-486b-ba3c-f57579b20e41}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Collder">
-      <UniqueIdentifier>{f97c5ec8-f30a-4337-aa9b-d7cfc32eda8d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Camera">
-      <UniqueIdentifier>{5c64af44-6d1e-457c-bf9c-69c4515d80bb}</UniqueIdentifier>
     </Filter>
     <Filter Include="DKJEN\TexInformation">
       <UniqueIdentifier>{81045715-06bb-4a2d-ad08-6b01c387f5a9}</UniqueIdentifier>
@@ -197,35 +179,8 @@
     <ClCompile Include="DKJEN\CameraProjection\CameraProjection.cpp">
       <Filter>DKJEN\CameraProjection</Filter>
     </ClCompile>
-    <ClCompile Include="GameProject\Player\Player.cpp">
-      <Filter>Game\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Player\Bullet.cpp">
-      <Filter>Game\Player</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\WorldCoordinate\WorldCoordinate.cpp">
       <Filter>DKJEN\WorldCoordinate</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Enemy\Enemy.cpp">
-      <Filter>Game\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Enemy\IEnemyState.cpp">
-      <Filter>Game\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Enemy\EnemyLeaveh.cpp">
-      <Filter>Game\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Enemy\EnemyApproach.cpp">
-      <Filter>Game\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Skydome\Skydome.cpp">
-      <Filter>Game\Skydome</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Collder\CollisionManager.cpp">
-      <Filter>Game\Collder</Filter>
-    </ClCompile>
-    <ClCompile Include="GameProject\Enemy\EnemyBullet.cpp">
-      <Filter>Game\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\TexInformation\TexManagement.cpp">
       <Filter>DKJEN\TexInformation</Filter>
@@ -352,41 +307,8 @@
     <ClInclude Include="DKJEN\CameraProjection\CameraProjection.h">
       <Filter>DKJEN\CameraProjection</Filter>
     </ClInclude>
-    <ClInclude Include="GameProject\Player\Player.h">
-      <Filter>Game\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Player\Bullet.h">
-      <Filter>Game\Player</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\WorldCoordinate\WorldCoordinate.h">
       <Filter>DKJEN\WorldCoordinate</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Enemy\Enemy.h">
-      <Filter>Game\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Enemy\IEnemyState.h">
-      <Filter>Game\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Enemy\EnemyLeaveh.h">
-      <Filter>Game\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Enemy\EnemyApproach.h">
-      <Filter>Game\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Skydome\Skydome.h">
-      <Filter>Game\Skydome</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Enemy\EnemyBullet.h">
-      <Filter>Game\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Collder\Collder.h">
-      <Filter>Game\Collder</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Collder\CollisionConfig.h">
-      <Filter>Game\Collder</Filter>
-    </ClInclude>
-    <ClInclude Include="GameProject\Collder\CollisionManager.h">
-      <Filter>Game\Collder</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\TexInformation\TexManagement.h">
       <Filter>DKJEN\TexInformation</Filter>
