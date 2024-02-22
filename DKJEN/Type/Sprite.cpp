@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-void Sprite::Initialize(TexProeerty  tex)
+void Sprite::Initialize(uint32_t  tex)
 {
 
 
@@ -94,7 +94,7 @@ void Sprite::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Colo
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(1, transformationMatrixResourceSprote.Get()->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
+	DescriptorManagement::rootParamerterCommand(2, tex_);
 	commandList->DrawIndexedInstanced(6, 1, 0, 0, 0);
 
 }

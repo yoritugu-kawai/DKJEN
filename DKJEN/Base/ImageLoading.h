@@ -1,10 +1,13 @@
 #pragma once
+#include<map>
+#include<memory>
 #include"../Base/WinApp.h"
 #include"../Base/DxCommon.h"
 #include"../Base/Function.h"
 #include"../externals/DirectXTex/d3dx12.h"
 #include"../externals/DirectXTex/DirectXTex.h"
 #include"../Management/DescriptorManagement.h"
+#include"../TexDeta/Image/ImageData.h"
 struct VertexData {
 	Vector4 position;
 	Vector2 texcoord;
@@ -70,5 +73,7 @@ private:
 	uint32_t descriptorSizeSRV;
 	uint32_t descriptorSizeRTV;
 	uint32_t descriptorSizeDSV;
-
+	
+	std::map<string, std::unique_ptr<ImageData>>imageDatas;
+	static bool CheckImageData(string filePath);
 };

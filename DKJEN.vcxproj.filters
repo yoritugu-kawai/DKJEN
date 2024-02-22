@@ -66,6 +66,12 @@
     <Filter Include="DKJEN\TexInformation">
       <UniqueIdentifier>{81045715-06bb-4a2d-ad08-6b01c387f5a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\TexDeta">
+      <UniqueIdentifier>{ea856ce8-5218-48a7-ae3d-7c7ce67ba277}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DKJEN\TexDeta\Image">
+      <UniqueIdentifier>{bcfc85f9-e4e5-4f21-91f2-9867bf0efd8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -197,6 +203,9 @@
     <ClCompile Include="DKJEN\Management\DescriptorManagement.cpp">
       <Filter>DKJEN\Management</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\TexDeta\Image\ImageData.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -324,6 +333,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Management\DescriptorManagement.h">
       <Filter>DKJEN\Management</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\TexDeta\Image\ImageData.h">
+      <Filter>DKJEN\TexDeta\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

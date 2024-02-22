@@ -3,11 +3,12 @@
 #include"../Base/DxCommon.h"
 #include"../Base/SpritePSO.h"
 #include"../Base/ImageLoading.h"
+#include"../Management/DescriptorManagement.h"
 class  Sprite
 {
 public:
 	 
-	 void Initialize(TexProeerty  tex);
+	 void Initialize(uint32_t  tex);
 	 void Vertex();
 	 void Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
 	// void Release();
@@ -29,7 +30,7 @@ private:
 	Transform transformSprite{ {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 
 
-	TexProeerty  tex_;
+	uint32_t  tex_;
 	Vector4 transX_ = { 320.f,0.0f,0.0f,1.0f };
 	Vector4 transY_ = { 0.0f,180.0f,0.0f,1.0f };
 	Vector4 transXY_ = { 320.0f,180.0f,0.0f,1.0f };

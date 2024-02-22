@@ -108,47 +108,49 @@ void ImageLoading::ShaderResourceView()
 
 }
 
+bool ImageLoading::CheckImageData(string filePath)
+{
+	if (ImageLoading::GetInstance()->imageDatas.find(filePath)==ImageLoading::GetInstance()->imageDatas.end()) {
+		return true;
+	}
+	return false;
+}
+
 
 uint32_t ImageLoading::LoadTexture(const std::string& filePath)
 {
+	if (CheckImageData(filePath)) {
+		SImageData texData;
 
-	uint32_t descriptorSizeSRV = ImageLoading::GetInstance()->descriptorSizeSRV;
-	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-	ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
+		uint32_t descriptorSizeSRV = ImageLoading::GetInstance()->descriptorSizeSRV;
+		ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
+		ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
 
-	//Textureを読んで転送する
-	DirectX::ScratchImage mipImages = LoadTextureData(filePath);
-	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+		//Textureを読んで転送する
+		DirectX::ScratchImage mipImages = LoadTextureData(filePath);
+		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+		texData.size.x = static_cast<float>(metadata.width);
+		texData.size.y = static_cast<float>(metadata.height);
+		texData.resource= CreateTexResource(device, metadata);
+		UploadTexData(texData.resource.Get(), mipImages);
 
-	ComPtr <ID3D12Resource> textureResource = CreateTexResource(device, metadata);
-	UploadTexData(textureResource.Get(), mipImages);
-	//Textureを読んで転送する2
-	//DirectX::ScratchImage mipImages2 = LoadTexture("resource/monsterBall.png");
-	//const DirectX::TexMetadata& metadata2 = mipImages2.GetMetadata();
-	//ID3D12Resource* textureResource2 = CreateTexResource(device, metadata2);
-	//UploadTexData(textureResource2, mipImages2);
+		//テキストのシェダ－
+		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+		srvDesc.Format = metadata.format;
+		srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
 
+		DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, srvDesc, texData.resource);
+		DescriptorManagement::IndexIncrement();
+		texData.index = DescriptorManagement::GetIndex();
+		DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV);
+		ImageLoading::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
 
-	//テキストのシェダ－
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = metadata.format;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
-	//
-
-
-	DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, srvDesc, textureResource);
-	DescriptorManagement::IndexIncrement();
-	
-	
-	
-	//
-
-	
-	DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV);
-	ImageLoading::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
-	return DescriptorManagement::GetIndex();
+		ImageLoading::GetInstance()->imageDatas[filePath] =
+			std::make_unique<ImageData>(filePath, texData);
+	}
+	return ImageLoading::GetInstance()->imageDatas[filePath]->GetImageIndex();
 }
 
 

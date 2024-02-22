@@ -40,8 +40,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	pro.Initialize();
 	Obj3D* time = new Obj3D;
 	time->Initialize("resource", "ball.obj");
-	/*Sprite* sprite_ = new Sprite;
-	sprite_->Initialize(texball);*/
+	Sprite* sprite_ = new Sprite;
+	sprite_->Initialize(texball);
 
 
 
