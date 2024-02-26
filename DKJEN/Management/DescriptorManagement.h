@@ -21,6 +21,6 @@ private:
 	D3D12_CPU_DESCRIPTOR_HANDLE SrvHandleCPU[DESCRIPTER_MAX]{};
 	D3D12_GPU_DESCRIPTOR_HANDLE SrvHandleGPU[DESCRIPTER_MAX]{};
 
-	 uint32_t index;
+	 uint32_t index=0;
 
 };

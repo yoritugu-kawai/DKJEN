@@ -7,19 +7,23 @@
 class  Sprite
 {
 public:
-	 
-	 void Initialize(uint32_t  tex);
-	 void Vertex();
-	 void Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
-	// void Release();
 
-	 ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
+	void Initialize(uint32_t  tex);
+	void Vertex();
+	void Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
+	// void Release();
+	void SetTexcoord00LT(Vector2 texcoord) { texcoord00LT = texcoord; }
+	void SetTexcoord10RT(Vector2 texcoord) { texcoord10RT = texcoord; }
+	void SetTexcoord01LD(Vector2 texcoord) { texcoord01LD = texcoord; }
+	void SetTexcoord11RD(Vector2 texcoord) { texcoord11RD = texcoord; }
+
+	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 private:
 
 	//
 	D3D12_VERTEX_BUFFER_VIEW vertexBufferViewSprite{};
 	D3D12_INDEX_BUFFER_VIEW indexBufferViewSprite{};
-	
+
 	VertexData* VertexDataSprite = nullptr;
 	ComPtr<ID3D12Resource> vertexResourceSprite;
 	ComPtr<ID3D12Resource>transformationMatrixResourceSprote;
@@ -40,6 +44,10 @@ private:
 	 {0.0f,0.0f,0.0f}
 	};
 	Matrix4x4 matrix;
+	Vector2 texcoord00LT = { 0.0f,0.0f };
+	Vector2 texcoord10RT = { 1.0f,0.0f };
+	Vector2 texcoord01LD = { 0.0f,1.0f };
+	Vector2 texcoord11RD = { 1.0f,1.0f };
 };
 
 

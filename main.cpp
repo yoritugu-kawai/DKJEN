@@ -31,7 +31,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-	uint32_t texball = ImageLoading::LoadTexture("resource/ball.png");
+
 
 	/*TexProeerty texNeedle2 = imageLoading3->LoadTexture("resource/p/needle2.png");
 	TexProeerty texTime = imageLoading->LoadTexture("resource/p/time.png");*/
@@ -40,8 +40,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	pro.Initialize();
 	Obj3D* time = new Obj3D;
 	time->Initialize("resource", "ball.obj");
-	/*Sprite* sprite_ = new Sprite;
-	sprite_->Initialize(texball);*/
+	uint32_t texball = ImageLoading::LoadTexture("resource/uvChecker.png");
+	Sprite* sprite_ = new Sprite;
+	sprite_->Initialize(texball);
 
 
 
@@ -79,6 +80,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　ゲーム処理
 		//////
 	
+
+		if (Input::GetInstance()->PushKeyPressed(DIK_A)) {
+			uint32_t tex = ImageLoading::LoadTexture("resource/uvChecker.png");
+			int a=0;
+		}
 #ifdef USE_IMGUI
 
 		ImGui::Begin("buildTest");
@@ -104,13 +110,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 
 		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, pro);
-		//sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
+		sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
 		/*particle->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color); */
 	
 		//////
 		//　　描画処理
 		//////
-
+	
 		
 		//終わり
 		FrameManagement::EndFrame();

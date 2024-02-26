@@ -121,7 +121,8 @@ uint32_t ImageLoading::LoadTexture(const std::string& filePath)
 {
 	if (CheckImageData(filePath)) {
 		SImageData texData;
-
+		DescriptorManagement::IndexIncrement();
+		texData.index = DescriptorManagement::GetIndex();
 		uint32_t descriptorSizeSRV = ImageLoading::GetInstance()->descriptorSizeSRV;
 		ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 		ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
@@ -142,8 +143,7 @@ uint32_t ImageLoading::LoadTexture(const std::string& filePath)
 		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
 
 		DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, srvDesc, texData.resource);
-		DescriptorManagement::IndexIncrement();
-		texData.index = DescriptorManagement::GetIndex();
+
 		DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV);
 		ImageLoading::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
 

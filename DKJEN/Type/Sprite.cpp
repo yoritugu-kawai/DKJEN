@@ -34,22 +34,24 @@ void Sprite::Vertex()
 	//1枚目
 	//左下
 	VertexDataSprite[0].position = { transY_ };
-	VertexDataSprite[0].texcoord = { 0.0f,1.0f };
+	VertexDataSprite[0].texcoord = { texcoord01LD };
 	//左上
 	VertexDataSprite[1].position = { 0.0f,0.0f,0.0f,1.0f };
-	VertexDataSprite[1].texcoord = { 0.0f,0.0f };
+	VertexDataSprite[1].texcoord = { texcoord00LT };
 	//右下
 	VertexDataSprite[2].position = { transXY_ };
-	VertexDataSprite[2].texcoord = { 1.0f,1.0f };
+	VertexDataSprite[2].texcoord = { texcoord11RD };
 	
 	//右上
 	VertexDataSprite[3].position = { transX_ };
-	VertexDataSprite[3].texcoord = { 1.0f,0.0f };
+	VertexDataSprite[3].texcoord = { texcoord10RT };
 	
 	
 	indexDataSpriite[0] = 0;  indexDataSpriite[1] = 1; indexDataSpriite[2] = 2;
 	indexDataSpriite[3] = 1; indexDataSpriite[4] = 3; indexDataSpriite[5] = 2;
 }
+
+
 void Sprite::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
 	matrix = MakeAffineMatrix(scale, rotate, translate);
