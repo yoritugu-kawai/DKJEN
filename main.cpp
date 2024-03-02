@@ -27,7 +27,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	
 	ImageLoading::Initiluze();
-
+	CameraData* cameraData = new CameraData;
+	cameraData->Create();
 
 
 
@@ -104,12 +105,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::DragFloat3("rotate", &pro.rotate.x);
 
 		ImGui::End();
-	
+		cameraData->Update();
 		//////
 		//　　描画処理
 		//////
 
-		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, pro);
+		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, cameraData);
 		sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
 		/*particle->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color); */
 	

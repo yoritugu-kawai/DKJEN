@@ -6,6 +6,7 @@
 #include"../Base/LightPSO.h"
 #include"../Base/ImageLoading.h"
 #include"../CameraProjection/CameraProjection.h"
+#include"../Camera/CameraData.h"
 #include<fstream>
 #include<sstream>
 struct MaterialData {
@@ -33,7 +34,7 @@ public:
 	/// <param name="Vector3 rotate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector3 translate = { 0.0f, 0.0f, 0.0f }"></param>
 	/// <param name="Vector4 color = { 1.0f,1.0f,1.0f,1.0f }"></param>
-	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraOperation pro);
+	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraData* cameraData);
 	//void Release();
 	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
 
@@ -45,16 +46,17 @@ private:
 	ComPtr<ID3D12Resource> materialResource;
 	ComPtr<ID3D12Resource> wvpResource;
 	ComPtr<ID3D12Resource> lightResource;
-	ComPtr<ID3D12Resource> cameraResource;
+	
 
 
 	D3D12_VERTEX_BUFFER_VIEW vertxBufferView{};
 	ModelData modelData;
 	Matrix4x4 matrix;
 	//TexProeerty  tex_;
-
+	
 	Vector3 direction_ = { 0.0f,1.0f,0.0f };
 
 	Vector3 pos;
 	uint32_t tex_;
 };
+

@@ -9,7 +9,7 @@ void Obj3D::Initialize( const std::string& directoryPath,const std::string& file
 	materialResource = CreateBufferResource(sizeof(Vector4));
 	wvpResource = CreateBufferResource(sizeof(TransformationMatrix));
 	lightResource = CreateBufferResource(sizeof(DirectionalLight));
-	cameraResource = CreateBufferResource(sizeof(CameraCBuffer));
+
 	
 	vertxBufferView.BufferLocation = vetexResource.Get()->GetGPUVirtualAddress();
 	vertxBufferView.SizeInBytes = UINT(sizeof(VertexData) * modelData.vertices.size());
@@ -20,9 +20,9 @@ void Obj3D::Initialize( const std::string& directoryPath,const std::string& file
 	//tex_ = tex;
 }
 
-void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color, CameraOperation pro)
+void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color,CameraData*cameraData)
 {
-	pro;
+	
 	translate.z = translate.z + pos.z;
 	matrix = MakeAffineMatrix(scale,rotate, translate);
 	
@@ -31,15 +31,16 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	Vector4* materialData = nullptr;
 	TransformationMatrix* matrixData = nullptr;
 	DirectionalLight* lightData = nullptr;
-	CameraCBuffer* cameraData = nullptr;
+
 
 	vetexResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 	materialResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 	wvpResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&matrixData));
 	lightResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
 
-	this->cameraResource.Get()->Map(0, nullptr, reinterpret_cast<void**>(&cameraData));
-	cameraData->pos = pro.translate;
+	
+	
+
 	std::memcpy(vertexData, modelData.vertices.data(), sizeof(VertexData)*modelData.vertices.size());
 	//
 	// 
@@ -47,7 +48,7 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 
 	Matrix4x4 CameraMatrix = MakeIdentity4x4();
 
-	matrix = Multiply(matrix, Multiply(pro.view, pro.projection));
+	matrix = Multiply(matrix, Multiply(cameraData->GetView(), cameraData->GetProjection()));
 	matrixData->WVP = matrix;
 	matrixData->World = MakeIdentity4x4();
 	*materialData = Color;
@@ -72,7 +73,7 @@ void Obj3D::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(1, wvpResource.Get()->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(3, lightResource.Get()->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootConstantBufferView(4,this->cameraResource.Get()->GetGPUVirtualAddress());
+	commandList->SetGraphicsRootConstantBufferView(4, cameraData->GetColl()->GetGPUVirtualAddress());
 
 	DescriptorManagement::rootParamerterCommand(2, tex_);
 	commandList->DrawInstanced(UINT(modelData.vertices.size()), 1, 0, 0);
