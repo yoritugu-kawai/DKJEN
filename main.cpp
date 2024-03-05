@@ -34,8 +34,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-	/*TexProeerty texNeedle2 = imageLoading3->LoadTexture("resource/p/needle2.png");
-	TexProeerty texTime = imageLoading->LoadTexture("resource/p/time.png");*/
+	
 
 	CameraOperation pro;
 	pro.Initialize();
@@ -63,7 +62,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	timePos_.translate = { 0.0f,0.0f,0.0f };
 	timePos_.color = { 1.0f,1.0f,1.0f,1.0f };
 
-	Vector3 needleRotate_ = { 0.0f,0.0f,0.0f };
+	Vector3 cameraPos = { 0.0f,0.0f,0.0f };
 	Vector3 needleRotate2_ = { 0.0f,0.0f,0.0f };
 	//　メインループ
 	MSG msg{};
@@ -101,7 +100,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		ImGui::Begin("Camera");
 
-		ImGui::DragFloat3("translate", &pro.translate.x);
+		ImGui::DragFloat3("translate", &cameraPos.x);
 		ImGui::DragFloat3("rotate", &pro.rotate.x);
 
 		ImGui::End();
@@ -109,6 +108,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　　描画処理
 		//////
+		cameraData->SetTranslate(cameraPos);
 
 		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, cameraData);
 		sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
