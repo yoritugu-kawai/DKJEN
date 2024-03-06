@@ -260,6 +260,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Type\Texture.cpp" />
     <ClCompile Include="DKJEN\Utilipy\Input.cpp" />
     <ClCompile Include="DKJEN\WorldCoordinate\WorldCoordinate.cpp" />
+    <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +308,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="DKJEN\Utilipy\Pch.h" />
     <ClInclude Include="DKJEN\Utilipy\rektyk.h" />
     <ClInclude Include="DKJEN\WorldCoordinate\WorldCoordinate.h" />
+    <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\..\..\2年前期課題\CG\DirectＸ\PolygonObiject3d.VS.hlsl">

@@ -75,6 +75,9 @@
     <Filter Include="DKJEN\Camera">
       <UniqueIdentifier>{ac08f034-35f0-42ca-a9ce-6f5aeeeb4fb5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\WorldTransform">
+      <UniqueIdentifier>{c53ac5ef-4551-48a0-9f8a-7eb949737963}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -206,11 +209,14 @@
     <ClCompile Include="DKJEN\Management\DescriptorManagement.cpp">
       <Filter>DKJEN\Management</Filter>
     </ClCompile>
-    <ClCompile Include="DKJEN\TexDeta\Image\ImageData.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="DKJEN\Camera\CameraData.cpp">
       <Filter>DKJEN\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp">
+      <Filter>DKJEN\WorldTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="DKJEN\TexDeta\Image\ImageData.cpp">
+      <Filter>DKJEN\TexDeta\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +351,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Camera\CameraData.h">
       <Filter>DKJEN\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h">
+      <Filter>DKJEN\WorldTransform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
