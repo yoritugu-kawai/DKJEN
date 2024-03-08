@@ -7,6 +7,7 @@
 
 #include"DKJEN/Utilipy/rektyk.h"
 
+#include"DKJEN/WorldTransform/WorldTransform.h"
 #include"DKJEN/CameraProjection/CameraProjection.h"
 
 #include"DKJEN/Management/TypeManagement.h"
@@ -33,8 +34,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
+	WorldTransform* worldTransform = new WorldTransform;
 
-	
+	worldTransform->Create();
 
 	CameraOperation pro;
 	pro.Initialize();
@@ -62,7 +64,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	timePos_.translate = { 0.0f,0.0f,0.0f };
 	timePos_.color = { 1.0f,1.0f,1.0f,1.0f };
 
-	Vector3 cameraPos = { 0.0f,0.0f,0.0f };
+	Vector3 cameraPos = { 0.0f,0.0f,-10.0f };
 	Vector3 needleRotate2_ = { 0.0f,0.0f,0.0f };
 	//　メインループ
 	MSG msg{};
@@ -83,7 +85,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		if (Input::GetInstance()->PushKeyPressed(DIK_A)) {
 			uint32_t tex = ImageLoading::LoadTexture("resource/uvChecker.png");
-			int a=0;
 		}
 #ifdef USE_IMGUI
 
@@ -104,13 +105,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::DragFloat3("rotate", &pro.rotate.x);
 
 		ImGui::End();
+
 		cameraData->Update();
+		worldTransform->UpdateMatrix(cameraData);
 		//////
 		//　　描画処理
 		//////
 		cameraData->SetTranslate(cameraPos);
 
-		time->Draw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color, cameraData);
+		time->Draw( timePos_.color, cameraData, worldTransform);
 		sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
 		/*particle->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color); */
 	

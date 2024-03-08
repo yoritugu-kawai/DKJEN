@@ -5,6 +5,7 @@ void CameraData::Create()
 	this->view_ = MakeIdentity4x4();
 	this->projection_ = MakeIdentity4x4();
 	buffer_ = CreateBufferResource(sizeof(CameraCBuffer));
+	
 }
 
 void CameraData::Update()

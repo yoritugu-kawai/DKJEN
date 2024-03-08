@@ -1,13 +1,16 @@
 #pragma once
-
+#include"../Imgui/imguiManager.h"
+#include"../Base/CreateBufferResource.h"
 #include"../Math/Math.h"
-#include"../Base/DxCommon.h"
+#include"../Base/ImageLoading.h"
+#include"../Camera/CameraData.h"
 class WorldTransform
 {
 public:
 	void Create();
-	void UpdateMatrix();
-	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
+	void UpdateMatrix(CameraData*cameraData);
+	
+	
 
 #pragma region Get
 	Matrix4x4 GetMatWorld_() { return matWorld_; }
@@ -26,11 +29,11 @@ public:
 
 #pragma endregion
 private:
-	Vector3 scale_;
-	Vector3 rotate_;
-	Vector3 translate_;
-	Vector4 color_;
+	Vector3 scale_ = { 1.0f,1.0f,1.0f };
+	Vector3 rotate_ = { 0.0f,0.0f,0.0f };
+	Vector3 translate_ = {0.0f,0.0f,0.0f};
+	Vector4 color_ = { 1,1,1,1 };
 	Matrix4x4 matWorld_;
-	Vector3 data_ ;
+	TransformationMatrix *data_ ;
 	ComPtr<ID3D12Resource> buffer_ = nullptr;
 };

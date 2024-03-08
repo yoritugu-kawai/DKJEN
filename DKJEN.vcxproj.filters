@@ -78,6 +78,9 @@
     <Filter Include="DKJEN\WorldTransform">
       <UniqueIdentifier>{c53ac5ef-4551-48a0-9f8a-7eb949737963}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DKJEN\Base\CreateBufferResource">
+      <UniqueIdentifier>{d66a846c-70e5-4e57-8e38-74c9e2696e6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -115,9 +118,6 @@
     </ClCompile>
     <ClCompile Include="DKJEN\Shader\TextureCompileShader.cpp">
       <Filter>DKJEN\Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="DKJEN\Type\Camera.cpp">
-      <Filter>DKJEN\Type</Filter>
     </ClCompile>
     <ClCompile Include="DKJEN\externals\imgui\imgui.cpp">
       <Filter>ImguiEx</Filter>
@@ -218,6 +218,9 @@
     <ClCompile Include="DKJEN\TexDeta\Image\ImageData.cpp">
       <Filter>DKJEN\TexDeta\Image</Filter>
     </ClCompile>
+    <ClCompile Include="DKJEN\Base\CreateBufferResource.cpp">
+      <Filter>DKJEN\Base\CreateBufferResource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -235,9 +238,6 @@
     <ClInclude Include="DKJEN\Management\PSOCopileManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Math\Math.h">
-      <Filter>DKJEN\Math</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Shader\LightCompileShader.h">
       <Filter>DKJEN\Shader</Filter>
     </ClInclude>
@@ -249,9 +249,6 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Shader\TextureCompileShader.h">
       <Filter>DKJEN\Shader</Filter>
-    </ClInclude>
-    <ClInclude Include="DKJEN\Type\Camera.h">
-      <Filter>DKJEN\Type</Filter>
     </ClInclude>
     <ClInclude Include="DKJEN\externals\imgui\imconfig.h">
       <Filter>ImguiEx</Filter>
@@ -354,6 +351,12 @@
     </ClInclude>
     <ClInclude Include="DKJEN\WorldTransform\WorldTransform.h">
       <Filter>DKJEN\WorldTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Base\CreateBufferResource.h">
+      <Filter>DKJEN\Base\CreateBufferResource</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Math\Math.h">
+      <Filter>DKJEN\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
