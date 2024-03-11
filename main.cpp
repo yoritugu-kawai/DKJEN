@@ -43,14 +43,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Obj3D* time = new Obj3D;
 	time->Initialize("resource", "ball.obj");
 	uint32_t texball = ImageLoading::LoadTexture("resource/uvChecker.png");
+	uint32_t tex = ImageLoading::LoadTexture("resource/monsterBall.png");
+	uint32_t tex2 = ImageLoading::LoadTexture("resource/e.png");
+
 	Sprite* sprite_ = new Sprite;
-	sprite_->Initialize(texball);
+	sprite_->Initialize(tex);
 
+	Sprite* sprite2_ = new Sprite;
+	sprite2_->Initialize(texball);
 
+	Sprite* sprite3_ = new Sprite;
+	sprite3_->Initialize(texball);
 
-	//Particle* particle = new Particle;
+	Particle* particle = new Particle;
 
-	//particle->Initialize(texball);
+	particle->Initialize(texball);
+
+	
+
 	Coordinate imGuiParticle;
 	imGuiParticle.scale = { 1.0f,1.0f,1.0f };
 	imGuiParticle.rotate = { 0.0f,0.0f,0.0f };
@@ -83,16 +93,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 	
 
-		if (Input::GetInstance()->PushKeyPressed(DIK_A)) {
+		/*if (Input::GetInstance()->PushKeyPressed(DIK_A)) {
 			uint32_t tex = ImageLoading::LoadTexture("resource/uvChecker.png");
 		}
-#ifdef USE_IMGUI
-
-		ImGui::Begin("buildTest");
-		ImGui::End();
-
-
-#endif // USE_IMGUI
+*/
 
 
 
@@ -102,7 +106,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::Begin("Camera");
 
 		ImGui::DragFloat3("translate", &cameraPos.x);
-		ImGui::DragFloat3("rotate", &pro.rotate.x);
+		ImGui::DragFloat3("boll", &timePos_.translate.x);
 
 		ImGui::End();
 
@@ -112,11 +116,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//　　描画処理
 		//////
 		cameraData->SetTranslate(cameraPos);
-
+		worldTransform->SetTranslate(timePos_.translate);
 		time->Draw( timePos_.color, cameraData, worldTransform);
 		sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
-		/*particle->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color); */
-	
+		particle->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
+
+		sprite2_->Darw({ 1,1,1 }, { 0,0,0 }, { 0,360,0 }, timePos_.color);
+		sprite3_->Darw({ 1,1,1 }, { 0,0,0 }, { 100,360,0 }, timePos_.color);
 		//////
 		//　　描画処理
 		//////

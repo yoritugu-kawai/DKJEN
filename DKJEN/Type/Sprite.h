@@ -3,6 +3,7 @@
 #include"../Base/DxCommon.h"
 #include"../Base/SpritePSO.h"
 #include"../Base/ImageLoading.h"
+#include"../Base/CreateBufferResource.h"
 #include"../Management/DescriptorManagement.h"
 class  Sprite
 {
@@ -17,7 +18,7 @@ public:
 	void SetTexcoord01LD(Vector2 texcoord) { texcoord01LD = texcoord; }
 	void SetTexcoord11RD(Vector2 texcoord) { texcoord11RD = texcoord; }
 
-	ID3D12Resource* CreateBufferResource(size_t sizeInbyte);
+	
 private:
 
 	//

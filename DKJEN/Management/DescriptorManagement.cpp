@@ -20,7 +20,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE DescriptorManagement::CPUDescriptorHandle( uint32_t 
 	DescriptorManagement::GetInstance()->SrvHandleCPU[index] =
 		GetCPUDescriptorHandle(
 			srvDescriptorHeap, descriptorSizeSRV, GetIndex());
-	DescriptorManagement::GetInstance()->SrvHandleCPU[index].ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	DescriptorManagement::GetInstance()->SrvHandleCPU[index].ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV)*index;
 	device->CreateShaderResourceView(textureResource.Get(), &srvDesc, DescriptorManagement::GetInstance()->SrvHandleCPU[index]);
 	return  DescriptorManagement::GetInstance()->SrvHandleCPU[index];
 }
@@ -34,7 +34,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE DescriptorManagement::GPUDescriptorHandle(uint32_t d
 	DescriptorManagement::GetInstance()->SrvHandleGPU[index] =
 		GetGPUDescriptorHandle(
 			srvDescriptorHeap, descriptorSizeSRV, GetIndex());
-	DescriptorManagement::GetInstance()->SrvHandleGPU[index].ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
+	DescriptorManagement::GetInstance()->SrvHandleGPU[index].ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV) * index;
 	return DescriptorManagement::GetInstance()->SrvHandleGPU[index];
 	
 }

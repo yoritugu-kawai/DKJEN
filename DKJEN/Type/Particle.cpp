@@ -1,17 +1,6 @@
 #include "Particle.h"
 
-//void Particle::Initialize()
-//{
-//
-//	model.vertices.push_back({ v.position = {1.0f,1.0f,0.0f,1.0f}, v.texcoord = {0.0f,0.0f}, v.normal = {0.0f,0.0f,1.0f} });
-//	model.vertices.push_back({ v.position = {-1.0f,1.0f,0.0f,1.0f}, v.texcoord = {0.0f,0.0f}, v.normal = {0.0f,0.0f,1.0f} });
-//	model.vertices.push_back({ v.position = {1.0f,-1.0f,0.0f,1.0f}, v.texcoord = {0.0f,0.0f}, v.normal = {0.0f,0.0f,1.0f} });
-//	model.vertices.push_back({ v.position = {1.0f,-1.0f,0.0f,1.0f}, v.texcoord = {0.0f,0.0f}, v.normal = {0.0f,0.0f,1.0f} });
-//	model.vertices.push_back({ v.position = {-1.0f,1.0f,0.0f,1.0f}, v.texcoord = {0.0f,0.0f}, v.normal = {0.0f,0.0f,1.0f} });
-//	model.vertices.push_back({ v.position = {-1.0f,-1.0f,0.0f,1.0f}, v.texcoord = {0.0f,0.0f}, v.normal = {0.0f,0.0f,1.0f} });
-//	model.material.textureFilePath = "./resource/uvChecker.png";
-//}
-void Particle::Initialize(TexProeerty  tex)
+void Particle::Initialize(uint32_t  tex)
 {
 
 
@@ -153,20 +142,10 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootConstantBufferView(3, transformationMatrixResourceSprote->GetGPUVirtualAddress());
 	commandList->SetGraphicsRootDescriptorTable(1, instancingSrvHandleGPU);
-	commandList->SetGraphicsRootDescriptorTable(2, tex_.SrvHandleGPU);
+	DescriptorManagement::rootParamerterCommand(2, tex_);
 	commandList->DrawIndexedInstanced(6,10,0,0,0);
 
 }
-
-//void  Particle::Release()
-//{
-//	//tex_.Resource->Release();
-//
-//	vertexResourceSprite->Release();
-//	indexResourceSprite->Release();
-//	transformationMatrixResourceSprote->Release();
-//	materialResource->Release();
-//}
 
 void Particle::SRV()
 {
@@ -187,36 +166,4 @@ void Particle::SRV()
 	 instancingSrvHandleGPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	 
 	device->CreateShaderResourceView(instancingResource.Get(), &instansingSrvDesc, instancingSrvHandleCPU);
-}
-
-ID3D12Resource* Particle::CreateBufferResource(size_t sizeInbyte)
-{
-	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
-	ID3D12Resource* RssultResource;
-	//頂点リソース用のヒープの設定
-	D3D12_HEAP_PROPERTIES uploadHeapProperties{};
-
-	uploadHeapProperties.Type = D3D12_HEAP_TYPE_UPLOAD; //UploadHeapを使う
-
-	//頂点リソースの設定
-	D3D12_RESOURCE_DESC ResourceDesc{};
-
-	//バッファリソース。テクスチャの場合はまた別の設定をする
-	ResourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-	ResourceDesc.Width = sizeInbyte; //リソースのサイズ。今回はvector4を3頂点分
-
-	//バッファの場合はこれらは1にする決まり
-	ResourceDesc.Height = 1;
-	ResourceDesc.DepthOrArraySize = 1;
-	ResourceDesc.MipLevels = 1;
-	ResourceDesc.SampleDesc.Count = 1;
-
-	//バッファの場合はこれにする決まり
-	ResourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-	HRESULT hr;
-	hr = device->CreateCommittedResource(&uploadHeapProperties, D3D12_HEAP_FLAG_NONE,
-		&ResourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr, IID_PPV_ARGS(&RssultResource));
-	assert(SUCCEEDED(hr));
-
-	return RssultResource;
 }
