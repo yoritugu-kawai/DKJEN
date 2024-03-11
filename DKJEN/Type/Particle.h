@@ -48,6 +48,8 @@ private:
 	const uint32_t kNumInstance = 10;
 	ParticleTransform particles_[10];
 	uint32_t  tex_;
+	uint32_t instancingIndex_ = 0;
+
 	std::random_device seedGenerator;
 	
 };

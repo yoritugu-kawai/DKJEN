@@ -31,6 +31,7 @@ void Particle::Initialize(uint32_t  tex)
 		particles_[i].Velocity = { 0.0f,0.0f,0.0f };
 		const float kDeltaTime = 1.0f / 60.0f;
 	}
+	SRV();
 }
 
 void  Particle::Vertex()
@@ -104,7 +105,7 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 		reinterpret_cast<void**>(&materialDeta));
 	materialDeta->color = Color;
 	Vertex();
-	SRV();
+	
 
 	std::mt19937 randomEngine(this->seedGenerator());
 	std::uniform_real_distribution<float>  distribution(-0.1f,0.1f);
@@ -139,10 +140,11 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 	commandList->IASetVertexBuffers(0, 1, &vertexBufferViewSprite);
 	commandList->IASetIndexBuffer(&indexBufferViewSprite);
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootConstantBufferView(3, transformationMatrixResourceSprote->GetGPUVirtualAddress());
-	commandList->SetGraphicsRootDescriptorTable(1, instancingSrvHandleGPU);
+	DescriptorManagement::rootParamerterCommand(1, instancingIndex_);
 	DescriptorManagement::rootParamerterCommand(2, tex_);
+	commandList->SetGraphicsRootConstantBufferView(3, transformationMatrixResourceSprote->GetGPUVirtualAddress());
 	commandList->DrawIndexedInstanced(6,10,0,0,0);
 
 }
@@ -160,10 +162,9 @@ void Particle::SRV()
 	instansingSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
 	instansingSrvDesc.Buffer.NumElements = 10;
 	instansingSrvDesc.Buffer.StructureByteStride = sizeof(TransformationMatrix);
-	D3D12_CPU_DESCRIPTOR_HANDLE instancingSrvHandleCPU = GetCPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
-	 instancingSrvHandleGPU = GetGPUDescriptorHandle(srvDescriptorHeap, descriptorSizeSRV, 3);
-	 instancingSrvHandleCPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	 instancingSrvHandleGPU.ptr += device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	 
-	device->CreateShaderResourceView(instancingResource.Get(), &instansingSrvDesc, instancingSrvHandleCPU);
+
+	DescriptorManagement::IndexIncrement();
+	DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV,instansingSrvDesc ,instancingResource);
+	DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV);
+	instancingIndex_ = DescriptorManagement::GetIndex();
 }

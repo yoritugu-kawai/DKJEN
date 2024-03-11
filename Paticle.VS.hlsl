@@ -8,6 +8,7 @@ struct TransformationMatrix {
 };
 
 StructuredBuffer<TransformationMatrix > gTransformationMatrix  : register(t0);
+ConstantBuffer<TransformationMatrix> gTestTransformationMatrix : register(b1);
 
 struct VertexShaderInput {
 	float32_t4 position : POSITION0;
