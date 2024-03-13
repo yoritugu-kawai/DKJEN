@@ -8,7 +8,7 @@ void Particle::Initialize(uint32_t  tex)
 	tex_ = tex;// spriteLoad_->Load("resource/e.png");
 	
 	vertexResourceSprite = CreateBufferResource(sizeof(VertexData) * 6);
-	transformationMatrixResourceSprote = CreateBufferResource(sizeof(Matrix4x4));
+	//transformationMatrixResourceSprote = CreateBufferResource(sizeof(Matrix4x4));
 	materialResource = CreateBufferResource(sizeof(UVMaterial));
 	indexResourceSprite = CreateBufferResource(sizeof(uint32_t) * 6);
 
@@ -34,7 +34,7 @@ void Particle::Initialize(uint32_t  tex)
 	SRV();
 }
 
-void  Particle::Vertex()
+void  Particle::Vertex(Vector4 pos)
 {
 
 
@@ -42,7 +42,7 @@ void  Particle::Vertex()
 	//頂点データ
 	vertexResourceSprite->Map(0, nullptr, reinterpret_cast<void**>(&VertexDataSprite));
 
-	Vector4 pos = { 0,0,0,1 };
+	
 	float size = 0.5f;
 	
 	VertexDataSprite[0].position = { pos.x - size,pos.y + size,pos.z ,pos.w };
@@ -98,13 +98,12 @@ void  Particle::Vertex()
 }
 void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
-	matrix = MakeAffineMatrix(scale, rotate, translate);
 
 	UVMaterial* materialDeta = nullptr;
 	materialResource->Map(0, nullptr,
 		reinterpret_cast<void**>(&materialDeta));
 	materialDeta->color = Color;
-	Vertex();
+	Vertex({translate.x,translate.y,translate.x,1});
 	
 
 	std::mt19937 randomEngine(this->seedGenerator());
@@ -119,16 +118,17 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 	materialDeta->uvTransform = m2;
 
 
-	transformationMatrixResourceSprote->Map(0, nullptr, reinterpret_cast<void**>
+	/*transformationMatrixResourceSprote->Map(0, nullptr, reinterpret_cast<void**>
 		(&transformationMatrixDataSprite));
 	*transformationMatrixDataSprite = MakeIdentity4x4();
 
+	matrix = MakeAffineMatrix(scale, rotate, translate);
 	Matrix4x4 SpriteMatrix = MakeAffineMatrix(transformSprite.scale, transformSprite.rotate, transformSprite.translate);
 	Matrix4x4 viewMatrix = MakeIdentity4x4();
 	Matrix4x4 projectionMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::GetInstance()->Width()), float(WinApp::GetInstance()->Height()), 0.0f, 100.0f);
 	Matrix4x4 worldViewProjectionMatrix = Multiply(matrix, Multiply(viewMatrix, projectionMatrix));
-	*transformationMatrixDataSprite = worldViewProjectionMatrix;
-	worldViewProjectionMatrix;
+	*transformationMatrixDataSprite = worldViewProjectionMatrix;*/
+	//worldViewProjectionMatrix;
 
 	//
 	PSOProperty pso_ = ParticlePSO::GetInstance()->GetPSO().Texture;
@@ -142,9 +142,10 @@ void  Particle::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 C
 	commandList->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	commandList->SetGraphicsRootConstantBufferView(0, materialResource->GetGPUVirtualAddress());
+	//commandList->SetGraphicsRootConstantBufferView(3, transformationMatrixResourceSprote->GetGPUVirtualAddress());
 	DescriptorManagement::rootParamerterCommand(1, instancingIndex_);
 	DescriptorManagement::rootParamerterCommand(2, tex_);
-	commandList->SetGraphicsRootConstantBufferView(3, transformationMatrixResourceSprote->GetGPUVirtualAddress());
+	
 	commandList->DrawIndexedInstanced(6,10,0,0,0);
 
 }

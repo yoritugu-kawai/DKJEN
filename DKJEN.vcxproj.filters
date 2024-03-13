@@ -337,9 +337,6 @@
     <ClInclude Include="DKJEN\Base\ParyiclePSO.h">
       <Filter>DKJEN\Base\PSO</Filter>
     </ClInclude>
-    <ClInclude Include="DKJEN\Type\Particle.h">
-      <Filter>DKJEN\Type</Filter>
-    </ClInclude>
     <ClInclude Include="DKJEN\Management\DescriptorManagement.h">
       <Filter>DKJEN\Management</Filter>
     </ClInclude>
@@ -357,6 +354,9 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Math\Math.h">
       <Filter>DKJEN\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="DKJEN\Type\Particle.h">
+      <Filter>DKJEN\Type</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

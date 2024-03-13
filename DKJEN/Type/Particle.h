@@ -12,7 +12,7 @@ class Particle
 {
 public:
 	void Initialize(uint32_t  tex);
-	void Vertex();
+	void Vertex(Vector4 pos);
 	void Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
 	//void Release();
 	void SRV();
@@ -25,18 +25,16 @@ private:
 
 	VertexData* VertexDataSprite = nullptr;
 	ComPtr<ID3D12Resource> vertexResourceSprite;
-	ComPtr<ID3D12Resource> transformationMatrixResourceSprote;
+	//ComPtr<ID3D12Resource> transformationMatrixResourceSprote;
 	ComPtr<ID3D12Resource> materialResource;
 	ComPtr<ID3D12Resource> indexResourceSprite;
 
-	Matrix4x4* transformationMatrixDataSprite = nullptr;
+	//Matrix4x4* transformationMatrixDataSprite = nullptr;
 	Transform transformSprite{ {1.0f,1.0f,1.0f},{0.0f,0.0f,0.0f},{0.0f,0.0f,0.0f} };
 	D3D12_GPU_DESCRIPTOR_HANDLE instancingSrvHandleGPU;
 	ComPtr<ID3D12Resource>instancingResource;
 
-	Vector4 transX_ = { 560.f,0.0f,0.0f,1.0f };
-	Vector4 transY_ = { 0.0f,360.0f,0.0f,1.0f };
-	Vector4 transXY_ = { 560.0f,360.0f,0.0f,1.0f };
+	
 	Transform uvTranformSprite{
 	 {1.0f,1.0f,1.0f},
 	 {0.0f,0.0f,0.0f},
@@ -48,8 +46,9 @@ private:
 	const uint32_t kNumInstance = 10;
 	ParticleTransform particles_[10];
 	uint32_t  tex_;
+	uint32_t  tex2_;
 	uint32_t instancingIndex_ = 0;
-
+	
 	std::random_device seedGenerator;
 	
 };

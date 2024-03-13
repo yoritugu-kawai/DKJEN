@@ -111,7 +111,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		ImGui::DragFloat3("boll", &timePos_.translate.x);
 
 		ImGui::End();
+		
+		/*
+		ImGui::Begin("texChange");
 
+		ImGui::Checkbox("true or false", &TF);
+
+		ImGui::End();*/
 		cameraData->Update();
 		worldTransform->UpdateMatrix(cameraData);
 		//////
@@ -121,8 +127,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		worldTransform->SetTranslate(timePos_.translate);
 		time->Draw( timePos_.color, cameraData, worldTransform);
 		sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
-		particle->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
-		particle2->Darw(timePos_.scale, timePos_.rotate, {0.0f,0.0f,2.0f}, timePos_.color);
+		particle->Darw(timePos_.scale, timePos_.rotate, { 0.0f,0.0f,0.0f }, timePos_.color);
+		particle2->Darw(timePos_.scale, timePos_.rotate, {3.0f,0.0f,0.0f}, timePos_.color);
 		sprite2_->Darw({ 1,1,1 }, { 0,0,0 }, { 0,360,0 }, timePos_.color);
 		sprite3_->Darw({ 1,1,1 }, { 0,0,0 }, { 100,360,0 }, timePos_.color);
 		//////
