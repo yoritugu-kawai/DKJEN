@@ -12,7 +12,7 @@ public:
 
 private:
 	Bullet* bullet_;
-	Sprite* player;
+	Sprite* sprite_;
 	Vector3 pos_;
-	bool isShot;
+	bool isShot_;
 };

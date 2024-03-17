@@ -52,7 +52,7 @@ void Sprite::Vertex()
 }
 
 
-void Sprite::Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
+void Sprite::Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color)
 {
 	matrix = MakeAffineMatrix(scale, rotate, translate);
 

@@ -11,7 +11,7 @@ public:
 
 	void Initialize(uint32_t  tex);
 	void Vertex();
-	void Darw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
+	void Draw(Vector3 scale, Vector3 rotate, Vector3 translate, Vector4 Color);
 	// void Release();
 	void SetTexcoord00LT(Vector2 texcoord) { texcoord00LT = texcoord; }
 	void SetTexcoord10RT(Vector2 texcoord) { texcoord10RT = texcoord; }

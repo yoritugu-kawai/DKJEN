@@ -2,13 +2,13 @@
 
 void Player::Initialize()
 {
-	player = new Sprite;
+	sprite_ = new Sprite;
 	uint32_t tex = ImageLoading::LoadTexture("resource/tex.png");
-	player->Initialize(tex);
+	sprite_->Initialize(tex);
 	pos_ = { 500.0f,360.0f,0.0f };
 	bullet_ = new Bullet;
 	bullet_->Initialize();
-	isShot = 0;
+	isShot_ = false;
 }
 
 void Player::Update()
@@ -28,18 +28,19 @@ void Player::Update()
 		pos_.y += 5;
 	}
 	if (Input::GetInstance()->PushKey(DIK_SPACE)) {
-		isShot = 1;
+		isShot_ = true;
 	}
-	if (!isShot) 
+	if (!isShot_) 
 	bullet_->SetPos(pos_);
-	if (isShot) 
+	if (isShot_) 
 	bullet_->Update();
+	isShot_ = bullet_->GetIsShot();
 }
 
 void Player::Draw()
 {
-	player->Darw({ 0.1f,0.2f,1 }, { 0,0,0 }, pos_, { 1.0f,1.0f,1.0f,1.0f });
-	if (isShot) {
+	sprite_->Draw({ 0.1f,0.2f,1 }, { 0,0,0 }, pos_, { 1.0f,1.0f,1.0f,1.0f });
+	if (isShot_) {
 		bullet_->Draw();
 	}
 }
