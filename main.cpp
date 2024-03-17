@@ -13,6 +13,8 @@
 #include"DKJEN/Management/TypeManagement.h"
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
+
+#include"GameProject/Player/Player.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -38,46 +40,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	worldTransform->Create();
 
-	CameraOperation pro;
-	pro.Initialize();
-	Obj3D* time = new Obj3D;
-	time->Initialize("resource", "ball.obj");
-	uint32_t texball = ImageLoading::LoadTexture("resource/uvChecker.png");
-	uint32_t tex = ImageLoading::LoadTexture("resource/monsterBall.png");
-	uint32_t tex2 = ImageLoading::LoadTexture("resource/e.png");
+	
+	
 
-	Sprite* sprite_ = new Sprite;
-	sprite_->Initialize(tex);
+	Player* player_ = new Player;
 
-	Sprite* sprite2_ = new Sprite;
-	sprite2_->Initialize(texball);
-
-	Sprite* sprite3_ = new Sprite;
-	sprite3_->Initialize(texball);
-
-	Particle* particle = new Particle;
-
-	particle->Initialize(texball);
-
-	Particle* particle2 = new Particle;
-
-	particle2->Initialize(tex);
-
-	Coordinate imGuiParticle;
-	imGuiParticle.scale = { 1.0f,1.0f,1.0f };
-	imGuiParticle.rotate = { 0.0f,0.0f,0.0f };
-	imGuiParticle.translate = { 0.0f,0.0f,0.0f };
-	imGuiParticle.color = { 1.0f, 1.0f, 1.0, 1.0f };
-
+	player_->Initialize();
 	//座標
 	Coordinate timePos_;
 	timePos_.scale = { 1.0f,1.0f,1.0f };
 	timePos_.rotate = { 0.0f,0.0f,0.0f };
 	timePos_.translate = { 0.0f,0.0f,0.0f };
 	timePos_.color = { 1.0f,1.0f,1.0f,1.0f };
-
-	Vector3 cameraPos = { 0.0f,0.0f,-10.0f };
-	Vector3 needleRotate2_ = { 0.0f,0.0f,0.0f };
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -87,7 +61,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			DispatchMessage(&msg);
 		}
 		FrameManagement::BeginFrame();
-		pro.Update();
+		
 		//最初
 
 		//////
@@ -100,37 +74,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 */
 
-
+		player_->Update();
 
 		//////
 		//　ゲーム処理
 		//////
-		ImGui::Begin("Camera");
-
-		ImGui::DragFloat3("translate", &cameraPos.x);
-		ImGui::DragFloat3("boll", &timePos_.translate.x);
-
-		ImGui::End();
 		
-		/*
-		ImGui::Begin("texChange");
-
-		ImGui::Checkbox("true or false", &TF);
-
-		ImGui::End();*/
-		cameraData->Update();
-		worldTransform->UpdateMatrix(cameraData);
 		//////
 		//　　描画処理
 		//////
-		cameraData->SetTranslate(cameraPos);
-		worldTransform->SetTranslate(timePos_.translate);
-		time->Draw( timePos_.color, cameraData, worldTransform);
-		sprite_->Darw(timePos_.scale, timePos_.rotate, timePos_.translate, timePos_.color);
-		particle->Darw(timePos_.scale, timePos_.rotate, { 0.0f,0.0f,0.0f }, timePos_.color);
-		particle2->Darw(timePos_.scale, timePos_.rotate, {3.0f,0.0f,0.0f}, timePos_.color);
-		sprite2_->Darw({ 1,1,1 }, { 0,0,0 }, { 0,360,0 }, timePos_.color);
-		sprite3_->Darw({ 1,1,1 }, { 0,0,0 }, { 100,360,0 }, timePos_.color);
+		player_->Draw();
 		//////
 		//　　描画処理
 		//////

@@ -1,25 +1,14 @@
 #pragma once
-#include"../../DKJEN/Management/TypeManagement.h"
-#include"../Collder/Collder.h"
-class Bullet :public Collider
+#include"../../DKJEN/Type/Sprite.h"
+class Bullet
 {
 public:
-	void Intiailize(Coordinate pos, const Vector3& velocuty);
-	void Updet();
-	void Draw(CameraOperation pro);
-	static const int32_t kLifeTime = 60 * 5;
-	bool IsDead() const { return isDead_; }
-	void OnCollision() override;
-	Vector3 GetWorldPosition() override;
+	void Initialize();
+	void Update();
+	void Draw();
+	Vector3 GetPos() { return pos_; }
+	void SetPos(Vector3 pos) { pos_ = pos; }
 private:
-	Obj3D* obj3d_;
-	Coordinate pos_;
-	int shot_ = 0;
-	//速度
-	Vector3 velocuty_;
-	int32_t deathTimer_ = kLifeTime;
-	bool isDead_ = false;
-	TexProeerty tex;
+	Sprite* bullet;
+	Vector3 pos_;
 };
-
-

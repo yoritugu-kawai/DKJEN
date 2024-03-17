@@ -1,48 +1,21 @@
 #include "Bullet.h"
-#include"../../DKJEN/Utilipy/Input.h"
-void Bullet::Intiailize(Coordinate pos, const Vector3& velocuty)
+
+void Bullet::Initialize()
 {
-	pos_ = pos;
-	ImageLoading* imageLoading = new ImageLoading;
-	imageLoading->Initiluze();
-	tex = imageLoading->LoadTexture("GameResource/Bullet.png");
+	bullet = new Sprite;
+	uint32_t tex = ImageLoading::LoadTexture("resource/tex.png");
+	bullet->Initialize(tex);
+
+}
+
+
+void Bullet::Update()
+{
 	
-	obj3d_ = new Obj3D;
-	obj3d_->Initialize("GameResource", "Bullet.obj");
-
-	velocuty_ = velocuty;
-	steCollisionAttribute(kCollisionAttributePlayer);
-	steCollisionMask(~kCollisionAttributePlayer);
-}
-Vector3 Bullet::GetWorldPosition() {
-	Vector3 result = pos_.translate;
-		/*
-	{
-		this->pos_.matWorld.m[3][0],
-		this->pos_.matWorld.m[3][1],
-		this->pos_.matWorld.m[3][2]
-	};*/
-	return result;
+	pos_.y -= 10;
 }
 
-void Bullet::Updet()
+void Bullet::Draw()
 {
-	pos_.translate = Add(pos_.translate, velocuty_);
-	if (--deathTimer_ <= 0) {
-		isDead_ = true;
-	}
-	pos_.UpdateMatrix();
-}
-
-void Bullet::Draw(CameraOperation pro)
-{
-
-	if (isDead_ == false) {
-		obj3d_->Draw(pos_.scale, pos_.rotate, pos_.translate, pos_.color, pro,tex );
-	}
-}
-
-void Bullet::OnCollision()
-{
-	isDead_ = true;
+	bullet->Darw({ 0.1f,0.2f,1 }, { 0,0,0 }, pos_, { 1.0f,0.0f,1.0f,1.0f });
 }

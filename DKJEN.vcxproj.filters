@@ -81,6 +81,12 @@
     <Filter Include="DKJEN\Base\CreateBufferResource">
       <UniqueIdentifier>{d66a846c-70e5-4e57-8e38-74c9e2696e6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProject">
+      <UniqueIdentifier>{27acabb8-0b2c-46ab-81b3-bb38ba355ed6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\PLayer">
+      <UniqueIdentifier>{7bce0c8f-fd6e-4a3a-a920-8b3d1b6dc9a1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -221,6 +227,12 @@
     <ClCompile Include="DKJEN\Base\CreateBufferResource.cpp">
       <Filter>DKJEN\Base\CreateBufferResource</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\Player\Player.cpp">
+      <Filter>GameProject\PLayer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\Player\Bullet.cpp">
+      <Filter>GameProject\PLayer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
@@ -357,6 +369,12 @@
     </ClInclude>
     <ClInclude Include="DKJEN\Type\Particle.h">
       <Filter>DKJEN\Type</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Player\Player.h">
+      <Filter>GameProject\PLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Player\Bullet.h">
+      <Filter>GameProject\PLayer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
