@@ -19,9 +19,7 @@ void Bullet::Update()
 		pos_ = pos_;
 		isShot_ = false;
 	}
-	ImGui::Begin("bullet");
-	ImGui::SliderFloat3("bu", &pos_.y, 0, 5);
-	ImGui::End();
+	
 }
 
 void Bullet::Draw()
