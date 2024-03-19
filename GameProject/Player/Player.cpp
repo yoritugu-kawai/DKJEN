@@ -9,6 +9,7 @@ void Player::Initialize()
 	bullet_ = new Bullet;
 	bullet_->Initialize();
 	isShot_ = false;
+	
 }
 
 void Player::Input()
@@ -45,6 +46,8 @@ void Player::Update()
 	bullet_->Update();
 
 	isShot_ = bullet_->GetIsShot();
+	bulletPos_ = bullet_->GetPos();
+
 }
 
 void Player::Draw()

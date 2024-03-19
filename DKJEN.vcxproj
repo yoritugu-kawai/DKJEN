@@ -261,6 +261,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="DKJEN\Utilipy\Input.cpp" />
     <ClCompile Include="DKJEN\WorldCoordinate\WorldCoordinate.cpp" />
     <ClCompile Include="DKJEN\WorldTransform\WorldTransform.cpp" />
+    <ClCompile Include="GameProject\Enemy\Enemy.cpp" />
     <ClCompile Include="GameProject\Player\Bullet.cpp" />
     <ClCompile Include="GameProject\Player\Player.cpp" />
     <ClCompile Include="main.cpp" />

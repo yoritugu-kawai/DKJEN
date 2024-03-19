@@ -15,6 +15,8 @@
 #include"DKJEN/Management/PSOCopileManagement.h"
 
 #include"GameProject/Player/Player.h"
+#include"GameProject/Enemy/Enemy.h"
+
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -46,12 +48,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Player* player_ = new Player;
 
 	player_->Initialize();
+
+	Enemy* enemy_ = new Enemy;
+	enemy_->Initialize();
+
+
 	//座標
-	Coordinate timePos_;
-	timePos_.scale = { 1.0f,1.0f,1.0f };
-	timePos_.rotate = { 0.0f,0.0f,0.0f };
-	timePos_.translate = { 0.0f,0.0f,0.0f };
-	timePos_.color = { 1.0f,1.0f,1.0f,1.0f };
+	bool des = false;
+
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -71,11 +75,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		/*if (Input::GetInstance()->PushKeyPressed(DIK_A)) {
 			uint32_t tex = ImageLoading::LoadTexture("resource/uvChecker.png");
-		}
-*/
+		*/
 
 		player_->Update();
-
+		enemy_->Update();
+		if (player_->GetBulletPos().x <= enemy_->GetPos().x + 10 &&
+			enemy_->GetPos().x <= player_->GetBulletPos().x+10 &&
+			player_->GetBulletPos().y <= enemy_->GetPos().y+10 &&
+			enemy_->GetPos().y <= player_->GetBulletPos().y+10) {
+			des = true;
+		}
+		
 		//////
 		//　ゲーム処理
 		//////
@@ -83,7 +93,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　　描画処理
 		//////
+		if (des==false)
+		{
+
+		enemy_->Draw();
+		}
 		player_->Draw();
+
 		//////
 		//　　描画処理
 		//////

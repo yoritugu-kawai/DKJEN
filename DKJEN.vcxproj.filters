@@ -236,6 +236,9 @@
     <ClCompile Include="GameProject\Player\Bullet.cpp">
       <Filter>GameProject\PLayer</Filter>
     </ClCompile>
+    <ClCompile Include="GameProject\Enemy\Enemy.cpp">
+      <Filter>GameProject\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
