@@ -87,6 +87,9 @@
     <Filter Include="GameProject\PLayer">
       <UniqueIdentifier>{7bce0c8f-fd6e-4a3a-a920-8b3d1b6dc9a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameProject\Enemy">
+      <UniqueIdentifier>{17086e15-e985-42c5-82c7-0f16d14b7f84}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
@@ -375,6 +378,9 @@
     </ClInclude>
     <ClInclude Include="GameProject\Player\Bullet.h">
       <Filter>GameProject\PLayer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\Enemy\Enemy.h">
+      <Filter>GameProject\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

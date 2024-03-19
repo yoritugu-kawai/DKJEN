@@ -6,6 +6,7 @@ class Player
 {
 public:
 	void Initialize();
+	void Input();
 	void Update();
 	void Draw();
 

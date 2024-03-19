@@ -11,11 +11,12 @@ void Player::Initialize()
 	isShot_ = false;
 }
 
-void Player::Update()
+void Player::Input()
 {
+
 	if (Input::GetInstance()->PushKey(DIK_A)) {
 		pos_.x -= 5;
-		
+
 	}
 	if (Input::GetInstance()->PushKey(DIK_D)) {
 		pos_.x += 5;
@@ -27,20 +28,29 @@ void Player::Update()
 	if (Input::GetInstance()->PushKey(DIK_S)) {
 		pos_.y += 5;
 	}
+}
+
+void Player::Update()
+{
+	Input();
+
 	if (Input::GetInstance()->PushKey(DIK_SPACE)) {
 		isShot_ = true;
 	}
+	
 	if (!isShot_) 
 	bullet_->SetPos(pos_);
+
 	if (isShot_) 
 	bullet_->Update();
+
 	isShot_ = bullet_->GetIsShot();
 }
 
 void Player::Draw()
 {
 	sprite_->Draw({ 0.1f,0.2f,1 }, { 0,0,0 }, pos_, { 1.0f,1.0f,1.0f,1.0f });
-	if (isShot_) {
+	if (isShot_) 
 		bullet_->Draw();
-	}
+	
 }
