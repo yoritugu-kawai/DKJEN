@@ -16,7 +16,8 @@
 
 #include"GameProject/Player/Player.h"
 #include"GameProject/Enemy/Enemy.h"
-
+#include"GameProject/GameSeen/StartSeen/StartSeen.h"
+#include"GameProject/GameSeen/StateSeen/StateSeen.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -44,18 +45,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	
 	
+	StateSeen* seen = new StartSeen;
 
-	Player* player_ = new Player;
-
-	player_->Initialize();
-
-	Enemy* enemy_ = new Enemy;
-	enemy_->Initialize();
-
+	seen->Initialize();
 
 	//座標
-	bool des = false;
 
+	
 	//　メインループ
 	MSG msg{};
 	while (msg.message != WM_QUIT)
@@ -77,15 +73,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			uint32_t tex = ImageLoading::LoadTexture("resource/uvChecker.png");
 		*/
 
-		player_->Update();
-		enemy_->Update();
-		if (player_->GetBulletPos().x <= enemy_->GetPos().x + 10 &&
-			enemy_->GetPos().x <= player_->GetBulletPos().x+10 &&
-			player_->GetBulletPos().y <= enemy_->GetPos().y+10 &&
-			enemy_->GetPos().y <= player_->GetBulletPos().y+10) {
-			des = true;
-		}
 		
+		seen->Update();
 		//////
 		//　ゲーム処理
 		//////
@@ -93,12 +82,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　　描画処理
 		//////
-		if (des==false)
-		{
-
-		enemy_->Draw();
-		}
-		player_->Draw();
+		seen->Draw();
 
 		//////
 		//　　描画処理
