@@ -2,16 +2,16 @@
 
 void GameManager::Initialize()
 {
-	iseen = new PlaySeen;
-	iseen->Initialize();
+	iseen_ = new StartSeen;
+	iseen_->Initialize();
 }
 
 void GameManager::Update()
 {
-	iseen->Update(this);
+	iseen_->Update(this);
 }
 
 void GameManager::Draw()
 {
-	iseen->Draw();
+	iseen_->Draw();
 }

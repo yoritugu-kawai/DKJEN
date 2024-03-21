@@ -8,7 +8,7 @@ public:
 	void Initialize();
 	void Update();
 	void Draw();
-	void ChangeState(IScene*stateSeen) {iseen = stateSeen;}
+	void ChangeState(IScene* stateSeen) { iseen_ = stateSeen; }
 private:
-	IScene*iseen = nullptr;
+	IScene*iseen_ = nullptr;
 };

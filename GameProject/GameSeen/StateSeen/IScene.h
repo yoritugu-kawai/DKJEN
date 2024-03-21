@@ -1,6 +1,6 @@
 #pragma once
-#include"../../../DKJEN/Utilipy/Input.h"
-#include"../../GameManager/GameManager.h"
+
+//#include"../../GameManager/GameManager.h"
 class GameManager;
 class IScene {
 public:

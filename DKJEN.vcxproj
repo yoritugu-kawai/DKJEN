@@ -265,7 +265,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="GameProject\GameManager\GameManager.cpp" />
     <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp" />
     <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp" />
-    <ClCompile Include="GameProject\GameSeen\StateSeen\IScene.cpp" />
     <ClCompile Include="GameProject\Player\Bullet.cpp" />
     <ClCompile Include="GameProject\Player\Player.cpp" />
     <ClCompile Include="main.cpp" />

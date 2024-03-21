@@ -14,7 +14,9 @@
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
 
-
+//#include"GameProject/GameSeen/StateSeen/IScene.h"
+//#include"GameProject/GameSeen/StartSeen/StartSeen.h"
+//#include"GameProject/GameSeen/PlaySeen/PlaySeen.h"
 #include"GameProject/GameManager/GameManager.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
@@ -39,10 +41,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 
 
-	GameManager* gameManager = new GameManager;
-	gameManager->Initialize();
-	
-	
+	GameManager* gameManager_ = new GameManager;
+	gameManager_->Initialize();
+	/*IScene* iseen = new StartSeen;
+	iseen->Initialize();*/
 
 	//座標
 
@@ -64,25 +66,23 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 	
 
-		/*if (Input::GetInstance()->PushKeyPressed(DIK_A)) {
-			uint32_t tex = ImageLoading::LoadTexture("resource/uvChecker.png");
-		*/
-
 		
+
+		//iseen->Update();
 		
 		//////
 		//　ゲーム処理
 		//////
 		
+		gameManager_->Update();
 		//////
 		//　　描画処理
 		//////
-		gameManager->Update();
-
+		//iseen->Draw();
 		//////
 		//　　描画処理
 		//////
-		gameManager->Draw();
+		gameManager_->Draw();
 		
 		//終わり
 		FrameManagement::EndFrame();

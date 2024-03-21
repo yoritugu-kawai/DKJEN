@@ -12,7 +12,7 @@ void PlaySeen::Initialize()
 
 void PlaySeen::Update(GameManager* gameManager)
 {
-	gameManager;
+	//gameManager;
 	player_->Update();
 	enemy_->Update();
 	if (player_->GetBulletPos().x <= enemy_->GetPos().x + 10 &&
@@ -20,6 +20,9 @@ void PlaySeen::Update(GameManager* gameManager)
 		player_->GetBulletPos().y <= enemy_->GetPos().y + 10 &&
 		enemy_->GetPos().y <= player_->GetBulletPos().y + 10) {
 		des = true;
+	}
+	if (Input::GetInstance()->PushKeyPressed(DIK_S)) {
+		gameManager->ChangeState(new StartSeen);
 	}
 }
 

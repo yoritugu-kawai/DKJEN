@@ -2,8 +2,8 @@
 #include"../StateSeen/IScene.h"
 #include"../../Enemy/Enemy.h"
 #include"../../Player/Player.h"
-
-class PlaySeen : public IScene {
+#include"../../GameManager/GameManager.h"
+class PlaySeen:public IScene {
 public:
 	void Initialize()override;
 	void Update(GameManager* gameManager)override;

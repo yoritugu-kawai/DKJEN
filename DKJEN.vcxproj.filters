@@ -263,9 +263,6 @@
     <ClCompile Include="GameProject\GameManager\GameManager.cpp">
       <Filter>GameProject\GameManager</Filter>
     </ClCompile>
-    <ClCompile Include="GameProject\GameSeen\StateSeen\IScene.cpp">
-      <Filter>GameProject\GameSeen\IScene</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DKJEN\Utilipy\Input.h">
