@@ -1,12 +1,12 @@
 #pragma once
-#include"../StateSeen/StateSeen.h"
+#include"../StateSeen/IScene.h"
 #include"../../Enemy/Enemy.h"
 #include"../../Player/Player.h"
 
-class PlaySeen : public StateSeen {
+class PlaySeen : public IScene {
 public:
 	void Initialize()override;
-	void Update()override;
+	void Update(GameManager* gameManager)override;
 	void Draw()override;
 private:
 	Player* player_;

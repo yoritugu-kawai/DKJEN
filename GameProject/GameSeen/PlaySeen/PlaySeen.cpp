@@ -10,8 +10,9 @@ void PlaySeen::Initialize()
 	enemy_->Initialize();
 }
 
-void PlaySeen::Update()
+void PlaySeen::Update(GameManager* gameManager)
 {
+	gameManager;
 	player_->Update();
 	enemy_->Update();
 	if (player_->GetBulletPos().x <= enemy_->GetPos().x + 10 &&

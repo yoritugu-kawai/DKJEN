@@ -16,8 +16,7 @@
 
 #include"GameProject/Player/Player.h"
 #include"GameProject/Enemy/Enemy.h"
-#include"GameProject/GameSeen/StartSeen/StartSeen.h"
-#include"GameProject/GameSeen/StateSeen/StateSeen.h"
+#include"GameProject/GameManager/GameManager.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
 
@@ -43,11 +42,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	worldTransform->Create();
 
+	GameManager* gameManager = new GameManager;
+	gameManager->Initialize();
 	
 	
-	StateSeen* seen = new StartSeen;
-
-	seen->Initialize();
 
 	//座標
 
@@ -74,7 +72,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		*/
 
 		
-		seen->Update();
+		
 		//////
 		//　ゲーム処理
 		//////
@@ -82,12 +80,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 		//　　描画処理
 		//////
-		seen->Draw();
+		gameManager->Update();
 
 		//////
 		//　　描画処理
 		//////
-	
+		gameManager->Draw();
 		
 		//終わり
 		FrameManagement::EndFrame();

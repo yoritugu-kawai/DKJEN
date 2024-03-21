@@ -96,11 +96,14 @@
     <Filter Include="GameProject\GameSeen\StartSeen">
       <UniqueIdentifier>{1a961d99-acb9-44bb-a34f-c23ab7b87fa1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameProject\GameSeen\StateSeen">
-      <UniqueIdentifier>{4ec2fd1e-22ed-42d1-b495-58e00011cbd8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameProject\GameSeen\PlaySeen">
       <UniqueIdentifier>{ef1e263d-edf5-407c-974d-cce7383fd4fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameManager">
+      <UniqueIdentifier>{764607de-351f-44d7-9fc3-765ec84dc2ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameProject\GameSeen\IScene">
+      <UniqueIdentifier>{4ec2fd1e-22ed-42d1-b495-58e00011cbd8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -251,11 +254,17 @@
     <ClCompile Include="GameProject\Enemy\Enemy.cpp">
       <Filter>GameProject\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp">
-      <Filter>GameProject\GameSeen\StateSeen</Filter>
-    </ClCompile>
     <ClCompile Include="GameProject\GameSeen\PlaySeen\PlaySeen.cpp">
       <Filter>GameProject\GameSeen\PlaySeen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\StartSeen\StartSeen.cpp">
+      <Filter>GameProject\GameSeen\StartSeen</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameManager\GameManager.cpp">
+      <Filter>GameProject\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProject\GameSeen\StateSeen\IScene.cpp">
+      <Filter>GameProject\GameSeen\IScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -406,11 +415,14 @@
     <ClInclude Include="GameProject\GameSeen\StartSeen\StartSeen.h">
       <Filter>GameProject\GameSeen\StartSeen</Filter>
     </ClInclude>
-    <ClInclude Include="GameProject\GameSeen\StateSeen\StateSeen.h">
-      <Filter>GameProject\GameSeen\StateSeen</Filter>
+    <ClInclude Include="GameProject\GameSeen\StateSeen\IScene.h">
+      <Filter>GameProject\GameSeen\IScene</Filter>
     </ClInclude>
     <ClInclude Include="GameProject\GameSeen\PlaySeen\PlaySeen.h">
       <Filter>GameProject\GameSeen\PlaySeen</Filter>
+    </ClInclude>
+    <ClInclude Include="GameProject\GameManager\GameManager.h">
+      <Filter>GameProject\GameManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
