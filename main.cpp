@@ -14,8 +14,7 @@
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
 
-#include"GameProject/Player/Player.h"
-#include"GameProject/Enemy/Enemy.h"
+
 #include"GameProject/GameManager/GameManager.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
@@ -34,13 +33,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	ImageLoading::Initiluze();
 	CameraData* cameraData = new CameraData;
 	cameraData->Create();
-
-
-
-
 	WorldTransform* worldTransform = new WorldTransform;
 
 	worldTransform->Create();
+
+
 
 	GameManager* gameManager = new GameManager;
 	gameManager->Initialize();
