@@ -42,7 +42,7 @@ void Player::Update()
 	if (!isShot_) 
 	bullet_->SetPos(pos_);
 
-	if (isShot_) 
+	if (isShot_)
 	bullet_->Update();
 
 	isShot_ = bullet_->GetIsShot();
@@ -53,7 +53,6 @@ void Player::Update()
 void Player::Draw()
 {
 	sprite_->Draw({ 0.1f,0.2f,1 }, { 0,0,0 }, pos_, { 1.0f,1.0f,1.0f,1.0f });
-	if (isShot_) 
-		bullet_->Draw();
+	if (isShot_) bullet_->Draw();
 	
 }

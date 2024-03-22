@@ -12,7 +12,7 @@ void Enemy::Initialize()
 void Enemy::Update()
 {
 	pos_.x = pos_.x + speed_;
-	if (pos_.x==1200) {
+	if (pos_.x == 1200) {
 		speed_ = speed_ * -1;
 	}
 	if (pos_.x == 10) {
