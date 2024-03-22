@@ -14,9 +14,7 @@
 #include "DKJEN/Management/FrameManagement.h"
 #include"DKJEN/Management/PSOCopileManagement.h"
 
-//#include"GameProject/GameSeen/StateSeen/IScene.h"
-//#include"GameProject/GameSeen/StartSeen/StartSeen.h"
-//#include"GameProject/GameSeen/PlaySeen/PlaySeen.h"
+
 #include"GameProject/GameManager/GameManager.h"
 const wchar_t Title[] = { L"ド根性エンジン" };
 
@@ -66,7 +64,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//////
 	
 
-		
+		/*up = 1.5f * up;
+		hit_ = hit_ * up;*/
 
 		//iseen->Update();
 		
