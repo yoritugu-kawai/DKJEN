@@ -15,3 +15,13 @@ void GameManager::Draw()
 {
 	iseen_->Draw();
 }
+
+void GameManager::ChangeState(IScene* stateSeen)
+{
+	delete iseen_;
+	iseen_ = stateSeen;
+	iseen_->Initialize();
+	iseen_->Update(this);
+	iseen_->Draw();
+	return;
+}

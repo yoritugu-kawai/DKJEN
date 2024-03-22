@@ -21,9 +21,9 @@ void PlaySeen::Update(GameManager* gameManager)
 		enemy_->GetPos().y <= player_->GetBulletPos().y + 10) {
 		des = true;
 	}
-	if (Input::GetInstance()->PushKeyPressed(DIK_S)) {
+	/*if (Input::GetInstance()->PushKeyPressed(DIK_S)) {
 		gameManager->ChangeState(new StartSeen);
-	}
+	}*/
 }
 
 void PlaySeen::Draw()
