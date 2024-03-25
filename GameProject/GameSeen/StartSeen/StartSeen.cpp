@@ -3,7 +3,7 @@
 void StartSeen::Initialize()
 {
 	sprite_ = new Sprite;
-	uint32_t tex = TexManager::LoadTexture("resource/tex.png");
+	uint32_t tex = TexManager::LoadTexture("resource/space.png");
 	sprite_->Initialize(tex);
 	color_ = 1.0f;
 	change_ = false;
