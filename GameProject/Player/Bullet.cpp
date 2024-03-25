@@ -24,5 +24,5 @@ void Bullet::Update()
 
 void Bullet::Draw()
 {
-	sprite_->Draw({ 0.1f,0.2f,1 }, { 0,0,0 }, pos_, { 1.0f,0.0f,1.0f,1.0f });
+	sprite_->Draw({ 10.0f,10.0f,1 }, { 0,0,0 }, pos_, { 1.0f,0.0f,1.0f,1.0f });
 }

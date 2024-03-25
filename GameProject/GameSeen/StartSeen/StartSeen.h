@@ -11,4 +11,6 @@ public:
 private:
 	Sprite* sprite_;
 	Vector3 pos_ = { 0,0,0 };
+	float color_;
+	bool change_;
 };

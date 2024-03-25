@@ -36,9 +36,9 @@ private:
 
 
 	uint32_t  tex_;
-	Vector4 transX_ = { 320.f,0.0f,0.0f,1.0f };
-	Vector4 transY_ = { 0.0f,180.0f,0.0f,1.0f };
-	Vector4 transXY_ = { 320.0f,180.0f,0.0f,1.0f };
+	Vector4 transX_ = { 10.f,0.0f,0.0f,1.0f };
+	Vector4 transY_ = { 0.0f,10.0f,0.0f,1.0f };
+	Vector4 transXY_ = { 10.0f,10.0f,0.0f,1.0f };
 	Transform uvTranformSprite{
 	 {1.0f,1.0f,1.0f},
 	 {0.0f,0.0f,0.0f},
