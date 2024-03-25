@@ -148,7 +148,7 @@ ModelData Obj3D::LoadObjFile(const std::string& directoryPath, const std::string
 
 	}
 
-	tex_=ImageLoading::LoadTexture(modelData.material.textureFilePath);
+	tex_= TexManager::LoadTexture(modelData.material.textureFilePath);
 
 	return modelData;
 }

@@ -1,31 +1,31 @@
 #include"ImageLoading.h"
 
 static uint32_t LoadCount;
-ImageLoading* ImageLoading::GetInstance()
+TexManager* TexManager::GetInstance()
 {
-	static ImageLoading instance;
+	static TexManager instance;
 
 	return &instance;
 }
 
-void ImageLoading::Initiluze()
+void TexManager::Initiluze()
 {
-	uint32_t descriptorSizeSRV= ImageLoading::GetInstance()->descriptorSizeSRV;
-	uint32_t descriptorSizeRTV=ImageLoading::GetInstance()->descriptorSizeRTV;
-	uint32_t descriptorSizeDSV=ImageLoading::GetInstance()->descriptorSizeDSV;
+	uint32_t descriptorSizeSRV= TexManager::GetInstance()->descriptorSizeSRV;
+	uint32_t descriptorSizeRTV= TexManager::GetInstance()->descriptorSizeRTV;
+	uint32_t descriptorSizeDSV= TexManager::GetInstance()->descriptorSizeDSV;
 	CoInitializeEx(0, COINIT_MULTITHREADED);
 	ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 	descriptorSizeSRV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 	descriptorSizeRTV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	descriptorSizeDSV = device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
 	LoadCount = 0;
-	ImageLoading::GetInstance()->descriptorSizeSRV=  descriptorSizeSRV ;
-	ImageLoading::GetInstance()->descriptorSizeRTV =  descriptorSizeRTV ;
-	ImageLoading::GetInstance()->descriptorSizeDSV =  descriptorSizeDSV ;
+	TexManager::GetInstance()->descriptorSizeSRV=  descriptorSizeSRV ;
+	TexManager::GetInstance()->descriptorSizeRTV =  descriptorSizeRTV ;
+	TexManager::GetInstance()->descriptorSizeDSV =  descriptorSizeDSV ;
 
 }
 
-DirectX::ScratchImage ImageLoading::LoadTextureData(const std::string& filePath)
+DirectX::ScratchImage TexManager::LoadTextureData(const std::string& filePath)
 {
 
 	//テクスチャファイルを読み込んでプログラムで扱えるようにする
@@ -44,7 +44,7 @@ DirectX::ScratchImage ImageLoading::LoadTextureData(const std::string& filePath)
 
 }
 
-ID3D12Resource* ImageLoading::CreateTexResource(ID3D12Device* device, const DirectX::TexMetadata& metadata)
+ID3D12Resource* TexManager::CreateTexResource(ID3D12Device* device, const DirectX::TexMetadata& metadata)
 {
 	//1.metadataを基にResourceの設定
 	D3D12_RESOURCE_DESC resourceDesc{};
@@ -77,7 +77,7 @@ ID3D12Resource* ImageLoading::CreateTexResource(ID3D12Device* device, const Dire
 	return resource;
 }
 
-void ImageLoading::UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages)
+void TexManager::UploadTexData(ID3D12Resource* texture, const DirectX::ScratchImage& mipImages)
 {
 	//Meta情報を取得
 	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
@@ -102,28 +102,28 @@ void ImageLoading::UploadTexData(ID3D12Resource* texture, const DirectX::Scratch
 
 }
 
-void ImageLoading::ShaderResourceView()
+void TexManager::ShaderResourceView()
 {
 
 
 }
 
-bool ImageLoading::CheckImageData(string filePath)
+bool TexManager::CheckImageData(string filePath)
 {
-	if (ImageLoading::GetInstance()->imageDatas.find(filePath)==ImageLoading::GetInstance()->imageDatas.end()) {
+	if (TexManager::GetInstance()->imageDatas.find(filePath)== TexManager::GetInstance()->imageDatas.end()) {
 		return true;
 	}
 	return false;
 }
 
 
-uint32_t ImageLoading::LoadTexture(const std::string& filePath)
+uint32_t TexManager::LoadTexture(const std::string& filePath)
 {
 	if (CheckImageData(filePath)) {
 		SImageData texData;
 		DescriptorManagement::IndexIncrement();
 		texData.index = DescriptorManagement::GetIndex();
-		uint32_t descriptorSizeSRV = ImageLoading::GetInstance()->descriptorSizeSRV;
+		uint32_t descriptorSizeSRV = TexManager::GetInstance()->descriptorSizeSRV;
 		ID3D12Device* device = DxCommon::GetInstance()->GetDevice();
 		ID3D12DescriptorHeap* srvDescriptorHeap = DxCommon::GetInstance()->GetsrvDescriptorHeap();
 
@@ -145,17 +145,17 @@ uint32_t ImageLoading::LoadTexture(const std::string& filePath)
 		DescriptorManagement::CPUDescriptorHandle(descriptorSizeSRV, srvDesc, texData.resource);
 
 		DescriptorManagement::GPUDescriptorHandle(descriptorSizeSRV);
-		ImageLoading::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
+		TexManager::GetInstance()->descriptorSizeSRV = descriptorSizeSRV;
 
-		ImageLoading::GetInstance()->imageDatas[filePath] =
+		TexManager::GetInstance()->imageDatas[filePath] =
 			std::make_unique<ImageData>(filePath, texData);
 	}
-	return ImageLoading::GetInstance()->imageDatas[filePath]->GetImageIndex();
+	return TexManager::GetInstance()->imageDatas[filePath]->GetImageIndex();
 }
 
 
 
-void ImageLoading::End()
+void TexManager::End()
 {
 	CoUninitialize();
 }

@@ -3,7 +3,7 @@
 void Bullet::Initialize()
 {
 	sprite_ = new Sprite;
-	uint32_t tex = ImageLoading::LoadTexture("resource/tex.png");
+	uint32_t tex = TexManager::LoadTexture("resource/tex.png");
 	sprite_->Initialize(tex);
 	speed_ = 10;
 	isShot_ = false;

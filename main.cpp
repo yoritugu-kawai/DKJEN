@@ -30,7 +30,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	PSOCopileManagement::Set();
 
 	
-	ImageLoading::Initiluze();
+	TexManager::Initiluze();
 	CameraData* cameraData = new CameraData;
 	cameraData->Create();
 	WorldTransform* worldTransform = new WorldTransform;

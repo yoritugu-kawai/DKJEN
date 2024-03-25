@@ -3,7 +3,7 @@
 void Player::Initialize()
 {
 	sprite_ = new Sprite;
-	uint32_t tex = ImageLoading::LoadTexture("resource/tex.png");
+	uint32_t tex = TexManager::LoadTexture("resource/tex.png");
 	sprite_->Initialize(tex);
 	pos_ = { 500.0f,360.0f,0.0f };
 	bullet_ = new Bullet;

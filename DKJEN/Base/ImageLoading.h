@@ -52,10 +52,10 @@ struct UVMaterial {
 
 };
 
-class ImageLoading
+class TexManager
 {
 public:
-	static ImageLoading* GetInstance();
+	static TexManager* GetInstance();
 
 	static void Initiluze();
 	static uint32_t LoadTexture(const std::string& filePath);
